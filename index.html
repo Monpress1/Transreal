@@ -1,90 +1,615 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monpress At Work - Bigger & 3D</title>
+    <meta charset="utf-8">
+    <title>Transreal Properties - Your Trusted Real Estate Partner</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="property sale, apartment renting, leasing, consultation, Ekiti state, Nigeria" name="keywords">
+    <meta content="Transreal Properties: Your trusted partner in real estate for property sale, apartment rentals, and consultation across Ekiti state, Nigeria." name="description">
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
     
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            display: flex; 
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Arial Black', sans-serif;
-            overflow: hidden;
+        .featured-property-item .img-fluid {
+            height: 250px; 
+            object-fit: cover;
+            width: 100%;
         }
-
-        .container {
-            /* Text size significantly increased */
-            font-size: 8vw; /* Even bigger font size for impact! */
-            color: #3498db; 
-            /* Enhanced text-shadow for a more prominent 3D effect */
-            text-shadow: 
-                4px 4px 0px rgba(0, 0, 0, 0.1),
-                8px 8px 0px rgba(0, 0, 0, 0.05),
-                12px 12px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow for 3D depth */
-            perspective: 1000px;
+        .featured-property-item {
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-
-        .word {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(80px) rotateX(-90deg); /* Start further down and more rotated */
-            animation: 
-                slideIn 1s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94), /* Smoother slide-in */
-                wobble 2.5s infinite alternate ease-in-out 1s; /* Longer and more pronounced wobble */
-        }
-
-        /* Keyframe animation for the words to slide in */
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0);
-            }
-        }
-
-        /* Keyframe animation for a more prominent wobble and 3D movement */
-        @keyframes wobble {
-            0% {
-                transform: rotateY(0deg) scale(1) translateX(0px);
-            }
-            25% {
-                transform: rotateY(5deg) scale(1.08) translateX(10px) translateY(-5px); /* More movement */
-            }
-            50% {
-                transform: rotateY(-5deg) scale(1.05) translateX(-10px) translateY(5px);
-            }
-            75% {
-                transform: rotateY(3deg) scale(1.07) translateX(8px) translateY(-3px);
-            }
-            100% {
-                transform: rotateY(0deg) scale(1) translateX(0px);
-            }
+        .featured-property-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
+
 <body>
-<center>
-    <div class="container">
-        <span class="word">Monpress</span>
-        <span class="word">is</span>
-        <span class="word">at</span>
-        <span class="word">work!</span>
-    </div><br><hr>
- Dont get dizzy 
-  
+    <div class="container-xxl bg-white p-0">
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="container-fluid nav-bar bg-transparent">
+            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                    <div class="icon p-2 me-2">
+                        <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 140px; height: 64px;">
+                    </div>
+                    <h1 class="m-0 text-primary"><font style="font-size:60%; margin-left:-30px;" >TRANSEAL</font> <font style="font-size:60%;color:#0a0b3ce8;"> PROPERTIES</font></h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="property.html" class="dropdown-item">Property List</a>
+                                <a href="property-type.html" class="dropdown-item">Property Type</a>
+                                <a href="property-agent.html" class="dropdown-item">Property Agent</a>
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="404.html" class="dropdown-item">404 Error</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                </div>
+            </nav>
+        </div>
+        <div class="container-fluid header bg-white p-0">
+            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+                <div class="col-md-6 p-5 mt-lg-5">
+                    <h2 class="display-5 animated fadeIn mb-4">Your <span class="text-primary">Trusted Partner</span> in  Real Estate  </h2>
+                    <p class="animated fadeIn mb-4 pb-2">We deal in property sale, apartment renting, leasing, consultation, all across Ekiti state, Nigeria.</p>
+                    <a href="property.html" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Explore Properties</a>
+                </div>
+                <div class="col-md-6 animated fadeIn">
+                    <div class="owl-carousel header-carousel">
+                        <div class="owl-carousel-item">
+                            <img class="img-fluid" src="img/carousel-1.jpg" alt="Carousel Image 1">
+                        </div>
+                        <div class="owl-carousel-item">
+                            <img class="img-fluid" src="img/carousel-2.jpg" alt="Carousel Image 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Property Types</h1>
+                    <p>At Transreal Properties we offer a wide range of services, ranging from selling of landed properties, to perfectly structured and modern buildings.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" href="property.html">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="img/icon-apartment.png" alt="Apartment Icon">
+                                </div>
+                                <h6>Apartment</h6>
+                                <span>165+ Properties</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" href="property.html">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="img/icon-villa.png" alt="Home Icon">
+                                </div>
+                                <h6>Home</h6>
+                                <span>120+ properties</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="img/icon-housing.png" alt="Land Icon">
+                                </div>
+                                <h6>Land</h6>
+                                <span>217+ Properties</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" href="property.html">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="img/icon-house.png" alt="Office Icon">
+                                </div>
+                                <h6>Office space</h6>
+                                <span>75+ Properties</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+              
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="img/icon-luxury.png" alt="Consultation Icon">
+                                </div>
+                                <h6>Consultation</h6>
+                                <span> service</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                            <img class="img-fluid w-100" src="img/about.jpg" alt="About Transreal Properties">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h1 class="mb-4">#1 Place To Find The Perfect Property</h1>
+                        <p class="mb-4">Transreal Properties is consistently praised for its exceptional client focus, providing deep market expertise, highly responsive communication, and a commitment to transparency that ensures you find the optimal property solution quickly and with complete confidence.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>100% affordable property sales</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>100% transparency and reliability</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Client focused Responsiveness</p>
+                        <a class="btn btn-primary py-3 px-5 mt-3" href="about.html">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end">
+                    <div class="col-lg-6">
+                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                            <h1 class="mb-3">Property Listing</h1>
+                            <p>Explore our latest property listing all across Ekiti state</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#tab-1">Featured</a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-2">For Sell</a>
+                            </li>
+                            <li class="nav-item me-0">
+                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">For Rent</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden">
+                                        <a href=""><img class="img-fluid" src="img/1.jpg" alt="Duplex"></a>
+                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
+                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Building</div>
+                                    </div>
+                                    <div class="p-4 pb-0">
+                                        <h5 class="text-primary mb-3"> ₦65,800,000</h5>
+                                        <a class="d-block h5 mb-2" href="">Duplex</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Ekiti State nigeria</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>5 Bed</small>
+                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>3 Bath</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden">
+                                        <a href=""><img class="img-fluid" src="img/4.jpg" alt="3 bedroom flat"></a>
+                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
+                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Flat</div>
+                                    </div>
+                                    <div class="p-4 pb-0">
+                                        <h5 class="text-primary mb-3"> ₦450,345</h5>
+                            <a class="d-block h5 mb-2" href="property.html">3 bed room flat</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Iworoko Ekiti</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>500 Sqft</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
+                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden">
+                                        <a href=""><img class="img-fluid" src="img/2.jpg" alt="4 bedroom apartment"></a>
+                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
+                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Apartment</div>
+                                    </div>
+                                    <div class="p-4 pb-0">
+                                        <h5 class="text-primary mb-3"> ₦25,000,000</h5>
+                                        <a class="d-block h5 mb-2" href="">4 bedroom apartment </a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Ekiti state</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>4 Bed</small>
+                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden">
+                                        <a href=""><img class="img-fluid" src="img/5.jpg" alt="Plot of land"></a>
+                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For sell</div>
+                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Land</div>
+                                    </div>
+                                    <div class="p-4 pb-0">
+                                        <h5 class="text-primary mb-3"> ₦1,900,000</h5>
+                                        <a class="d-block h5 mb-2" href="property.html">1 plot of land</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Unknown Location</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class=" text-primary me-2"></i></small>
+                                        <small class="flex-fill text-center py-2"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden">
+                                        <a href=""><img class="img-fluid" src="img/6.jpg" alt="Modern duplex house"></a>
+                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
+                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Home</div>
+                                    </div>
+                                    <div class="p-4 pb-0">
+                                        <h5 class="text-primary mb-3"> ₦170,000,000</h5>
+                                        <a class="d-block h5 mb-2" href="">Modern duplex house</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Unknown Location</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>3000 Sqft</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>7 Bed</small>
+                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>4 Bath</small>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                                <a class="btn btn-primary py-3 px-5" href="property.html">More Property</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-4 col-md-6">
+                                </div>
+                        </div>
+                    </div>
+                     <div id="tab-3" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-4 col-md-6">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="bg-light rounded p-3">
+                    <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                        <div class="row g-5 align-items-center">
+                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                                <img class="img-fluid rounded w-100" src="img/call.jpg" alt="Contact Us">
+                            </div>
+                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                                <div class="mb-4">
+                                    <h1 class="mb-3">Contact Transreal Properties</h1>
+                                    <p>We are available for all property transaction/ consultation 24/7 </p>
+                                </div>
+                                <a href="tel:08133979019" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Make A Call</a>
+                                <a href="mailto:onefash01@yahoo.com" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">What Our Clients Say!</h1>
+                    <p><i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    </p>
+                </div>
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="testimonial-item bg-light rounded p-3">
+                        <div class="bg-white border rounded p-4">
+                            <p>Transreal Properties are very truthful and honest when it comes to buying of land or getting property in ekiti, they are the most reliable</p>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid flex-shrink-0 rounded" src="img/tes1.jpg" style="width: 45px; height: 45px;" alt="Client Testimonial">
+                                <div class="ps-3">
+                                    <h6 class="fw-bold mb-1">Mr amini fabusuyi</h6>
+                                    <small>Land Purchase</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item bg-light rounded p-3">
+                        <div class="bg-white border rounded p-4">
+                            <p>Their price is very affordable, and the transactions were very smooth, i was given all my documents instantly, unlike some other property providers i have used before</p>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid flex-shrink-0 rounded" src="img/tes2.jpg" style="width: 45px; height: 45px;" alt="Client Testimonial">
+                                <div class="ps-3">
+                                    <h6 class="fw-bold mb-1">David Metu</h6>
+                                    <small>house</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item bg-light rounded p-3">
+                        <div class="bg-white border rounded p-4">
+                            <p>I am a student of ekiti state university, and i had accomodation issues i got duped twice before i then met transreal Properties, i am presently still in the 2 bedroom flat i rented from them, very peaceful, very neat, highly recommended.</p>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid flex-shrink-0 rounded" src="img/tes3.jpg" style="width: 45px; height: 45px;" alt="Client Testimonial">
+                                <div class="ps-3">
+                                    <h6 class="fw-bold mb-1">feyisara eniola</h6>
+                                    <small>Rent</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Featured Listings</h1>
+                    <p>Don't miss our hottest and newest properties available right now.</p>
+                </div>
+                <div id="featured-properties-carousel-container">
+                    <div class="text-center" id="featured-loading-spinner">
+                        <div class="spinner-border text-primary" role="status" style="width: 2rem; height: 2rem;">
+                            <span class="visually-hidden">Loading Featured Properties...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Loading featured listings...</p>
+                    </div>
+
+                    <div class="owl-carousel property-carousel wow fadeInUp d-none" id="featured-properties-carousel" data-wow-delay="0.1s">
+                        </div>
+                    
+                    <div class="col-12 text-center d-none" id="featured-no-listings-message">
+                        <p class="lead text-muted mt-5">No featured properties available right now. View all listings on the <a href="property.html">Property List page</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Get In Touch</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>iworoko Ekiti Nigeria, opposite iworoko highschool</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><a href="tel:08133979019">08133979019</a></p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>onefash01.@yahoo.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Quick Links</h5>
+                        <a class="btn btn-link text-white-50" href="about.html">About Us</a>
+                        <a class="btn btn-link text-white-50" href="contact">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="Property">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="about">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="about">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Photo Gallery</h5>
+                        <div class="row g-2 pt-2">
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/1.jpg" alt="Gallery Photo 1">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/2.jpg" alt="Gallery Photo 2">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/3.jpg" alt="Gallery Photo 3">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/4.jpg" alt="Gallery Photo 4">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/5.jpg" alt="Gallery Photo 5">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/6.jpg" alt="Gallery Photo 6">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Newsletter</h5>
+                        <p>Join our newsletter for the latest property updates.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder=" email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">TP</a> Transreal Properties 2025 All Right Reserved. 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script src="js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const words = document.querySelectorAll('.word');
-            words.forEach((word, index) => {
-                word.style.animationDelay = `${index * 0.2}s`;
+        // --- SUPABASE CONFIGURATION (Must be kept up-to-date) ---
+        // Verified keys for read-only access
+        const SUPABASE_URL = 'https://qgwxjnftvnzvbpalzxes.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_A7ILV8KrJcHIrUbk3TsMFg_bjZnWn_C'; 
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: { persistSession: false },
+        });
+
+        // --- UTILITY FUNCTION ---
+        function formatNaira(price) {
+            return new Intl.NumberFormat('en-NG', {
+                style: 'currency',
+                currency: 'NGN',
+                minimumFractionDigits: 0,
+            }).format(price);
+        }
+
+        // --- FEATURED PROPERTIES LOGIC ---
+        const carouselContainer = document.getElementById('featured-properties-carousel');
+        const loadingSpinner = document.getElementById('featured-loading-spinner');
+        const noListingsMessage = document.getElementById('featured-no-listings-message');
+        
+        async function loadFeaturedProperties() {
+            loadingSpinner.classList.remove('d-none'); // Show loading spinner
+
+            const { data: properties, error } = await sb
+                .from('properties')
+                // Selecting ONLY the columns that exist in your database
+                .select('id, name, price, location, property_type, sale_rent_status, image_url') 
+                .eq('is_featured', true) 
+                .order('created_at', { ascending: false })
+                .limit(8); 
+
+            loadingSpinner.classList.add('d-none'); // Hide loading spinner
+
+            if (error) {
+                // Proper error logging for debugging
+                const errorMessage = error.message || error.details || 'An unknown database error occurred.';
+                console.error('Database Error:', errorMessage);
+                
+                // Show user-friendly error message on the page
+                noListingsMessage.classList.remove('d-none');
+                noListingsMessage.innerHTML = `<p class="lead text-danger mt-5">Error loading listings. (Error: ${errorMessage})</p>`;
+                return;
+            }
+
+            if (properties.length === 0) {
+                noListingsMessage.classList.remove('d-none');
+                return;
+            }
+
+            // Populate the carousel
+            properties.forEach(property => {
+                const carouselItem = document.createElement('div');
+                carouselItem.className = 'owl-carousel-item';
+                
+                // Dynamic Badges using a distinct background color (bg-danger for red)
+                const featuredBadge = `
+                    <div class="bg-danger rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" style="font-weight: 700;">
+                        <i class="fa fa-fire text-white me-1"></i> HOT LISTING
+                    </div>
+                `;
+
+                carouselItem.innerHTML = `
+                    <div class="property-item featured-property-item rounded overflow-hidden shadow-sm">
+                        <div class="position-relative overflow-hidden">
+                            <a href="property.html"><img class="img-fluid" src="${property.image_url}" alt="${property.name}"></a>
+                            
+                            ${featuredBadge}
+                            
+                            <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">${property.property_type}</div>
+                        </div>
+                        <div class="p-4 pb-4">
+                            <h5 class="text-primary mb-3">${formatNaira(property.price)}</h5>
+                            <a class="d-block h5 mb-2" href="property.html">${property.name}</a>
+                            <p class="mb-0"><i class="fa fa-map-marker-alt text-primary me-2"></i>${property.location}</p>
+                        </div>
+                        </div>
+                `;
+                carouselContainer.appendChild(carouselItem);
             });
+
+            // Initialize Owl Carousel
+            carouselContainer.classList.remove('d-none');
+            $(carouselContainer).owlCarousel({
+                autoplay: true,
+                smartSpeed: 1000,
+                margin: 24,
+                dots: true,
+                loop: true,
+                nav: false,
+                responsive: {
+                    0: { items: 1 },
+                    768: { items: 2 },
+                    992: { items: 3 }
+                }
+            });
+        }
+
+        // Run the main functions on document load
+        document.addEventListener('DOMContentLoaded', () => {
+            new WOW().init();
+            loadFeaturedProperties();
         });
     </script>
+
+    
 </body>
 </html>

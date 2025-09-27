@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Transreal Properties - Property Listings</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Browse available properties for sale and rent from Transreal Properties in Ekiti State." name="keywords">
+    <meta content="Find your perfect home, land, or commercial property with Transreal Properties' current listings." name="description">
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* Define the primary color for consistent theming (from your property.html code) */
+        :root {
+            /* NOTE: If you are using your 'style.css', these should be in there. 
+               We keep them here to ensure your card colors work immediately. */
+            --bs-primary: #00b98e; /* This is the color from your original 'style.css' (approx) */
+            --bs-success: #198754;
+            --bs-warning: #ffc107;
+            --bs-danger: #dc3545;
+        }
+
+        .property-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%; 
+            display: flex;
+            flex-direction: column;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .property-img-container {
+            height: 250px; 
+            overflow: hidden;
+            position: relative;
+        }
+        .property-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .property-body {
+            padding: 15px;
+            flex-grow: 1;
+        }
+        .property-price {
+            font-size: 1.6rem;
+            color: var(--bs-primary);
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="container-fluid nav-bar bg-transparent">
+            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                    <div class="icon p-2 me-2">
+                        <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 140px; height: 64px;">
+                    </div>
+                    <h1 class="m-0 text-primary"><font style="font-size:60%; margin-left:-30px;" >TRANSEAL</font> <font style="font-size:60%;color:#0a0b3ce8;"> PROPERTIES</font></h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Property</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="property-list.html" class="dropdown-item active">Property List</a>
+                                
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="404.html" class="dropdown-item">404 Error</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                </div>
+            </nav>
+        </div>
+        <div class="container-fluid header bg-white p-0">
+            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+                <div class="col-md-12 p-5 mt-lg-5">
+                    <h1 class="display-5 animated fadeIn mb-4 text-center">Current Property Listings</h1>
+                    <nav aria-label="breadcrumb animated fadeIn">
+                        <ol class="breadcrumb text-uppercase justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Property</a></li>
+                            <li class="breadcrumb-item text-body active" aria-current="page">Property List</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h1 class="text-primary"></h1>
+                    <p class="lead"></p>
+                </div>
+
+                <div class="row g-4 justify-content-center" id="property-listings-grid">
+                    <div class="col-12 text-center" id="loading-spinner">
+                        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-3 fs-5">Loading properties...</p>
+                    </div>
+                </div>
+
+                <div class="row g-4 d-none" id="no-listings-message">
+                    <div class="col-12 text-center">
+                        <p class="lead text-muted mt-5">No properties are currently listed. Check back later!</p>
+                        <a href="contact.html" class="btn btn-primary py-3 px-5">Contact Us for Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Get In Touch</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>iworoko Ekiti Nigeria, opposite iworoko highschool</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><a href="tel:08133979019">08133979019</a></p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>onefash01.@yahoo.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Quick Links</h5>
+                        <a class="btn btn-link text-white-50" href="about.html">About Us</a>
+                        <a class="btn btn-link text-white-50" href="contact">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="Property">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="about">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="about">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Photo Gallery</h5>
+                        <div class="row g-2 pt-2">
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/1.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/2.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/3.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/4.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/5.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/6.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Newsletter</h5>
+                        <p></p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder=" email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">TP</a> Transreal Properties 2025 All Right Reserved. 
+							
+							
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // --- CONFIGURATION ---
+        const WHATSAPP_NUMBER = '+2348133979019';
+
+        // NOTE: KEEP YOUR SUPABASE CONFIGURATION HERE
+        const SUPABASE_URL = 'https://qgwxjnftvnzvbpalzxes.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_A7ILV8KrJcHIrUbk3TsMFg_bjZnWn_C'; 
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: { persistSession: false },
+        });
+
+        const grid = document.getElementById('property-listings-grid');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const noListingsMessage = document.getElementById('no-listings-message');
+        
+        /**
+         * Converts a price number into a formatted Nigerian Naira string.
+         */
+        function formatNaira(price) {
+            return new Intl.NumberFormat('en-NG', {
+                style: 'currency',
+                currency: 'NGN',
+                minimumFractionDigits: 0,
+            }).format(price);
+        }
+
+        /**
+         * Loads properties from Supabase and renders them.
+         */
+        async function loadProperties() {
+            // Ensure only the spinner is visible initially
+            loadingSpinner.classList.remove('d-none');
+            grid.innerHTML = '';
+            
+            const { data: properties, error } = await sb
+                .from('properties')
+                .select('id, name, price, location, property_type, sale_rent_status, image_url, description, created_at, is_featured, is_hot')
+                .order('created_at', { ascending: false });
+
+            // Hide loading spinner after fetch attempt
+            loadingSpinner.classList.add('d-none');
+
+
+            if (error) {
+                console.error('Error fetching properties:', error);
+                grid.innerHTML = `<div class="col-12 text-center text-danger"><p>Error loading listings: ${error.message}</p></div>`;
+                return;
+            }
+
+            if (properties.length === 0) {
+                // Remove 'd-none' from the parent row, not the inner div
+                document.getElementById('no-listings-message').classList.remove('d-none');
+                return;
+            }
+            
+            // Calculate the time threshold for the 'New' tag (1 day/24 hours)
+            const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+            const now = new Date();
+
+            properties.forEach(property => {
+                const createdAtTime = new Date(property.created_at).getTime();
+                const isNew = (now.getTime() - createdAtTime) < oneDayInMilliseconds;
+
+                // --- Tagging Logic (Preserved) ---
+                let tagsHtml = '';
+                if (property.is_featured) {
+                    tagsHtml += '<span class="badge bg-danger me-1"><i class="fas fa-star fa-fw"></i> Featured</span>';
+                }
+                if (property.is_hot) {
+                    tagsHtml += '<span class="badge bg-warning text-dark me-1"><i class="fas fa-fire fa-fw"></i> Hot</span>';
+                }
+                if (isNew) {
+                    tagsHtml += '<span class="badge bg-success me-1"><i class="fas fa-bolt fa-fw"></i> New!</span>';
+                }
+                
+                // --- WhatsApp Link Generation (New/Updated) ---
+                // URL-encode the message for WhatsApp
+                const whatsappMessage = encodeURIComponent(
+                    `Hello Transreal Properties, I am interested in property listing: "${property.name}" in ${property.location}  `
+                );
+                // Create the WhatsApp link
+                const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER.replace(/\s/g, '')}?text=${whatsappMessage}`;
+
+
+                const column = document.createElement('div');
+                // The col-lg-6 col-md-6 ensures 2 properties per line on screens medium and larger.
+                column.className = 'col-lg-6 col-md-6 col-12 wow fadeInUp'; 
+                column.setAttribute('data-wow-delay', '0.1s'); // Add animation
+
+                // Create the property card HTML
+                column.innerHTML = `
+                    <div class="property-card bg-white shadow-sm">
+                        <div class="property-img-container">
+                            <img class="property-img" src="${property.image_url}" alt="${property.name}">
+                            <div class="position-absolute top-0 start-0 bg-primary text-white p-2 small" style="border-radius: 0 8px 8px 0;">
+                                ${property.sale_rent_status}
+                            </div>
+                        </div>
+                        <div class="property-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>${tagsHtml}</div>
+                                <span class="badge bg-secondary">${property.property_type}</span>
+                            </div>
+                            <h5 class="text-primary property-price mb-2">${formatNaira(property.price)}</h5>
+                            <a class="d-block h5 mb-2 text-dark text-decoration-none" href="#">${property.name}</a>
+                            <p class="text-body small flex-grow-1"><i class="fa fa-map-marker-alt text-primary me-2"></i>${property.location}</p>
+                            
+                            <div class="mt-3">
+                                <a href="${whatsappLink}" target="_blank" class="btn btn-success py-2 w-100">
+                                    <i class="fab fa-whatsapp me-2"></i> Connect on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(column);
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', loadProperties);
+    </script>
+</body>
+</html>
