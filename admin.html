@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,31 +12,145 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <link href="css/style.css" rel="stylesheet">
 
     <style>
-        :root { --bs-primary: #7bff55; }
-        .admin-container { max-width: 1000px; margin: 30px auto; padding: 20px; }
-        .dashboard-card { border-left: 5px solid var(--bs-primary); }
-        .property-list-section { max-height: 400px; overflow-y: auto; }
-        .list-group-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; }
-        .property-info { flex-grow: 1; margin-right: 15px; }
-        .action-buttons button { margin-left: 5px; }
-        h21 {
-            color: #ea743b; /* Fixed the misplaced '#' characters */
-            font-size: 2rem; /* Adjusted size for clarity */
-            display: block;
+        /* NEW Color Palette & Typography */
+        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
+        :root { 
+            --bs-primary: #007bff; /* Sky Blue for action/focus */
+            --bs-secondary: #003366; /* Deep Blue for text/headings */ 
+            --bs-success: #28a745;
+            --bs-danger: #dc3545;
+        }
+
+        .admin-container { 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            padding: 30px; 
+            background-color: #fff; 
+        }
+
+        /* Reduced & Improved WELCOME Message */
+        .admin-welcome {
+            color: var(--bs-secondary); 
+            font-size: 1.8rem; 
+            font-weight: 700;
             margin-bottom: 1rem;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+
+        /* Dashboard Cards - Smaller & Cleaner */
+        .dashboard-card { 
+            border: 1px solid #e9ecef;
+            border-radius: .5rem; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 0.5rem 1rem rgba(0, 51, 102, 0.05) !important;
+        }
+        .dashboard-card .card-body { padding: 1rem; } 
+        .dashboard-card:hover { transform: translateY(-3px); box-shadow: 0 0.8rem 1.5rem rgba(0, 51, 102, 0.1); }
+        .dashboard-card-icon {
+            padding: 0.7rem;
+            border-radius: 50%;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .dashboard-card-icon.bg-primary { background-color: var(--bs-primary); }
+        .dashboard-card-icon.bg-warning { background-color: #ffc107 !important; }
+        .dashboard-card-icon.bg-danger { background-color: #dc3545 !important; }
+
+        .dashboard-card .display-4 { 
+            font-size: 2.5rem; 
+            font-weight: 700;
+            color: var(--bs-secondary);
+        }
+        
+        /* Property Card Design (Grid/List with Image) */
+        .property-list-section { 
+            max-height: 60vh; 
+            overflow-y: auto; 
+            border: 1px solid #dee2e6; 
+            border-radius: .5rem; 
+            padding: 10px;
+        }
+
+        .property-card { 
+            display: flex; 
+            gap: 15px;
+            align-items: center; 
+            padding: 15px; 
+            margin-bottom: 10px; 
+            border: 1px solid #f0f0f0;
+            border-radius: .5rem;
+            background-color: #fff;
+            transition: box-shadow 0.2s;
+        }
+        .property-card:hover { box-shadow: 0 4px 10px rgba(0, 51, 102, 0.05); }
+
+        /* Small Image Thumbnail */
+        .property-card-img {
+            width: 80px; 
+            height: 80px; 
+            min-width: 80px;
+            min-height: 80px;
+            overflow: hidden;
+            border-radius: 5px;
+            flex-shrink: 0;
+            background-color: #e9ecef; 
+        }
+        .property-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .property-info { 
+            flex-grow: 1; 
+            margin-right: 20px; 
+        }
+        .property-info h6 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--bs-secondary);
+            margin-bottom: 5px;
+        }
+        .action-buttons button { 
+            margin-left: 8px; 
+            min-width: 80px; 
+            font-size: 0.8rem;
+        }
+
+        /* Pill Navigation Styling */
+        .nav-pills-admin .nav-link {
+            border-radius: 50px;
+            margin-right: 10px;
+            font-weight: 600;
+            color: var(--bs-secondary);
+            transition: all 0.3s;
+            border: 1px solid #ced4da;
+            padding: 8px 20px;
+        }
+        .nav-pills-admin .nav-link.active {
+            background-color: var(--bs-primary);
+            color: #fff; 
+            border-color: var(--bs-primary);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Restored Form Header Style */
+        .form-section-header {
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: var(--bs-secondary);
+            font-weight: 600;
         }
     </style>
 </head>
@@ -49,13 +162,15 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-        <div class="container-fluid nav-bar bg-transparent">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+        <div class="container-fluid nav-bar bg-white sticky-top shadow-sm">
+            <nav class="navbar navbar-expand-lg navbar-light py-0 px-4">
                 <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 140px; height: 64px;">
                     </div>
-                    <h1 class="m-0 text-primary"><font style="font-size:60%; margin-left:-30px;" >TRANSREAL</font> <font style="font-size:60%;color:#0a0b3ce8;"> PROPERTIES</font></h1>
+                    <h1 class="m-0 text-secondary" style="font-size: 1.5rem;">
+                         TRANSREAL <span class="text-primary">PROPERTIES</span>
+                    </h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -63,81 +178,107 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="property.html" class="nav-item nav-link">Property list</a>
+                        <a href="property.html" class="nav-item nav-link">Property List</a>
                         <a href="admin.html" class="nav-item nav-link active">Admin</a>
                     </div>
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                    <button type="button" class="btn btn-primary px-3 d-none d-lg-flex ms-3 shadow-sm" data-bs-toggle="tab" data-bs-target="#add" onclick="document.getElementById('add-tab').click(); resetFormState(false);">
+                        <i class="fa-solid fa-house-chimney-medical me-2"></i> Add Property
+                    </button>
                 </div>
             </nav>
         </div>
-        <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-12 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">Admin Dashboard</h1> 
-                    <nav aria-label="breadcrumb animated fadeIn">
-                        <ol class="breadcrumb text-uppercase">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item text-body active" aria-current="page">Admin</li>
-                        </ol>
+        
                     </nav>
                 </div>
             </div>
         </div>
-        <div class="admin-container bg-white shadow-lg">
-            <h21>WELCOME, ADMINISTRATOR</h21>
+        
+        <div class="admin-container shadow-lg rounded">
+            <h2 class="admin-welcome">WELCOME, ADMINISTRATOR</h2>
             <div id="message" class="alert d-none"></div>
 
-            <div class="row mb-5">
-                <div class="col-md-6">
+            <div class="row mb-5 g-4 justify-content-center">
+                <div class="col-sm-6 col-md-4">
                     <div class="card dashboard-card">
                         <div class="card-body">
-                            <h5 class="card-title text-muted">Total Listed Properties</h5>
+                            <h6 class="card-title text-muted d-flex justify-content-between align-items-center mb-2">
+                                Total Listings 
+                                <i class="fa-solid fa-house fa-xl dashboard-card-icon bg-primary"></i>
+                            </h6>
                             <div id="total-properties" class="display-4 text-primary">0</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-6 col-md-4">
                     <div class="card dashboard-card">
                         <div class="card-body">
-                            <h5 class="card-title text-muted">Awaiting Action</h5>
-                            <div class="display-4 text-warning">0</div>
+                            <h6 class="card-title text-muted d-flex justify-content-between align-items-center mb-2">
+                                Featured Count 
+                                <i class="fa-solid fa-star fa-xl dashboard-card-icon bg-warning"></i>
+                            </h6>
+                            <div id="featured-properties" class="display-4 text-warning">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card dashboard-card">
+                        <div class="card-body">
+                            <h6 class="card-title text-muted d-flex justify-content-between align-items-center mb-2">
+                                Hot Listings Count
+                                <i class="fa-solid fa-fire fa-xl dashboard-card-icon bg-danger"></i>
+                            </h6>
+                            <div id="hot-properties" class="display-4 text-danger">0</div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            
+            <ul class="nav nav-pills nav-pills-admin mb-4 justify-content-center" id="adminTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="add-tab" data-bs-toggle="tab" data-bs-target="#add" type="button" role="tab" aria-controls="add" aria-selected="true">Add New Property</button>
+                    <button class="nav-link active" id="manage-tab" data-bs-toggle="tab" data-bs-target="#manage" type="button" role="tab" aria-controls="manage" aria-selected="true">
+                        <i class="fa-solid fa-list-check me-2"></i> Manage/Edit Listings
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="manage-tab" data-bs-toggle="tab" data-bs-target="#manage" type="button" role="tab" aria-controls="manage" aria-selected="false">Manage/Edit Listings</button>
+                    <button class="nav-link" id="add-tab" data-bs-toggle="tab" data-bs-target="#add" type="button" role="tab" aria-controls="add" aria-selected="false">
+                        <i class="fa-solid fa-house-chimney-medical me-2"></i> Add New Property
+                    </button>
                 </li>
             </ul>
-            <div class="tab-content border border-top-0 p-3">
-                <div class="tab-pane fade show active" id="add" role="tabpanel" aria-labelledby="add-tab">
-                    <h4 class="mb-3">New Listing Details</h4>
-                    <form id="add-property-form">
+            
+            <div class="tab-content border border-top-0 p-4 bg-light rounded-bottom">
+                
+                <div class="tab-pane fade show active" id="manage" role="tabpanel" aria-labelledby="manage-tab">
+                    <h4 class="mb-4 text-secondary">Existing Properties (Total: <span id="property-count-display">...</span>)</h4>
+                    <div class="property-list-section shadow-sm p-3 bg-white" id="manage-list">
+                        <div class="property-card text-center text-muted">Loading properties...</div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
+                    <h4 class="mb-4 text-secondary" id="form-title">New Listing Details</h4>
+                    <form id="add-property-form" class="p-4 border rounded bg-white shadow-sm">
                         <input type="hidden" id="property-id-to-edit" value="">
                         
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="name" class="form-label">Property Name/Title</label>
-                                <input type="text" class="form-control" id="name" required>
+                        <div class="form-section-header"><i class="fa-solid fa-circle-info me-2"></i> Basic Information</div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Property Name/Title <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="name" placeholder="e.g., 2 bedroom flat" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="price" class="form-label">Price (₦)</label>
-                                <input type="number" class="form-control" id="price" required>
+                            <div class="col-md-6">
+                                <label for="price" class="form-label">Price <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₦</span>
+                                    <input type="number" class="form-control" id="price" placeholder="200,000" required>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="location" class="form-label">Location</label>
-                                <input type="text" class="form-control" id="location" required>
+                            <div class="col-md-4">
+                                <label for="location" class="form-label">Location/Address <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="location" placeholder="e.g., Ado Ekiti" required>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="property_type" class="form-label">Property Type</label>
+                            <div class="col-md-4">
+                                <label for="property_type" class="form-label">Property Type <span class="text-danger">*</span></label>
                                 <select class="form-select" id="property_type" required>
                                     <option value="" selected disabled>Select Type</option>
                                     <option value="Apartment">Apartment</option>
@@ -146,8 +287,8 @@
                                     <option value="Commercial">Commercial</option>
                                 </select>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="sale_rent_status" class="form-label">Sale/Rent Status</label>
+                            <div class="col-md-4">
+                                <label for="sale_rent_status" class="form-label">Sale/Rent Status <span class="text-danger">*</span></label>
                                 <select class="form-select" id="sale_rent_status" required>
                                     <option value="" selected disabled>Select Status</option>
                                     <option value="Sale">For Sale</option>
@@ -156,68 +297,59 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="is_featured">
-                                    <label class="form-check-label" for="is_featured">Mark as **Featured**</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="is_hot">
-                                    <label class="form-check-label" for="is_hot">Mark as **Hot Listing**</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="image_file" class="form-label">Upload Primary Image (New/Replace)</label>
-                                <input type="file" class="form-control" id="image_file" accept="image/*" required>
-                                <small class="text-muted" id="current-image-status"></small>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="video_file" class="form-label">Upload Video (New/Replace - Max 50MB)</label>
-                                <input type="file" class="form-control" id="video_file" accept="video/*">
-                                <small class="text-muted" id="current-video-status"></small>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description (Optional)</label>
-                            <textarea class="form-control" id="description" rows="3"></textarea>
+                        <div class="mb-4 mt-3">
+                            <label for="description" class="form-label">Detailed Description (Optional)</label>
+                            <textarea class="form-control" id="description" rows="4" placeholder="Enter a comprehensive description of the property, features, and amenities..."></textarea>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary w-100" id="submit-btn">Add Property Listing</button>
-                        <button type="button" class="btn btn-secondary w-100 mt-2 d-none" id="cancel-edit-btn">Cancel Edit</button>
+                        <div class="form-section-header mt-4"><i class="fa-solid fa-camera-retro me-2"></i> Media & Tags</div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="image_file" class="form-label">Upload Primary Image <span class="text-danger">*</span></label>
+                                <input type="file" class="form-control" id="image_file" accept="image/*" required>
+                                <small class="mt-1 d-block" id="current-image-status"></small>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="video_file" class="form-label">Upload Video (Max 50MB)</label>
+                                <input type="file" class="form-control" id="video_file" accept="video/*">
+                                <small class="mt-1 d-block" id="current-video-status"></small>
+                            </div>
+                            
+                            <div class="col-md-6 pt-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="is_featured">
+                                    <label class="form-check-label" for="is_featured">Mark as <strong class="text-primary">Featured</strong></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pt-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="is_hot">
+                                    <label class="form-check-label" for="is_hot">Mark as <strong class="text-danger">Hot Listing</strong></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row pt-3 g-2">
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-primary w-100 py-2" id="submit-btn">
+                                    <i class="fa-solid fa-floppy-disk me-2"></i> Add Property Listing
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-outline-secondary w-100 py-2 d-none" id="cancel-edit-btn">
+                                    <i class="fa-solid fa-xmark me-2"></i> Cancel Edit
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
-
-                <div class="tab-pane fade" id="manage" role="tabpanel" aria-labelledby="manage-tab">
-                    <h4 class="mb-3">Existing Properties (Click 'Edit' or 'Delete')</h4>
-                    <div class="list-group property-list-section" id="manage-list">
-                        <div class="list-group-item list-group-item-info text-center">Loading properties...</div>
-                    </div>
-                </div>
             </div>
-        </div>
+            </div>
         </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script>
-        var spinner = function () {
-            // Use a short delay to ensure the DOM is fully drawn before hiding the spinner
-            setTimeout(function () {
-                if ($('#spinner').length > 0) {
-                    $('#spinner').removeClass('show');
-                }
-            }, 100); 
-        };
-        spinner();
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
@@ -237,14 +369,29 @@
         const submitBtn = document.getElementById('submit-btn');
         const cancelEditBtn = document.getElementById('cancel-edit-btn');
         const propertyIdToEdit = document.getElementById('property-id-to-edit');
+        const imageFileInput = document.getElementById('image_file');
+        const videoFileInput = document.getElementById('video_file');
         const currentImageStatus = document.getElementById('current-image-status');
         const currentVideoStatus = document.getElementById('current-video-status');
+        const formTitle = document.getElementById('form-title');
+        const propertyCountDisplay = document.getElementById('property-count-display');
+        const featuredPropertiesCount = document.getElementById('featured-properties'); 
+        const hotPropertiesCount = document.getElementById('hot-properties'); // NEW: Hot Properties Element
 
 
-        // --- UTILITY FUNCTIONS ---
+        // --- UTILITY FUNCTIONS (unchanged) ---
+        var spinner = function () {
+            setTimeout(function () {
+                if ($('#spinner').length > 0) {
+                    $('#spinner').removeClass('show');
+                }
+            }, 100); 
+        };
+        spinner();
+        
         function displayMessage(text, type) {
             messageElement.textContent = text;
-            messageElement.className = `alert alert-${type}`;
+            messageElement.className = `alert alert-${type} animated fadeIn`;
             messageElement.classList.remove('d-none');
             setTimeout(() => {
                 messageElement.classList.add('d-none');
@@ -253,19 +400,35 @@
 
         function disableForm(disabled) {
             submitBtn.disabled = disabled;
-            const action = propertyIdToEdit.value ? 'Saving' : 'Processing';
-            submitBtn.innerHTML = disabled ? `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${action}...` : (propertyIdToEdit.value ? 'Save Changes' : 'Add Property Listing');
+            const actionText = propertyIdToEdit.value ? 'Saving Changes' : 'Adding Listing';
+            const actionIcon = propertyIdToEdit.value ? '<i class="fa-solid fa-floppy-disk me-2"></i>' : '<i class="fa-solid fa-house-chimney-medical me-2"></i>';
+
+            submitBtn.innerHTML = disabled 
+                ? `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> ${actionText}...` 
+                : `${actionIcon} ${actionText}`;
         }
         
-        function resetFormState() {
+        function resetFormState(switchTab = true) {
             form.reset();
             propertyIdToEdit.value = '';
-            document.getElementById('image_file').required = true;
-            submitBtn.textContent = 'Add Property Listing';
+            imageFileInput.required = true;
+            
+            // UI Updates
+            formTitle.textContent = 'New Listing Details';
+            submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk me-2"></i> Add Property Listing';
             cancelEditBtn.classList.add('d-none');
+            
+            // Status Updates
             currentImageStatus.textContent = '';
+            currentImageStatus.dataset.url = '';
+            currentImageStatus.className = 'mt-1 d-block'; 
             currentVideoStatus.textContent = '';
-            document.getElementById('manage-tab').click(); 
+            currentVideoStatus.dataset.url = '';
+            currentVideoStatus.className = 'mt-1 d-block'; 
+
+            if (switchTab) {
+                document.getElementById('manage-tab').click(); 
+            }
         }
 
         /**
@@ -280,15 +443,25 @@
                     img.src = event.target.result;
                     img.onload = () => {
                         const canvas = document.createElement('canvas');
-                        canvas.width = img.width;
-                        canvas.height = img.height; 
+                        // Calculate new dimensions (e.g., max width 1200px)
+                        const MAX_WIDTH = 1200;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > MAX_WIDTH) {
+                            height = height * (MAX_WIDTH / width);
+                            width = MAX_WIDTH;
+                        }
+                        
+                        canvas.width = width;
+                        canvas.height = height; 
                         const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0);
+                        ctx.drawImage(img, 0, 0, width, height);
                         const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
                         fetch(compressedDataUrl)
                             .then(res => res.blob())
                             .then(blob => {
-                                const compressedFile = new File([blob], file.name, { type: 'image/jpeg' });
+                                const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpeg", { type: 'image/jpeg' });
                                 resolve(compressedFile);
                             })
                             .catch(reject);
@@ -312,65 +485,68 @@
             let filePath;
             if (oldUrl) {
                 try {
-                    const pathParts = new URL(oldUrl).pathname.split('/');
-                    const key = pathParts.slice(3).join('/'); 
-                    if (key.includes(folder)) { filePath = key; }
+                    const urlPath = new URL(oldUrl).pathname;
+                    const bucketIndex = urlPath.indexOf(STORAGE_BUCKET);
+                    if (bucketIndex !== -1) {
+                        filePath = urlPath.substring(bucketIndex + STORAGE_BUCKET.length + 1);
+                    }
                 } catch (e) {
-                    console.warn("Could not parse old URL for upsert path:", e);
+                    console.warn("Could not parse old URL for upsert path. Using new path generation:", e);
                 }
             }
-            if (!filePath) {
+            if (!filePath || !filePath.includes(folder)) {
                 filePath = `${folder}/${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
             }
 
             const { data, error } = await sb.storage
                 .from(STORAGE_BUCKET)
-                .upload(filePath, fileToUpload, { upsert: true });
+                .upload(filePath, fileToUpload, { upsert: true, cacheControl: '3600' });
 
             if (error) {
-                throw new Error(`Upload failed for ${file.name}: ${error.message}`);
+                throw new Error(`Upload failed for ${fileToUpload.name}: ${error.message}`);
             }
 
             const { data: publicUrlData } = sb.storage
                 .from(STORAGE_BUCKET)
-                .getPublicUrl(data.path);
+                .getPublicUrl(filePath);
 
             return publicUrlData.publicUrl;
         }
 
-        // --- FORM SUBMISSION (ADD/EDIT) ---
+        // --- FORM SUBMISSION (ADD/EDIT) (unchanged) ---
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             disableForm(true);
 
             const isEditing = !!propertyIdToEdit.value;
-            const imageFile = document.getElementById('image_file').files[0];
-            const videoFile = document.getElementById('video_file').files[0];
+            const imageFile = imageFileInput.files[0];
+            const videoFile = videoFileInput.files[0];
 
             let imageUrl = currentImageStatus.dataset.url || null; 
             let videoUrl = currentVideoStatus.dataset.url || null; 
 
             try {
+                // 1. Validate Image
                 if (!isEditing && !imageFile) {
                     throw new Error('Primary image is required for a new listing.');
                 }
                 
-                // 1. Upload/Update Image
+                // 2. Upload/Update Image
                 if (imageFile) {
-                    displayMessage('Uploading and compressing image...', 'info');
+                    displayMessage('Uploading and compressing image (This may take a moment)...', 'info');
                     imageUrl = await uploadFile(imageFile, 'images', imageUrl);
                 } 
                 if (!imageUrl) {
                     throw new Error('Primary image URL is missing. Please upload an image.');
                 }
 
-                // 2. Upload/Update Video
+                // 3. Upload/Update Video
                 if (videoFile) {
-                    displayMessage('Uploading video...', 'info');
+                    displayMessage('Uploading video (Max 50MB)...', 'info');
                     videoUrl = await uploadFile(videoFile, 'videos', videoUrl);
                 }
 
-                // 3. Prepare Data
+                // 4. Prepare Data
                 displayMessage(isEditing ? 'Saving changes to database...' : 'Inserting new data into database...', 'info');
                 
                 const propertyData = {
@@ -383,7 +559,7 @@
                     is_hot: document.getElementById('is_hot').checked,
                     image_url: imageUrl,
                     video_url: videoUrl,
-                    description: document.getElementById('description').value || null
+                    description: document.getElementById('description').value || null,
                 };
 
                 let dbOperation;
@@ -405,9 +581,9 @@
                 }
 
                 displayMessage(`Property listing ${isEditing ? 'updated' : 'created'} successfully!`, 'success');
-                resetFormState();
+                resetFormState(); 
                 loadPropertiesForManagement(); 
-                loadPropertyCount(); 
+                loadPropertyCount(); // Reload counts after successful submission
             } catch (error) {
                 displayMessage(`Operation Failed: ${error.message}`, 'danger');
                 console.error('Admin Error:', error);
@@ -416,7 +592,8 @@
             }
         });
 
-        // --- EDIT PROPERTY FUNCTION ---
+        // ... editProperty and deleteProperty functions (unchanged)
+
         async function editProperty(id) {
             displayMessage('Loading property details for editing...', 'info');
             
@@ -446,25 +623,47 @@
             // Set hidden ID for update
             propertyIdToEdit.value = property.id;
             
-            // Handle image/video URLs
-            document.getElementById('image_file').required = false;
-            currentImageStatus.textContent = property.image_url ? 'Current Image Exists (Leave blank to keep)' : 'No Current Image';
-            currentImageStatus.dataset.url = property.image_url || '';
-            currentVideoStatus.textContent = property.video_url ? 'Current Video Exists (Leave blank to keep)' : 'No Current Video';
-            currentVideoStatus.dataset.url = property.video_url || '';
+            // Handle image/video URLs and status
+            imageFileInput.required = false;
 
-            submitBtn.textContent = 'Save Changes';
+            // Image Status
+            currentImageStatus.dataset.url = property.image_url || '';
+            if (property.image_url) {
+                currentImageStatus.innerHTML = `✅ **Image Set** | <a href="${property.image_url}" target="_blank">View Current</a> | New file will overwrite.`;
+                currentImageStatus.className = 'mt-1 d-block text-success fw-bold';
+            } else {
+                currentImageStatus.textContent = 'No current image set. Please upload one.';
+                currentImageStatus.className = 'mt-1 d-block text-danger';
+            }
+            
+            // Video Status
+            currentVideoStatus.dataset.url = property.video_url || '';
+            if (property.video_url) {
+                currentVideoStatus.innerHTML = `🎥 **Video Set** | <a href="${property.video_url}" target="_blank">View Current</a> | New file will overwrite.`;
+                currentVideoStatus.className = 'mt-1 d-block text-success fw-bold';
+            } else {
+                currentVideoStatus.textContent = 'No current video set. Uploading is optional.';
+                currentVideoStatus.className = 'mt-1 d-block text-muted';
+            }
+
+
+            // UI changes for editing mode
+            formTitle.textContent = 'Edit Existing Listing (ID: ' + property.id + ')';
+            submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk me-2"></i> Save Changes';
             cancelEditBtn.classList.remove('d-none');
+            
+            // Switch to the Add/Edit tab
             document.getElementById('add-tab').click();
-            displayMessage('Ready to edit listing.', 'success');
+            
+            displayMessage('Ready to edit listing. Overwrite media by selecting new files.', 'success');
         }
 
-        cancelEditBtn.addEventListener('click', resetFormState);
+        cancelEditBtn.addEventListener('click', () => resetFormState(true)); 
         
-        // --- DELETE PROPERTY FUNCTION ---
         async function deleteProperty(id, name) {
-            if (!confirm(`Are you sure you want to delete "${name}"? This action is permanent.`)) { return; }
+            if (!confirm(`Are you sure you want to delete "${name}"? This action is permanent and will remove media.`)) { return; }
             displayMessage('Deleting property from database...', 'warning');
+            
             const { error } = await sb.from('properties').delete().eq('id', id);
             if (error) {
                 displayMessage(`Error deleting property: ${error.message}`, 'danger');
@@ -475,54 +674,94 @@
             }
         }
 
-        // --- LOAD LISTINGS & COUNT ---
+        // --- REVISED LOAD PROPERTY COUNT FUNCTION ---
         async function loadPropertyCount() {
-            const { count, error } = await sb
-                .from('properties')
-                .select('id', { count: 'exact', head: true }); 
+            // Get all three counts in one go for efficiency
+            const [
+                { count: totalCount, error: totalError },
+                { count: featuredCount, error: featuredError },
+                { count: hotCount, error: hotError }
+            ] = await Promise.all([
+                sb.from('properties').select('id', { count: 'exact', head: true }),
+                sb.from('properties').select('id', { count: 'exact', head: true }).eq('is_featured', true),
+                sb.from('properties').select('id', { count: 'exact', head: true }).eq('is_hot', true)
+            ]);
 
-            if (!error) {
-                document.getElementById('total-properties').textContent = count;
+
+            if (!totalError && !featuredError && !hotError) {
+                document.getElementById('total-properties').textContent = totalCount || 0;
+                propertyCountDisplay.textContent = totalCount || 0;
+                featuredPropertiesCount.textContent = featuredCount || 0; 
+                hotPropertiesCount.textContent = hotCount || 0; // Populate Hot Count card
             } else {
-                console.error("Failed to load count:", error);
-                document.getElementById('total-properties').textContent = 'Error: Check RLS';
+                console.error("Failed to load counts:", totalError || featuredError || hotError);
+                document.getElementById('total-properties').textContent = 'Error';
+                propertyCountDisplay.textContent = 'Error';
+                featuredPropertiesCount.textContent = 'Error';
+                hotPropertiesCount.textContent = 'Error';
             }
         }
-
+        
+        // --- LOAD LISTINGS FOR MANAGEMENT (unchanged) ---
         async function loadPropertiesForManagement() {
-            manageList.innerHTML = '<div class="list-group-item list-group-item-info text-center">Loading...</div>';
+            manageList.innerHTML = '<div class="property-card text-center text-muted">Loading...</div>';
 
             const { data: properties, error } = await sb
                 .from('properties')
-                .select('id, name, location, sale_rent_status')
+                .select('id, name, location, price, sale_rent_status, property_type, is_featured, is_hot, image_url')
                 .order('created_at', { ascending: false });
 
             if (error) {
-                manageList.innerHTML = `<div class="list-group-item list-group-item-danger">Error loading: ${error.message}</div>`;
+                manageList.innerHTML = `<div class="property-card text-danger"><i class="fa-solid fa-exclamation-triangle me-2"></i> Error loading: ${error.message}</div>`;
                 return;
             }
 
             if (properties.length === 0) {
-                manageList.innerHTML = '<div class="list-group-item list-group-item-success text-center">No properties currently listed.</div>';
+                manageList.innerHTML = '<div class="property-card text-success text-center">No properties currently listed. Use the "Add New Property" tab to start.</div>';
                 return;
             }
 
             manageList.innerHTML = ''; 
 
             properties.forEach(property => {
+                const isFeaturedBadge = property.is_featured ? '<span class="badge bg-primary me-1"><i class="fa-solid fa-star"></i> Featured</span>' : '';
+                const isHotBadge = property.is_hot ? '<span class="badge bg-danger me-1"><i class="fa-solid fa-fire"></i> Hot</span>' : '';
+                
+                const saleStatusBadge = property.sale_rent_status === 'Sale' 
+                    ? `<span class="badge rounded-pill bg-success ms-2"><i class="fa-solid fa-tag me-1"></i> SALE</span>` 
+                    : `<span class="badge rounded-pill bg-warning text-dark ms-2"><i class="fa-solid fa-key me-1"></i> RENT</span>`;
+
+                const typeBadge = `<span class="badge bg-secondary text-light ms-2">${property.property_type}</span>`;
+                
+                const imageSrc = property.image_url || 'https://via.placeholder.com/80?text=No+Image';
+                
+                // Format price with commas
+                const priceFormatted = property.price ? new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', minimumFractionDigits: 0 }).format(property.price) : 'Price N/A';
+
+
                 const item = document.createElement('div');
-                item.className = 'list-group-item list-group-item-action';
+                item.className = 'property-card';
                 item.innerHTML = `
+                    <div class="property-card-img">
+                        <img src="${imageSrc}" alt="${property.name} thumbnail">
+                    </div>
                     <div class="property-info">
-                        <strong>${property.name}</strong> 
-                        <small class="text-muted">(${property.location} - ${property.sale_rent_status})</small>
+                        <h6>${property.name} ${isFeaturedBadge}${isHotBadge}</h6> 
+                        <div class="d-flex align-items-center flex-wrap">
+                            <small class="text-secondary fw-bold me-3">${priceFormatted}</small>
+                            <small class="text-muted d-block me-3">
+                                <i class="fa-solid fa-location-dot me-1"></i> ${property.location}
+                            </small>
+                            ${saleStatusBadge}
+                            ${typeBadge}
+                        </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-sm btn-info edit-btn" data-id="${property.id}">
-                            <i class="fa fa-edit"></i> Edit
+                        <button class="btn btn-sm btn-outline-primary edit-btn" data-id="${property.id}">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit
                         </button>
-                        <button class="btn btn-sm btn-danger delete-btn" data-id="${property.id}" data-name="${property.name}">
-                            <i class="fa fa-trash"></i> Delete
+                        <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${property.id}" data-name="${property.name}">
+                            <i class="fa-solid fa-trash-can"></i> Delete
                         </button>
                     </div>
                 `;
