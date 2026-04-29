@@ -21,16 +21,14 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <link href="css/style.css" rel="stylesheet">
 
     <style>
         :root {
-            /* Using the primary color from your original code */
-            --bs-primary: #00b98e;
-            --bs-success: #198754;
-            --bs-warning: #ffc107;
-            --bs-danger: #dc3545;
+            var(--bs-primary): #00b98e;
+            var(--bs-success): #198754;
+            var(--bs-warning): #ffc107;
+            var(--bs-danger): #dc3545;
         }
 
         .property-card {
@@ -41,7 +39,7 @@
             height: 100%; 
             display: flex;
             flex-direction: column;
-            cursor: pointer; /* Indicate it's clickable */
+            cursor: pointer;
         }
         .property-card:hover {
             transform: translateY(-5px);
@@ -67,49 +65,57 @@
             font-weight: 700;
         }
 
-        /* Styling for the Modal (unchanged) */
-        .modal-xl-scrollable .modal-dialog {
-            max-width: 90%; 
-            height: 90vh;
-        }
-        .modal-xl-scrollable .modal-content {
-            height: 90vh;
-        }
-        .modal-body-scrollable {
-            overflow-y: auto;
+        /* Responsive tweaks */
+        @media (max-width: 576px) {
+            .property-price { font-size: 1.1rem; }
+            .property-body h5 { font-size: 0.95rem; }
+            .property-img-container { height: 180px; }
+            .property-body { padding: 10px; }
+            .btn-success { font-size: 0.8rem; padding: 6px; }
+            .property-body .badge { font-size: 0.7rem; }
         }
 
-        .video-container {
-            position: relative;
+        /* Detail View Styles */
+        .detail-view-media {
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            margin-bottom: 20px;
+            max-height: 500px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+        
+        img.detail-view-media { object-fit: cover; }
+        video.detail-view-media { object-fit: contain; background-color: #000; }
 
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-        }
-
-        .modal-description {
-            white-space: pre-wrap; /* Preserves formatting like line breaks */
-            font-size: 1rem;
-            line-height: 1.6;
+        .detail-description {
+            white-space: pre-wrap; 
+            font-size: 1.1rem;
+            line-height: 1.8;
             color: #495057;
         }
         
-        /* NEW: Sleek Search Bar Styling */
         #search-input {
-            border-radius: 50px; /* Fully rounded borders */
-            border: 2px solid var(--bs-primary); /* Primary color border */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+            border-radius: 50px; 
+            border: 2px solid var(--bs-primary); 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
             padding-left: 20px;
         }
 
+        /* --- SKELETON LOADING STYLES --- */
+        .skeleton {
+            background-color: #e2e5e7;
+            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+            background-size: 40px 100%;
+            background-repeat: no-repeat;
+            background-position: left -40px top 0;
+            animation: shine 1.2s ease infinite;
+        }
+        @keyframes shine {
+            to { background-position: right -40px top 0; }
+        }
+        .skeleton-img { width: 100%; height: 100%; }
+        .skeleton-text { height: 16px; margin-bottom: 10px; border-radius: 4px; }
+        .skeleton-title { height: 24px; margin-bottom: 12px; border-radius: 4px; }
+        .skeleton-btn { height: 40px; border-radius: 4px; margin-top: auto; }
     </style>
 </head>
 
@@ -120,6 +126,7 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
+        
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                 <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
@@ -139,7 +146,6 @@
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Property</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="property-list.html" class="dropdown-item active">Property List</a>
-                                
                             </div>
                         </div>
                         <div class="nav-item dropdown">
@@ -154,28 +160,23 @@
                     <a href="admin.html" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
                 </div>
             </nav>
-        
-        
-        <div class="container-xxl py-5">
-            <div class="container">
-               
+        </div>
 
+        <div id="main-listing-view" class="container-xxl py-5">
+            <div class="container">
                 <div class="row g-3 mb-5 justify-content-center">
                     <div class="col-md-8 col-lg-6">
                         <div class="input-group">
                             <span class="input-group-text bg-white border-0 py-3 ps-4 rounded-start-pill"><i class="fas fa-search text-primary"></i></span>
-                            <input type="text" id="search-input" class="form-control py-3 border-start-0 rounded-end-pill" placeholder="Search by property name or location">
+                            <input type="text" id="search-input" class="form-control py-3 border-start-0 rounded-end-pill" placeholder="Search by property name, location, or type...">
                         </div>
                     </div>
                 </div>
-                <div class="row g-4 justify-content-center" id="property-listings-grid">
-                    <div class="col-12 text-center" id="loading-spinner">
-                        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <p class="mt-3 fs-5">Loading properties...</p>
+                
+                <div class="row g-2 g-md-4 justify-content-center" id="property-listings-grid">
                     </div>
-                </div>
+
+                <div id="load-more-trigger" style="height: 20px; width: 100%;"></div>
 
                 <div class="row g-4 d-none" id="no-listings-message">
                     <div class="col-12 text-center">
@@ -186,93 +187,74 @@
             </div>
         </div>
 
-        <div class="modal fade" id="propertyDetailModal" tabindex="-1" aria-labelledby="propertyDetailModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-xl-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal-property-name">Property Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div id="property-detail-view" class="container-xxl py-5 d-none animate__animated animate__fadeIn">
+            <div class="container">
+                <div class="row mb-4 align-items-center">
+                    <div class="col-12">
+                        <button onclick="closePropertyDetail()" class="btn btn-outline-primary mb-3">
+                            <i class="fas fa-arrow-left me-2"></i> Back to Listings
+                        </button>
+                        <h2 class="display-5 text-dark mb-2" id="detail-property-name">Property Name</h2>
+                        <h5 class="text-primary mb-3" id="detail-price"></h5>
+                        <h6 id="detail-location" class="text-muted mb-4"><i class="fa fa-map-marker-alt me-2"></i>Location</h6>
+                        <div id="detail-tags" class="mb-4"></div>
                     </div>
-                    <div class="modal-body modal-body-scrollable">
-                        <div class="row g-4">
-                            <div class="col-lg-7">
-                                <img id="modal-image" class="img-fluid rounded mb-4 w-100" style="max-height: 400px; object-fit: cover;" alt="Property Image">
+                </div>
 
-                                <div class="video-container d-none" id="modal-video-container">
-                                    <video id="modal-video" controls width="100%" height="auto"></video>
-                                </div>
-                                
-                                <div id="modal-video-placeholder" class="alert alert-info text-center d-none">
-                                    <i class="fas fa-video me-2"></i> No video tour available for this property.
-                                </div>
+                <div class="row g-5">
+                    <div class="col-lg-7">
+                        <img id="detail-image" class="detail-view-media mb-4" alt="Property Image">
 
-                                <div class="mt-4">
-                                    <h4 class="text-primary" id="modal-price"></h4>
-                                    <h6 id="modal-location" class="text-muted"><i class="fa fa-map-marker-alt me-2"></i></h6>
-                                    <div id="modal-tags" class="mt-3"></div>
-                                </div>
-                            </div>
+                        <div id="detail-video-container" class="d-none">
+                            <h4 class="mb-3 text-secondary border-bottom pb-2">Property Video Tour</h4>
+                            <video id="detail-video" class="detail-view-media w-100" controls></video>
+                        </div>
+                    </div>
 
-                            <div class="col-lg-5">
-                                <h3 class="mb-3 text-secondary">Property Description</h3>
-                                <p id="modal-description" class="modal-description"></p>
-                                
-                                <h5 class="mt-4 mb-3 text-primary">Key Details</h5>
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-tag text-primary me-2"></i> Status: <span id="modal-status" class="fw-bold"></span></li>
-                                    <li><i class="fas fa-building text-primary me-2"></i> Type: <span id="modal-type" class="fw-bold"></span></li>
-                                    <li><i class="fas fa-clock text-primary me-2"></i> Listed On: <span id="modal-date" class="fw-bold"></span></li>
-                                </ul>
+                    <div class="col-lg-5">
+                        <div class="bg-light p-4 rounded shadow-sm">
+                            <h3 class="mb-3 text-secondary border-bottom pb-2">Property Description</h3>
+                            <p id="detail-description" class="detail-description"></p>
+                            
+                            <h5 class="mt-4 mb-3 text-primary">Key Details</h5>
+                            <ul class="list-unstyled mb-4">
+                                <li class="py-2 border-bottom"><i class="fas fa-tag text-primary me-3 w-10"></i> <strong>Status:</strong> <span id="detail-status" class="float-end"></span></li>
+                                <li class="py-2 border-bottom"><i class="fas fa-building text-primary me-3 w-10"></i> <strong>Type:</strong> <span id="detail-type" class="float-end"></span></li>
+                                <li class="py-2 border-bottom"><i class="fas fa-clock text-primary me-3 w-10"></i> <strong>Listed On:</strong> <span id="detail-date" class="float-end"></span></li>
+                            </ul>
 
-                                <a href="#" id="modal-whatsapp-link" target="_blank" class="btn btn-success btn-lg w-100 mt-4">
-                                    <i class="fab fa-whatsapp me-2"></i> Enquire Now on WhatsApp
-                                </a>
-                            </div>
+                            <a href="#" id="detail-whatsapp-link" target="_blank" class="btn btn-success btn-lg w-100 py-3 mt-2 shadow">
+                                <i class="fab fa-whatsapp me-2 fs-4 align-middle"></i> <span class="align-middle">Enquire Now on WhatsApp</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Get In Touch</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Iworoko road, opposite Iworoko community high school Iworoko Ekiti state Nigeria
-</p>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Iworoko road, opposite Iworoko community high school Iworoko Ekiti state Nigeria</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><a href="tel:08133979019">08133979019</a></p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>onefash01@yahoo.com</p>
-                        <div class="d-flex pt-2">
-                             </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Quick Links</h5>
-                        
-					<a class="btn btn-outline-light btn-social" href="https://www.instagram.com/spirit4440?igsh=ejBiYWp4Nm9qcGQ4"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/share/1Ero7QT5Br/"><i class="fab fa-facebook-f"></i></a>
-                            
-					</div>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/spirit4440?igsh=ejBiYWp4Nm9qcGQ4"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/share/1Ero7QT5Br/"><i class="fab fa-facebook-f"></i></a>
+                    </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Photo Gallery</h5>
                         <div class="row g-2 pt-2">
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/1.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/2.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/3.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/4.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/5.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/6.jpg" alt="">
-                            </div>
+                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/1.jpg" alt=""></div>
+                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/2.jpg" alt=""></div>
+                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/3.jpg" alt=""></div>
+                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/4.jpg" alt=""></div>
+                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/5.jpg" alt=""></div>
+                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/6.jpg" alt=""></div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -290,9 +272,6 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">TP</a> Transreal Properties 2025 All Right Reserved. 
-							
-							
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -320,17 +299,23 @@
             auth: { persistSession: false },
         });
 
-        // Global variable to hold all loaded properties (for front-end search)
+        // Global state variables for Lazy Loading / Pagination
         let allProperties = []; 
+        let currentPage = 0;
+        const itemsPerPage = 10;
+        let isLoading = false;
+        let hasMore = true;
+        let currentSearchTerm = '';
 
         // --- DOM Elements ---
         const grid = document.getElementById('property-listings-grid');
-        const loadingSpinner = document.getElementById('loading-spinner');
         const noListingsMessage = document.getElementById('no-listings-message');
         const searchInput = document.getElementById('search-input');
-        // Removed: statusFilter, typeFilter, resetFilterBtn
-        const detailModal = new bootstrap.Modal(document.getElementById('propertyDetailModal'));
-
+        const loadMoreTrigger = document.getElementById('load-more-trigger');
+        
+        // View Containers
+        const mainListingView = document.getElementById('main-listing-view');
+        const propertyDetailView = document.getElementById('property-detail-view');
 
         // --- UTILITY FUNCTIONS ---
         function formatNaira(price) {
@@ -346,6 +331,28 @@
                 `Hello Transreal Properties, I am interested in property listing: "${property.name}" in ${property.location}. (ID: ${property.id})`
             );
             return `https://wa.me/${WHATSAPP_NUMBER.replace(/\s/g, '')}?text=${whatsappMessage}`;
+        }
+
+        // --- HTML GENERATORS ---
+        function getSkeletonHTML() {
+            return `
+            <div class="col-12 property-item skeleton-card">
+                <div class="property-card bg-white shadow-sm border-0">
+                    <div class="property-img-container skeleton skeleton-img"></div>
+                    <div class="property-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="skeleton skeleton-text m-0" style="width: 30%;"></div>
+                            <div class="skeleton skeleton-text m-0" style="width: 20%;"></div>
+                        </div>
+                        <div class="skeleton skeleton-title" style="width: 60%;"></div>
+                        <div class="skeleton skeleton-text mb-3" style="width: 80%;"></div>
+                        <div class="skeleton skeleton-text flex-grow-1" style="width: 50%;"></div>
+                        <div class="mt-3 pt-2 border-top border-light">
+                            <div class="skeleton skeleton-btn w-100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
         }
 
         function createPropertyCard(property) {
@@ -367,14 +374,8 @@
             const whatsappLink = getWhatsAppLink(property);
             const imageSrc = property.image_url || 'https://via.placeholder.com/400x250?text=Image+Missing';
 
-
             const column = document.createElement('div');
-            column.className = 'col-lg-6 col-md-6 col-12 property-item wow fadeInUp'; 
-            column.setAttribute('data-wow-delay', '0.1s');
-            // Data attribute for searching (includes all relevant text)
-            column.setAttribute('data-search-text', `${property.name.toLowerCase()} ${property.location.toLowerCase()} ${property.description ? property.description.toLowerCase() : ''} ${property.property_type.toLowerCase()} ${property.sale_rent_status.toLowerCase()}`); 
-            
-            // Attach click event to show modal
+            column.className = 'col-12 property-item animate__animated animate__fadeIn'; 
             column.onclick = () => showPropertyDetail(property.id);
 
             column.innerHTML = `
@@ -387,7 +388,7 @@
                     </div>
                     <div class="property-body d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>${tagsHtml}</div>
+                            <div class="d-flex flex-wrap gap-1">${tagsHtml}</div>
                             <span class="badge bg-secondary">${property.property_type}</span>
                         </div>
                         <h5 class="text-primary property-price mb-2">${formatNaira(property.price)}</h5>
@@ -396,153 +397,168 @@
                         
                         <div class="mt-3">
                             <a href="${whatsappLink}" target="_blank" class="btn btn-success py-2 w-100" onclick="event.stopPropagation();">
-                                <i class="fab fa-whatsapp me-2"></i> Connect on WhatsApp
+                                <i class="fab fa-whatsapp me-2"></i> <span>Connect on WhatsApp</span>
                             </a>
                         </div>
                     </div>
                 </div>
             `;
-
             return column;
         }
 
+        // --- FETCH & PAGINATION LOGIC ---
+        async function fetchProperties(reset = false) {
+            if (isLoading || (!hasMore && !reset)) return;
 
-        // --- FILTERING/SEARCH LOGIC (Simplified) ---
-        function applyFilters() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
+            isLoading = true;
             
-            let matches = 0;
-            const propertyItems = document.querySelectorAll('.property-item');
-
-            propertyItems.forEach(item => {
-                const itemSearchText = item.getAttribute('data-search-text');
-
-                const searchMatch = !searchTerm || itemSearchText.includes(searchTerm);
-
-                if (searchMatch) {
-                    item.classList.remove('d-none');
-                    matches++;
-                } else {
-                    item.classList.add('d-none');
-                }
-            });
-
-            // Show/Hide no listings message
-            if (matches === 0) {
-                noListingsMessage.classList.remove('d-none');
-            } else {
+            if (reset) {
+                currentPage = 0;
+                hasMore = true;
+                grid.innerHTML = '';
+                allProperties = [];
                 noListingsMessage.classList.add('d-none');
             }
-        }
 
-        // --- PROPERTY DETAIL MODAL LOGIC (unchanged) ---
-        async function showPropertyDetail(id) {
-            const property = allProperties.find(p => p.id === id);
+            // Render skeleton cards
+            const numSkeletons = reset ? itemsPerPage : Math.min(3, itemsPerPage);
+            for (let i = 0; i < numSkeletons; i++) {
+                grid.insertAdjacentHTML('beforeend', getSkeletonHTML());
+            }
 
-            if (!property) {
-                console.error("Property not found in local cache:", id);
+            // Calculate pagination limits
+            const from = currentPage * itemsPerPage;
+            const to = from + itemsPerPage - 1;
+
+            // Build Supabase Query
+            let query = sb
+                .from('properties')
+                .select('id, name, price, location, property_type, sale_rent_status, image_url, description, video_url, created_at, is_featured, is_hot')
+                .order('created_at', { ascending: false })
+                .range(from, to);
+
+            // Integrate database searching for lazily loaded data
+            if (currentSearchTerm) {
+                const term = `%${currentSearchTerm}%`;
+                // Search across multiple fields using Supabase 'or'
+                query = query.or(`name.ilike.${term},location.ilike.${term},property_type.ilike.${term},sale_rent_status.ilike.${term},description.ilike.${term}`);
+            }
+
+            const { data, error } = await query;
+
+            // Remove Skeletons
+            document.querySelectorAll('.skeleton-card').forEach(el => el.remove());
+
+            if (error) {
+                console.error('Error fetching properties:', error);
+                grid.innerHTML += `<div class="col-12 text-center text-danger py-4"><p><i class="fas fa-exclamation-triangle me-2"></i> Error loading listings: ${error.message}</p></div>`;
+                isLoading = false;
                 return;
             }
 
-            // Populate Modal Fields
-            document.getElementById('modal-property-name').textContent = property.name;
-            document.getElementById('modal-image').src = property.image_url || 'https://via.placeholder.com/800x400?text=Image+Missing';
-            document.getElementById('modal-price').textContent = formatNaira(property.price);
-            document.getElementById('modal-location').innerHTML = `<i class="fa fa-map-marker-alt me-2"></i> ${property.location}`;
-            document.getElementById('modal-description').textContent = property.description || 'No detailed description provided for this listing.';
-            document.getElementById('modal-status').textContent = property.sale_rent_status;
-            document.getElementById('modal-type').textContent = property.property_type;
-            document.getElementById('modal-date').textContent = new Date(property.created_at).toLocaleDateString();
-            document.getElementById('modal-whatsapp-link').href = getWhatsAppLink(property);
+            // Stop fetching if data returned is less than items limit per page
+            if (data.length < itemsPerPage) {
+                hasMore = false;
+            }
 
-            // Tags
+            if (data.length === 0 && currentPage === 0) {
+                noListingsMessage.classList.remove('d-none');
+            } else {
+                noListingsMessage.classList.add('d-none');
+                data.forEach(property => {
+                    grid.appendChild(createPropertyCard(property));
+                });
+                // Append data to global array for the detail view logic
+                allProperties = [...allProperties, ...data];
+            }
+
+            currentPage++;
+            isLoading = false;
+        }
+
+        // --- SEARCH HANDLING (DEBOUNCED) ---
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                currentSearchTerm = e.target.value.trim();
+                fetchProperties(true); // Reset state and fetch new search results
+            }, 500); // 500ms delay to prevent excessive queries while typing
+        });
+
+        // --- VIEW SWITCHING LOGIC ---
+        function showPropertyDetail(id) {
+            const property = allProperties.find(p => p.id === id);
+
+            if (!property) return;
+
+            document.getElementById('detail-property-name').textContent = property.name;
+            document.getElementById('detail-image').src = property.image_url || 'https://via.placeholder.com/800x400?text=Image+Missing';
+            document.getElementById('detail-price').textContent = formatNaira(property.price);
+            document.getElementById('detail-location').innerHTML = `<i class="fa fa-map-marker-alt me-2"></i> ${property.location}`;
+            document.getElementById('detail-description').textContent = property.description || 'No detailed description provided for this listing.';
+            document.getElementById('detail-status').textContent = property.sale_rent_status;
+            document.getElementById('detail-type').textContent = property.property_type;
+            document.getElementById('detail-date').textContent = new Date(property.created_at).toLocaleDateString();
+            document.getElementById('detail-whatsapp-link').href = getWhatsAppLink(property);
+
             let tagsHtml = '';
-            if (property.is_featured) {
-                tagsHtml += '<span class="badge bg-danger me-1 fs-6"><i class="fas fa-star"></i> FEATURED</span>';
-            }
-            if (property.is_hot) {
-                tagsHtml += '<span class="badge bg-warning text-dark me-1 fs-6"><i class="fas fa-fire"></i> HOT LISTING</span>';
-            }
-            document.getElementById('modal-tags').innerHTML = tagsHtml;
+            if (property.is_featured) tagsHtml += '<span class="badge bg-danger me-2 fs-6 py-2 px-3"><i class="fas fa-star"></i> FEATURED</span>';
+            if (property.is_hot) tagsHtml += '<span class="badge bg-warning text-dark me-2 fs-6 py-2 px-3"><i class="fas fa-fire"></i> HOT LISTING</span>';
+            document.getElementById('detail-tags').innerHTML = tagsHtml;
 
-
-            // Video Handling
-            const videoContainer = document.getElementById('modal-video-container');
-            const videoElement = document.getElementById('modal-video');
-            const videoPlaceholder = document.getElementById('modal-video-placeholder');
+            const videoContainer = document.getElementById('detail-video-container');
+            const videoElement = document.getElementById('detail-video');
 
             if (property.video_url) {
                 videoElement.src = property.video_url;
                 videoContainer.classList.remove('d-none');
-                videoPlaceholder.classList.add('d-none');
-                videoElement.load(); // Ensure video loads correctly
+                videoElement.load(); 
             } else {
                 videoElement.src = '';
                 videoContainer.classList.add('d-none');
-                videoPlaceholder.classList.remove('d-none');
             }
 
-            detailModal.show();
+            mainListingView.classList.add('d-none');
+            propertyDetailView.classList.remove('d-none');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Stop video playback when modal is hidden
-        document.getElementById('propertyDetailModal').addEventListener('hidden.bs.modal', function () {
-            const videoElement = document.getElementById('modal-video');
+        function closePropertyDetail() {
+            const videoElement = document.getElementById('detail-video');
             if (videoElement) {
                 videoElement.pause();
                 videoElement.currentTime = 0;
             }
-        });
 
-
-        // --- MAIN LOADING FUNCTION (unchanged) ---
-        async function loadProperties() {
-            loadingSpinner.classList.remove('d-none');
-            grid.innerHTML = '';
-            noListingsMessage.classList.add('d-none');
-
-            // Fetch all necessary fields
-            const { data, error } = await sb
-                .from('properties')
-                .select('id, name, price, location, property_type, sale_rent_status, image_url, description, video_url, created_at, is_featured, is_hot')
-                .order('created_at', { ascending: false });
-
-            loadingSpinner.classList.add('d-none');
-
-
-            if (error) {
-                console.error('Error fetching properties:', error);
-                grid.innerHTML = `<div class="col-12 text-center text-danger"><p><i class="fas fa-exclamation-triangle me-2"></i> Error loading listings: ${error.message}</p></div>`;
-                return;
-            }
-
-            allProperties = data; // Store data globally for searching and modal
-            
-            if (allProperties.length === 0) {
-                noListingsMessage.classList.remove('d-none'); // Show No Listings Message
-                document.querySelector('#no-listings-message p').textContent = 'No properties are currently listed.';
-                return;
-            }
-            
-            // Render all properties initially
-            allProperties.forEach(property => {
-                grid.appendChild(createPropertyCard(property));
-            });
-
-            applyFilters(); 
+            propertyDetailView.classList.add('d-none');
+            mainListingView.classList.remove('d-none');
+            document.getElementById('search-input').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        // --- EVENT LISTENERS ---
-        // Bind searching to input event
-        searchInput.addEventListener('input', applyFilters);
-
-
-        // Initialize the page
+        // --- INITIALIZATION & OBSERVER ---
         document.addEventListener('DOMContentLoaded', () => {
-            loadProperties();
-            // WOW.js initialization
+            // Setup Intersection Observer for Infinite Scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '100px', // Trigger fetch 100px before the element is visible
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    fetchProperties(); // Automatically load more
+                }
+            }, observerOptions);
+
+            // Start observing the invisible trigger element
+            observer.observe(loadMoreTrigger);
+
+            // Fetch initial batch
+            fetchProperties(true);
             new WOW().init();
         });
     </script>
 </body>
 </html>
+
