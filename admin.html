@@ -22,13 +22,121 @@
 
     <style>
         /* NEW Color Palette & Typography */
-        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
         :root { 
-            --bs-primary: #007bff; /* Sky Blue for action/focus */
-            --bs-secondary: #003366; /* Deep Blue for text/headings */ 
+            --bs-primary: #007bff; 
+            --bs-secondary: #003366;  
             --bs-success: #28a745;
             --bs-danger: #dc3545;
         }
+
+        /* --- GLASSMORPHISM LOCK SCREEN STYLES --- */
+        #glass-lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #003366 0%, #007bff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999; /* Always on top */
+            transition: opacity 0.5s ease;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .glass-card h2 {
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .glass-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .glass-input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .glass-input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .glass-input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-btn {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        #lock-error-msg {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            display: none;
+            font-weight: 600;
+        }
+
+        /* Hidden class to completely remove the dashboard from view */
+        .admin-content-hidden {
+            display: none !important;
+        }
+        /* --- END GLASSMORPHISM STYLES --- */
 
         .admin-container { 
             max-width: 1200px; 
@@ -37,7 +145,6 @@
             background-color: #fff; 
         }
 
-        /* Reduced & Improved WELCOME Message */
         .admin-welcome {
             color: var(--bs-secondary); 
             font-size: 1.8rem; 
@@ -47,7 +154,6 @@
             padding-bottom: 10px;
         }
 
-        /* Dashboard Cards - Smaller & Cleaner */
         .dashboard-card { 
             border: 1px solid #e9ecef;
             border-radius: .5rem; 
@@ -72,7 +178,6 @@
             color: var(--bs-secondary);
         }
         
-        /* Property Card Design (Grid/List with Image) */
         .property-list-section { 
             max-height: 60vh; 
             overflow-y: auto; 
@@ -94,7 +199,6 @@
         }
         .property-card:hover { box-shadow: 0 4px 10px rgba(0, 51, 102, 0.05); }
 
-        /* Small Image Thumbnail */
         .property-card-img {
             width: 80px; 
             height: 80px; 
@@ -127,7 +231,6 @@
             font-size: 0.8rem;
         }
 
-        /* Pill Navigation Styling */
         .nav-pills-admin .nav-link {
             border-radius: 50px;
             margin-right: 10px;
@@ -144,7 +247,6 @@
             box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
         }
 
-        /* Restored Form Header Style */
         .form-section-header {
             border-bottom: 1px solid #e9ecef;
             padding-bottom: 5px;
@@ -155,13 +257,35 @@
     </style>
 </head>
 <body>
+
+    <!-- GLASSMORPHISM LOCK SCREEN OVERLAY -->
+    <div id="glass-lock-screen">
+        <div class="glass-card">
+            <h2>Admin Locked</h2>
+            <p>Transreal Properties Dashboard</p>
+            
+            <div class="glass-input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="admin-password" class="glass-input" placeholder="Enter secure password">
+            </div>
+            
+            <button class="glass-btn" onclick="verifyAdminPassword()">
+                <i class="fa-solid fa-unlock-keyhole me-2"></i> Unlock Dashboard
+            </button>
+            
+            <div id="lock-error-msg"><i class="fa-solid fa-circle-exclamation me-1"></i> Incorrect password. Try again.</div>
+        </div>
+    </div>
     
-    <div class="container-xxl bg-white p-0">
+    <!-- ADMIN DASHBOARD CONTENT (Hidden by default until unlocked) -->
+    <div id="main-admin-content" class="container-xxl bg-white p-0 admin-content-hidden">
+        
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
+        
         <div class="container-fluid nav-bar bg-white sticky-top shadow-sm">
             <nav class="navbar navbar-expand-lg navbar-light py-0 px-4">
                 <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
@@ -186,11 +310,6 @@
                     </button>
                 </div>
             </nav>
-        </div>
-        
-                    </nav>
-                </div>
-            </div>
         </div>
         
         <div class="admin-container shadow-lg rounded">
@@ -344,14 +463,71 @@
                     </form>
                 </div>
             </div>
-            </div>
         </div>
+    </div> <!-- End Main Content -->
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- GLASSMORPHISM LOCK LOGIC -->
+    <script>
+        const lockScreen = document.getElementById('glass-lock-screen');
+        const mainContent = document.getElementById('main-admin-content');
+        const passwordInput = document.getElementById('admin-password');
+        const errorMsg = document.getElementById('lock-error-msg');
+        
+        // Define your password here
+        const SECRET_PASSWORD = "Trans123";
+
+        function checkAdminLock() {
+            if (localStorage.getItem('glassAdminUnlocked') === 'true') {
+                // Already unlocked: Hide overlay, show main content
+                lockScreen.style.display = 'none';
+                mainContent.classList.remove('admin-content-hidden');
+            }
+        }
+
+        function verifyAdminPassword() {
+            if (passwordInput.value === SECRET_PASSWORD) {
+                // Correct Password
+                localStorage.setItem('glassAdminUnlocked', 'true');
+                errorMsg.style.display = 'none';
+                
+                // Fade out overlay and show content
+                lockScreen.style.opacity = '0';
+                setTimeout(() => {
+                    lockScreen.style.display = 'none';
+                    mainContent.classList.remove('admin-content-hidden');
+                }, 500);
+            } else {
+                // Incorrect Password
+                errorMsg.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                // Shake effect on card
+                const card = document.querySelector('.glass-card');
+                card.style.transform = 'translate(-5px, 0)';
+                setTimeout(() => card.style.transform = 'translate(5px, 0)', 100);
+                setTimeout(() => card.style.transform = 'translate(-5px, 0)', 200);
+                setTimeout(() => card.style.transform = 'translate(0, 0)', 300);
+            }
+        }
+
+        // Allow pressing Enter to submit
+        passwordInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                verifyAdminPassword();
+            }
+        });
+
+        // Run check immediately
+        checkAdminLock();
+    </script>
+
+    <!-- SUPABASE & DASHBOARD LOGIC -->
     <script>
         // --- CONFIGURATION ---
         const SUPABASE_URL = 'https://qgwxjnftvnzvbpalzxes.supabase.co';
@@ -376,10 +552,9 @@
         const formTitle = document.getElementById('form-title');
         const propertyCountDisplay = document.getElementById('property-count-display');
         const featuredPropertiesCount = document.getElementById('featured-properties'); 
-        const hotPropertiesCount = document.getElementById('hot-properties'); // NEW: Hot Properties Element
+        const hotPropertiesCount = document.getElementById('hot-properties'); 
 
-
-        // --- UTILITY FUNCTIONS (unchanged) ---
+        // --- UTILITY FUNCTIONS ---
         var spinner = function () {
             setTimeout(function () {
                 if ($('#spinner').length > 0) {
@@ -413,12 +588,10 @@
             propertyIdToEdit.value = '';
             imageFileInput.required = true;
             
-            // UI Updates
             formTitle.textContent = 'New Listing Details';
             submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk me-2"></i> Add Property Listing';
             cancelEditBtn.classList.add('d-none');
             
-            // Status Updates
             currentImageStatus.textContent = '';
             currentImageStatus.dataset.url = '';
             currentImageStatus.className = 'mt-1 d-block'; 
@@ -431,9 +604,6 @@
             }
         }
 
-        /**
-         * Placeholder for image compression (required for upload)
-         */
         function compressImage(file, quality = 0.5) {
              return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -443,7 +613,6 @@
                     img.src = event.target.result;
                     img.onload = () => {
                         const canvas = document.createElement('canvas');
-                        // Calculate new dimensions (e.g., max width 1200px)
                         const MAX_WIDTH = 1200;
                         let width = img.width;
                         let height = img.height;
@@ -472,7 +641,6 @@
             });
         }
         
-        // --- UPLOAD/UPDATE FUNCTION ---
         async function uploadFile(file, folder, oldUrl = null) {
             if (!file) return oldUrl; 
             if (folder === 'videos' && file.size > 50 * 1024 * 1024) { 
@@ -513,7 +681,6 @@
             return publicUrlData.publicUrl;
         }
 
-        // --- FORM SUBMISSION (ADD/EDIT) (unchanged) ---
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             disableForm(true);
@@ -526,12 +693,10 @@
             let videoUrl = currentVideoStatus.dataset.url || null; 
 
             try {
-                // 1. Validate Image
                 if (!isEditing && !imageFile) {
                     throw new Error('Primary image is required for a new listing.');
                 }
                 
-                // 2. Upload/Update Image
                 if (imageFile) {
                     displayMessage('Uploading and compressing image (This may take a moment)...', 'info');
                     imageUrl = await uploadFile(imageFile, 'images', imageUrl);
@@ -540,13 +705,11 @@
                     throw new Error('Primary image URL is missing. Please upload an image.');
                 }
 
-                // 3. Upload/Update Video
                 if (videoFile) {
                     displayMessage('Uploading video (Max 50MB)...', 'info');
                     videoUrl = await uploadFile(videoFile, 'videos', videoUrl);
                 }
 
-                // 4. Prepare Data
                 displayMessage(isEditing ? 'Saving changes to database...' : 'Inserting new data into database...', 'info');
                 
                 const propertyData = {
@@ -583,7 +746,7 @@
                 displayMessage(`Property listing ${isEditing ? 'updated' : 'created'} successfully!`, 'success');
                 resetFormState(); 
                 loadPropertiesForManagement(); 
-                loadPropertyCount(); // Reload counts after successful submission
+                loadPropertyCount(); 
             } catch (error) {
                 displayMessage(`Operation Failed: ${error.message}`, 'danger');
                 console.error('Admin Error:', error);
@@ -591,8 +754,6 @@
                 disableForm(false);
             }
         });
-
-        // ... editProperty and deleteProperty functions (unchanged)
 
         async function editProperty(id) {
             displayMessage('Loading property details for editing...', 'info');
@@ -608,7 +769,6 @@
                 return;
             }
 
-            // Populate form fields
             document.getElementById('name').value = property.name;
             document.getElementById('price').value = property.price;
             document.getElementById('location').value = property.location;
@@ -616,17 +776,12 @@
             document.getElementById('sale_rent_status').value = property.sale_rent_status;
             document.getElementById('description').value = property.description || '';
             
-            // Populate new tag checkboxes
             document.getElementById('is_featured').checked = property.is_featured;
             document.getElementById('is_hot').checked = property.is_hot;
             
-            // Set hidden ID for update
             propertyIdToEdit.value = property.id;
-            
-            // Handle image/video URLs and status
             imageFileInput.required = false;
 
-            // Image Status
             currentImageStatus.dataset.url = property.image_url || '';
             if (property.image_url) {
                 currentImageStatus.innerHTML = `✅ **Image Set** | <a href="${property.image_url}" target="_blank">View Current</a> | New file will overwrite.`;
@@ -636,7 +791,6 @@
                 currentImageStatus.className = 'mt-1 d-block text-danger';
             }
             
-            // Video Status
             currentVideoStatus.dataset.url = property.video_url || '';
             if (property.video_url) {
                 currentVideoStatus.innerHTML = `🎥 **Video Set** | <a href="${property.video_url}" target="_blank">View Current</a> | New file will overwrite.`;
@@ -646,15 +800,11 @@
                 currentVideoStatus.className = 'mt-1 d-block text-muted';
             }
 
-
-            // UI changes for editing mode
             formTitle.textContent = 'Edit Existing Listing (ID: ' + property.id + ')';
             submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk me-2"></i> Save Changes';
             cancelEditBtn.classList.remove('d-none');
             
-            // Switch to the Add/Edit tab
             document.getElementById('add-tab').click();
-            
             displayMessage('Ready to edit listing. Overwrite media by selecting new files.', 'success');
         }
 
@@ -674,9 +824,7 @@
             }
         }
 
-        // --- REVISED LOAD PROPERTY COUNT FUNCTION ---
         async function loadPropertyCount() {
-            // Get all three counts in one go for efficiency
             const [
                 { count: totalCount, error: totalError },
                 { count: featuredCount, error: featuredError },
@@ -687,12 +835,11 @@
                 sb.from('properties').select('id', { count: 'exact', head: true }).eq('is_hot', true)
             ]);
 
-
             if (!totalError && !featuredError && !hotError) {
                 document.getElementById('total-properties').textContent = totalCount || 0;
                 propertyCountDisplay.textContent = totalCount || 0;
                 featuredPropertiesCount.textContent = featuredCount || 0; 
-                hotPropertiesCount.textContent = hotCount || 0; // Populate Hot Count card
+                hotPropertiesCount.textContent = hotCount || 0; 
             } else {
                 console.error("Failed to load counts:", totalError || featuredError || hotError);
                 document.getElementById('total-properties').textContent = 'Error';
@@ -702,7 +849,6 @@
             }
         }
         
-        // --- LOAD LISTINGS FOR MANAGEMENT (unchanged) ---
         async function loadPropertiesForManagement() {
             manageList.innerHTML = '<div class="property-card text-center text-muted">Loading...</div>';
 
@@ -735,9 +881,7 @@
                 
                 const imageSrc = property.image_url || 'https://via.placeholder.com/80?text=No+Image';
                 
-                // Format price with commas
                 const priceFormatted = property.price ? new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', minimumFractionDigits: 0 }).format(property.price) : 'Price N/A';
-
 
                 const item = document.createElement('div');
                 item.className = 'property-card';
@@ -778,7 +922,6 @@
             });
         }
 
-        // Initialize dashboard on page load
         document.addEventListener('DOMContentLoaded', () => {
             loadPropertyCount();
             loadPropertiesForManagement();
@@ -786,3 +929,4 @@
     </script>
 </body>
 </html>
+
