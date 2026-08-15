@@ -1,606 +1,914 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Transreal Properties - Your Trusted Real Estate Partner</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="property sale, apartment renting, leasing, consultation, Ekiti state, Nigeria" name="keywords">
-    <meta content="Transreal Properties: Your trusted partner in real estate for property sale, apartment rentals, and consultation across Ekiti state, Nigeria." name="description">
+<meta charset="utf-8">
+<title>Transreal Properties | Hostels &amp; Student Accommodation Near EKSU, Iworoko</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="Transreal Properties, hostels near EKSU, hostels in Iworoko, student accommodation in Iworoko, self contain in Iworoko, apartments in Iworoko, real estate agent in Iworoko, property in Ekiti State">
+<meta name="description" content="Find student accommodation, hostels, self-contain apartments and rental properties near EKSU in Iworoko. Transreal Properties helps students and property seekers find suitable accommodation across Ekiti State.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%237C4DFF'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23FFB648' font-family='Georgia'%3ET%3C/text%3E%3C/svg%3E">
 
-    <link href="img/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet">
 
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink:#100A24;
+  --ink-2:#170F30;
+  --ink-3:#1F1440;
+  --violet:#7C4DFF;
+  --violet-2:#9B7BFF;
+  --amber:#FFB648;
+  --coral:#FF6B5D;
+  --mist:#F6F3FF;
+  --mist-dim:rgba(246,243,255,.66);
+  --mist-dimmer:rgba(246,243,255,.42);
+  --glass:rgba(255,255,255,.055);
+  --glass-2:rgba(255,255,255,.09);
+  --glass-border:rgba(255,255,255,.14);
+  --radius:20px;
+  --shadow-glow:0 20px 60px rgba(124,77,255,.25);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--mist);
+  font-family:'Manrope',sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,.display{
+  font-family:'Fraunces',serif;
+  color:var(--mist);
+  letter-spacing:-0.01em;
+  margin:0;
+}
+p{color:var(--mist-dim); margin:0;}
+a{text-decoration:none; color:inherit;}
+img{max-width:100%; display:block;}
+::selection{background:var(--violet); color:#fff;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+}
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+/* ============ AMBIENT BACKDROP ============ */
+.bg-mesh{
+  position:fixed; inset:0; z-index:-2; overflow:hidden;
+}
+.bg-mesh::before, .bg-mesh::after, .bg-mesh .blob{
+  content:""; position:absolute; border-radius:50%; filter:blur(90px); opacity:.5;
+}
+.bg-mesh::before{
+  width:640px; height:640px; top:-220px; left:-160px;
+  background:radial-gradient(circle, var(--violet), transparent 70%);
+}
+.bg-mesh::after{
+  width:560px; height:560px; bottom:-200px; right:-140px;
+  background:radial-gradient(circle, var(--coral), transparent 70%);
+  opacity:.35;
+}
+.bg-mesh .blob{
+  width:420px; height:420px; top:40%; left:60%;
+  background:radial-gradient(circle, var(--amber), transparent 70%);
+  opacity:.22; animation:drift 22s ease-in-out infinite alternate;
+}
+@keyframes drift{ from{transform:translate(0,0);} to{transform:translate(-80px,60px);} }
+.noise{
+  position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-    <link href="css/style.css" rel="stylesheet">
-    
-    <style>
-        .featured-property-item .img-fluid {
-            height: 250px; 
-            object-fit: cover;
-            width: 100%;
-        }
-        .featured-property-item {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .featured-property-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-    </style>
+/* ============ GLASS ============ */
+.glass{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-radius:var(--radius);
+}
+.glass-strong{
+  background:var(--glass-2);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+}
+
+/* ============ UTIL ============ */
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--amber); font-weight:500;
+}
+.section{padding:110px 0;}
+@media (max-width:768px){ .section{padding:70px 0;} }
+.section-head{max-width:640px; margin:0 auto 56px;}
+.section-head.left{margin:0 0 48px;}
+.mono{font-family:'JetBrains Mono',monospace;}
+
+/* ============ BUTTONS ============ */
+.btn-glow, .btn-ghost, .btn-line{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:15px 28px; border-radius:50px; font-weight:700; font-size:.92rem;
+  transition:.35s; border:1px solid transparent; cursor:pointer; white-space:nowrap;
+}
+.btn-glow{
+  background:linear-gradient(135deg, var(--violet), #9B5CFF);
+  color:#fff; box-shadow:0 10px 30px rgba(124,77,255,.4);
+}
+.btn-glow:hover{transform:translateY(-3px); box-shadow:0 16px 40px rgba(124,77,255,.55); color:#fff;}
+.btn-ghost{
+  background:var(--glass); border-color:var(--glass-border); color:var(--mist);
+  backdrop-filter:blur(14px);
+}
+.btn-ghost:hover{background:var(--glass-2); color:#fff; transform:translateY(-3px);}
+.btn-ghost.on-light{color:var(--ink); border-color:rgba(16,10,36,.15); background:rgba(16,10,36,.05);}
+.btn-line{background:transparent; border-color:rgba(246,243,255,.25); color:var(--mist);}
+.btn-line:hover{border-color:var(--amber); color:var(--amber);}
+
+/* ============ NAV ============ */
+.nav-wrap{position:sticky; top:0; z-index:999; padding:18px 20px 0;}
+.nav-inner{
+  max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;
+  padding:12px 18px; border-radius:60px;
+}
+.brand{display:flex; align-items:center; gap:10px;}
+.brand-mark{
+  width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg, var(--violet), var(--coral)); font-family:'Fraunces',serif; font-weight:700; color:#fff; font-size:1.1rem;
+}
+.brand-name{font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; letter-spacing:.01em;}
+.brand-name span{color:var(--amber); font-style:italic;}
+.nav-links{display:flex; align-items:center; gap:34px;}
+.nav-links a{
+  font-size:.88rem; font-weight:600; color:var(--mist-dim); position:relative; padding:4px 0;
+}
+.nav-links a:hover, .nav-links a.active{color:#fff;}
+.nav-links a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px;
+  background:var(--amber); border-radius:2px;
+}
+.nav-cta{display:flex; align-items:center; gap:12px;}
+.nav-toggle{display:none; background:none; border:none; color:#fff; font-size:1.4rem;}
+@media (max-width:991px){
+  .nav-links{
+    display:none; position:absolute; top:calc(100% + 10px); left:20px; right:20px; flex-direction:column;
+    align-items:flex-start; gap:6px; padding:18px; border-radius:18px; background:var(--ink-3); border:1px solid var(--glass-border);
+  }
+  .nav-links.open{display:flex;}
+  .nav-links a{padding:10px 4px; width:100%;}
+  .nav-toggle{display:block;}
+  .nav-cta .btn-glow{display:none;}
+}
+
+/* ============ HERO ============ */
+.hero{padding:64px 20px 40px; position:relative;}
+.hero-inner{max-width:1240px; margin:0 auto; display:grid; grid-template-columns:1.05fr .95fr; gap:60px; align-items:center;}
+@media (max-width:991px){ .hero-inner{grid-template-columns:1fr; gap:44px;} }
+.hero-eyebrow{margin-bottom:22px;}
+.hero h1{font-size:clamp(2.4rem, 4.6vw, 3.75rem); font-weight:600; line-height:1.06; margin-bottom:22px;}
+.hero h1 em{font-style:italic; font-weight:500; color:var(--violet-2);}
+.hero p.lead{font-size:1.08rem; max-width:520px; margin-bottom:34px;}
+.hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:38px;}
+.stat-chip{
+  display:inline-flex; align-items:center; gap:12px; padding:12px 20px; border-radius:50px;
+}
+.stat-chip .dot{width:9px; height:9px; border-radius:50%; background:var(--amber); box-shadow:0 0 12px var(--amber); flex:none;}
+.stat-chip strong{font-family:'JetBrains Mono',monospace; color:#fff; font-size:1rem;}
+.stat-chip span{font-size:.84rem; color:var(--mist-dim);}
+
+.hero-visual{position:relative;}
+.hero-frame{
+  position:relative; border-radius:28px; overflow:hidden; aspect-ratio:4/5; box-shadow:var(--shadow-glow);
+}
+.hero-frame img{width:100%; height:100%; object-fit:cover;}
+.hero-frame::after{
+  content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(16,10,36,.85) 100%);
+}
+.float-card{
+  position:absolute; padding:16px 18px; z-index:3; width:230px;
+}
+.float-card.top{top:22px; left:-24px;}
+.float-card.bottom{bottom:24px; right:-24px;}
+@media (max-width:560px){
+  .float-card.top{left:8px;} .float-card.bottom{right:8px;}
+}
+.float-card .flabel{font-family:'JetBrains Mono',monospace; font-size:.68rem; color:var(--amber); text-transform:uppercase; letter-spacing:.08em;}
+.float-card .fmain{font-family:'Fraunces',serif; font-size:1.15rem; color:#fff; margin-top:4px;}
+.float-card .fsub{font-size:.78rem; color:var(--mist-dim); margin-top:2px;}
+.float-card .favatars{display:flex; margin-top:10px;}
+.float-card .favatars i{
+  width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,var(--violet),var(--coral));
+  margin-left:-8px; border:2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-size:.6rem; color:#fff; font-style:normal;
+}
+.float-card .favatars i:first-child{margin-left:0;}
+
+/* ============ MARQUEE ============ */
+.marquee-strip{border-top:1px solid var(--glass-border); border-bottom:1px solid var(--glass-border); padding:16px 0; overflow:hidden; margin-top:70px;}
+.marquee-track{display:flex; gap:60px; white-space:nowrap; animation:scroll-x 26s linear infinite; width:max-content;}
+@keyframes scroll-x{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+.marquee-track span{font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--mist-dimmer); letter-spacing:.06em; text-transform:uppercase;}
+.marquee-track span i{color:var(--amber); margin-right:10px;}
+
+/* ============ CATEGORY ============ */
+.cat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+@media (max-width:900px){ .cat-grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:560px){ .cat-grid{grid-template-columns:1fr;} }
+.cat-card{
+  position:relative; border-radius:22px; overflow:hidden; height:260px; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:22px; background-size:cover; background-position:center; background-color:var(--ink-3);
+  transition:.5s; border:1px solid var(--glass-border);
+}
+.cat-card::before{
+  content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,10,36,.15) 0%, rgba(16,10,36,.92) 92%); transition:.5s;
+}
+.cat-card:hover{transform:translateY(-6px); border-color:var(--amber);}
+.cat-card:hover::before{background:linear-gradient(180deg, rgba(124,77,255,.2) 0%, rgba(16,10,36,.9) 92%);}
+.cat-card .cindex{position:relative; z-index:2; font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--amber); margin-bottom:auto;}
+.cat-card .ctitle{position:relative; z-index:2; font-family:'Fraunces',serif; font-size:1.32rem; color:#fff; margin-bottom:4px;}
+.cat-card .csub{position:relative; z-index:2; font-size:.82rem; color:var(--mist-dim);}
+.cat-card .carrow{
+  position:relative; z-index:2; margin-top:14px; width:34px; height:34px; border-radius:50%; display:flex; align-items:center;
+  justify-content:center; background:var(--glass-2); border:1px solid var(--glass-border); transition:.35s;
+}
+.cat-card:hover .carrow{background:var(--amber); color:var(--ink); transform:rotate(45deg);}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;}
+@media (max-width:900px){ .about-grid{grid-template-columns:1fr;} }
+.about-frame{position:relative; border-radius:26px; overflow:hidden; aspect-ratio:1/1;}
+.about-frame img{width:100%; height:100%; object-fit:cover;}
+.about-badge{
+  position:absolute; bottom:-1px; left:-1px; padding:20px 24px; border-radius:22px 0 22px 0;
+}
+.about-badge .num{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--amber);}
+.about-badge .lbl{font-size:.76rem; color:var(--mist-dim); max-width:130px;}
+.about-copy h2{font-size:clamp(1.9rem,3vw,2.5rem); font-weight:600; margin-bottom:20px; line-height:1.15;}
+.about-copy > p{margin-bottom:26px;}
+.check-list{display:flex; flex-direction:column; gap:16px;}
+.check-item{display:flex; gap:14px; padding:16px 18px;}
+.check-item i{
+  width:34px; height:34px; border-radius:10px; background:rgba(255,182,72,.14); color:var(--amber);
+  display:flex; align-items:center; justify-content:center; flex:none;
+}
+.check-item strong{color:#fff; display:block; font-size:.92rem; margin-bottom:2px;}
+.check-item span{font-size:.85rem;}
+
+/* ============ LISTING TABS ============ */
+.pill-tabs{display:inline-flex; padding:6px; border-radius:50px; gap:4px;}
+.pill-tabs button{
+  border:none; background:transparent; color:var(--mist-dim); font-weight:700; font-size:.86rem;
+  padding:11px 22px; border-radius:50px; cursor:pointer; transition:.3s; font-family:'Manrope',sans-serif;
+}
+.pill-tabs button.active{background:linear-gradient(135deg,var(--violet),#9B5CFF); color:#fff;}
+.listing-panel{display:none;}
+.listing-panel.active{display:grid;}
+.listing-grid{grid-template-columns:repeat(3,1fr); gap:24px; display:grid;}
+@media (max-width:991px){ .listing-grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:640px){ .listing-grid{grid-template-columns:1fr;} }
+
+.p-card{
+  border-radius:22px; overflow:hidden; transition:.4s; display:flex; flex-direction:column;
+}
+.p-card:hover{transform:translateY(-6px); border-color:rgba(255,182,72,.4);}
+.p-media{position:relative; height:210px; overflow:hidden;}
+.p-media img{width:100%; height:100%; object-fit:cover; transition:.6s;}
+.p-card:hover .p-media img{transform:scale(1.08);}
+.p-tag{
+  position:absolute; top:14px; left:14px; padding:6px 13px; border-radius:50px; font-family:'JetBrains Mono',monospace;
+  font-size:.68rem; text-transform:uppercase; letter-spacing:.05em; backdrop-filter:blur(10px);
+}
+.p-tag.sale{background:rgba(255,107,93,.85); color:#fff;}
+.p-tag.rent{background:rgba(124,77,255,.85); color:#fff;}
+.p-type{position:absolute; bottom:14px; left:14px; padding:6px 13px; border-radius:50px; font-size:.72rem; font-weight:700; color:var(--ink);}
+.p-body{padding:20px;}
+.p-price{font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:1.15rem; font-weight:600; margin-bottom:8px;}
+.p-name{font-family:'Fraunces',serif; font-size:1.08rem; color:#fff; margin-bottom:8px;}
+.p-loc{font-size:.84rem; display:flex; align-items:center; gap:6px;}
+.p-loc i{color:var(--amber);}
+.see-more-card{
+  display:flex; align-items:center; justify-content:center; text-align:center; border:1px dashed var(--glass-border);
+  border-radius:22px; padding:30px; min-height:100%; transition:.35s;
+}
+.see-more-card:hover{border-color:var(--amber); background:var(--glass-2);}
+.see-more-card .smc-i{
+  width:48px; height:48px; border-radius:50%; background:var(--glass-2); display:flex; align-items:center; justify-content:center;
+  margin:0 auto 12px; color:var(--amber); font-size:1.1rem;
+}
+.btn-view-all{
+  display:inline-flex; align-items:center; gap:10px; padding:12px 22px; border-radius:50px;
+  border:1px solid var(--glass-border); color:var(--mist-dim); font-family:'JetBrains Mono',monospace;
+  font-size:.78rem; letter-spacing:.05em; text-transform:uppercase; transition:.3s; background:transparent;
+}
+.btn-view-all i{font-size:.7rem; transition:.3s;}
+.btn-view-all:hover{color:var(--amber); border-color:var(--amber); gap:14px;}
+
+/* ============ CTA ============ */
+.cta-band{border-radius:30px; padding:56px; position:relative; overflow:hidden;}
+.cta-band::before{
+  content:""; position:absolute; width:340px; height:340px; border-radius:50%; background:var(--violet); filter:blur(100px); opacity:.35; top:-140px; right:-80px;
+}
+.cta-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; position:relative; z-index:1;}
+@media (max-width:900px){ .cta-grid{grid-template-columns:1fr;} }
+.cta-actions{display:flex; flex-wrap:wrap; gap:14px;}
+
+/* ============ TESTIMONIALS ============ */
+.t-card{padding:32px; height:100%;}
+.t-quote{font-family:'Fraunces',serif; font-style:italic; font-size:1.6rem; color:var(--amber); line-height:1; margin-bottom:14px; display:block;}
+.t-card p.txt{font-size:.98rem; color:var(--mist-dim); margin-bottom:22px; min-height:110px;}
+.t-person{display:flex; align-items:center; gap:12px;}
+.t-avatar{width:44px; height:170px; border-radius:50%; object-fit:cover;}
+.t-person strong{color:#fff; display:block; font-size:.9rem;}
+.t-person span{font-size:.78rem;}
+.stars{color:var(--amber); font-size:.8rem; margin-bottom:14px;}
+
+/* ============ FAQ ============ */
+.faq-item{border-radius:16px; margin-bottom:14px; overflow:hidden;}
+.faq-q{
+  display:flex; align-items:center; justify-content:space-between; padding:20px 24px; cursor:pointer; font-weight:700; color:#fff; font-size:.98rem;
+}
+.faq-q i{transition:.35s; color:var(--amber);}
+.faq-item.open .faq-q i{transform:rotate(45deg);}
+.faq-a{max-height:0; overflow:hidden; transition:.35s ease; padding:0 24px;}
+.faq-item.open .faq-a{max-height:200px; padding:0 24px 22px;}
+.faq-a p{font-size:.92rem;}
+
+/* ============ HOT CAROUSEL ============ */
+.owl-nav-custom{display:flex; gap:10px; justify-content:flex-end; margin-bottom:24px;}
+.owl-nav-custom button{
+  width:44px; height:44px; border-radius:50%; border:1px solid var(--glass-border); background:var(--glass);
+  color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:.3s;
+}
+.owl-nav-custom button:hover{background:var(--amber); color:var(--ink);}
+
+/* ============ FOOTER ============ */
+.footer{background:var(--ink-2); border-top:1px solid var(--glass-border); padding:80px 0 0; margin-top:60px;}
+.footer h6{font-family:'Fraunces',serif; color:#fff; font-size:1rem; margin-bottom:18px;}
+.footer p, .footer a{color:var(--mist-dim); font-size:.9rem;}
+.footer-links a{display:block; margin-bottom:10px; transition:.25s;}
+.footer-links a:hover{color:var(--amber); padding-left:4px;}
+.social-btn{
+  width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--glass-border); margin-right:8px; transition:.3s;
+}
+.social-btn:hover{background:var(--amber); color:var(--ink); border-color:var(--amber);}
+.gallery-mini{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+.gallery-mini img{border-radius:10px; aspect-ratio:1/1; object-fit:cover;}
+.news-input{
+  display:flex; border-radius:50px; padding:5px; margin-top:6px;
+}
+.news-input input{
+  flex:1; background:transparent; border:none; outline:none; padding:10px 16px; color:#fff; font-family:'Manrope',sans-serif; font-size:.88rem;
+}
+.news-input input::placeholder{color:var(--mist-dimmer);}
+.news-input button{
+  border:none; border-radius:50px; padding:10px 18px; background:linear-gradient(135deg,var(--violet),#9B5CFF); color:#fff; font-weight:700; font-size:.82rem;
+}
+.copyright{border-top:1px solid var(--glass-border); margin-top:50px; padding:22px 0; font-size:.82rem; text-align:center; color:var(--mist-dimmer);}
+
+.back-to-top{
+  position:fixed; right:24px; bottom:24px; width:48px; height:48px; border-radius:50%; z-index:60; display:none;
+  align-items:center; justify-content:center; color:#fff; box-shadow:0 10px 26px rgba(124,77,255,.4);
+}
+
+.reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+.reveal.is-visible{opacity:1; transform:translateY(0);}
+
+.skeleton{background:linear-gradient(90deg, rgba(255,255,255,.05) 25%, rgba(255,255,255,.12) 37%, rgba(255,255,255,.05) 63%); background-size:400% 100%; animation:sk 1.4s ease infinite;}
+@keyframes sk{0%{background-position:100% 50%;} 100%{background-position:0 50%;}}
+</style>
 </head>
-
 <body>
-    <div class="container-xxl bg-white p-0">
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <div class="container-fluid nav-bar bg-transparent">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 140px; height: 64px;">
-                    </div>
-                    <h1 class="m-0 text-primary"><font style="font-size:60%; margin-left:-30px;" >TRANSREAL</font> <font style="font-size:60%;color:#0a0b3ce8;"> PROPERTIES</font></h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property.html" class="dropdown-item">Property List</a>
-                               </div>
-                        </div>
-                        
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
-                </div>
-            </nav>
-        </div>
-        <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-6 p-5 mt-lg-5">
-                    <h2 class="display-5 animated fadeIn mb-4">Your <span class="text-primary">Trusted Partner</span> in  Real Estate  </h2>
-                    <p class="animated fadeIn mb-4 pb-2">We deal in property sale, apartment renting, leasing, consultation, all across Ekiti state, Nigeria.</p>
-                    <a href="property.html" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Explore Properties</a>
-                </div>
-                <div class="col-md-6 animated fadeIn">
-                    <div class="owl-carousel header-carousel">
-                        <div class="owl-carousel-item">
-                            <img class="img-fluid" src="img/carousel-1.jpg" alt="Carousel Image 1">
-                        </div>
-                        <div class="owl-carousel-item">
-                            <img class="img-fluid" src="img/carousel-2.jpg" alt="Carousel Image 2">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Property Types</h1>
-                    <p>At Transreal Properties we offer a wide range of services, ranging from selling of landed properties, to perfectly structured and modern buildings.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="property.html">
-                            <div class="rounded p-4">
-                                <div class="icon mb-3">
-                                    <img class="img-fluid" src="img/icon-apartment.png" alt="Apartment Icon">
-                                </div>
-                                <h6>Apartment</h6>
-                                <span>165+ Properties</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="property.html">
-                            <div class="rounded p-4">
-                                <div class="icon mb-3">
-                                    <img class="img-fluid" src="img/icon-villa.png" alt="Home Icon">
-                                </div>
-                                <h6>Home</h6>
-                                <span>120+ properties</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                            <div class="rounded p-4">
-                                <div class="icon mb-3">
-                                    <img class="img-fluid" src="img/icon-housing.png" alt="Land Icon">
-                                </div>
-                                <h6>Land</h6>
-                                <span>217+ Properties</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="property.html">
-                            <div class="rounded p-4">
-                                <div class="icon mb-3">
-                                    <img class="img-fluid" src="img/icon-house.png" alt="Office Icon">
-                                </div>
-                                <h6>Office space</h6>
-                                <span>75+ Properties</span>
-                            </div>
-                        </a>
-                    </div>
-                    
-              
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                            <div class="rounded p-4">
-                                <div class="icon mb-3">
-                                    <img class="img-fluid" src="img/icon-luxury.png" alt="Consultation Icon">
-                                </div>
-                                <h6>Consultation</h6>
-                                <span> service</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                            <img class="img-fluid w-100" src="img/about.jpg" alt="About Transreal Properties">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                        <h1 class="mb-4">#1 Place To Find The Perfect Property</h1>
-                        <p class="mb-4">Transreal Properties is consistently praised for its exceptional client focus, providing deep market expertise, highly responsive communication, and a commitment to transparency that ensures you find the optimal property solution quickly and with complete confidence.</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>100% affordable property sales</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>100% transparency and reliability</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Client focused Responsiveness</p>
-                        <a class="btn btn-primary py-3 px-5 mt-3" href="about.html">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-0 gx-5 align-items-end">
-                    <div class="col-lg-6">
-                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                            <h1 class="mb-3">Property Listing</h1>
-                            <p>Explore our latest property listing all across Ekiti state</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
-                        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-                            <li class="nav-item me-2">
-                                <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#tab-1">Featured</a>
-                            </li>
-                            <li class="nav-item me-2">
-                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-2">For Sale</a>
-                            </li>
-                            <li class="nav-item me-0">
-                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">For Rent</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tab-content">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-4">
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="img/1.jpg" alt="Duplex"></a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sale</div>
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Building</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3"> ₦65,800,000</h5>
-                                        <a class="d-block h5 mb-2" href="">Duplex</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Ekiti State nigeria</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>5 Bed</small>
-                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>3 Bath</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="img/4.jpg" alt="3 bedroom flat"></a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Flat</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3"> ₦450,345</h5>
-                            <a class="d-block h5 mb-2" href="property.html">3 bed room flat</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Iworoko Ekiti</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>500 Sqft</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="img/2.jpg" alt="4 bedroom apartment"></a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sale</div>
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Apartment</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3"> ₦25,000,000</h5>
-                                        <a class="d-block h5 mb-2" href="">4 bedroom apartment </a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Ekiti state</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>4 Bed</small>
-                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="img/5.jpg" alt="Plot of land"></a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For sale</div>
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Land</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3"> ₦1,900,000</h5>
-                                        <a class="d-block h5 mb-2" href="property.html">1 plot of land</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Unknown Location</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class=" text-primary me-2"></i></small>
-                                        <small class="flex-fill text-center py-2"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="img/6.jpg" alt="Modern duplex house"></a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For sale</div>
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Home</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3"> ₦170,000,000</h5>
-                                        <a class="d-block h5 mb-2" href="">Modern duplex house</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Unknown Location</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>3000 Sqft</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>7 Bed</small>
-                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>4 Bath</small>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                                <a class="btn btn-primary py-3 px-5" href="property.html">More Property</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tab-2" class="tab-pane fade show p-0">
-                        <div class="row g-4">
-                            <div class="col-lg-4 col-md-6">
-                                </div>
-                        </div>
-                    </div>
-                     <div id="tab-3" class="tab-pane fade show p-0">
-                        <div class="row g-4">
-                            <div class="col-lg-4 col-md-6">
-                                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="bg-light rounded p-3">
-                    <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
-                        <div class="row g-5 align-items-center">
-                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                                <img class="img-fluid rounded w-100" src="img/call.jpg" alt="Contact Us">
-                            </div>
-                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="mb-4">
-                                    <h1 class="mb-3">Contact Transreal Properties</h1>
-                                    <p>We are available for all property transaction/ consultation 24/7 </p>
-                                </div>
-                                <a href="tel:08133979019" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Make A Call</a>
-                                <a href="mailto:onefash01@yahoo.com" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">What Our Clients Say!</h1>
-                    <p><i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    </p>
-                </div>
-                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="testimonial-item bg-light rounded p-3">
-                        <div class="bg-white border rounded p-4">
-                            <p>Transreal Properties are very truthful and honest when it comes to buying of land or getting property in ekiti, they are the most reliable</p>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded" src="img/tes1.jpg" style="width: 45px; height: 45px;" alt="Client Testimonial">
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">Mr amini fabusuyi</h6>
-                                    <small>Land Purchase</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-light rounded p-3">
-                        <div class="bg-white border rounded p-4">
-                            <p>Their price is very affordable, and the transactions were very smooth, i was given all my documents instantly, unlike some other property providers i have used before</p>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded" src="img/tes2.jpg" style="width: 45px; height: 45px;" alt="Client Testimonial">
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">David Metu</h6>
-                                    <small>house</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-light rounded p-3">
-                        <div class="bg-white border rounded p-4">
-                            <p>I am a student of ekiti state university, and i had accomodation issues i got duped twice before i then met transreal Properties, i am presently still in the 2 bedroom flat i rented from them, very peaceful, very neat, highly recommended.</p>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded" src="img/tes3.jpg" style="width: 45px; height: 45px;" alt="Client Testimonial">
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">feyisara eniola</h6>
-                                    <small>Rent</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Featured Listings</h1>
-                    <p>Don't miss our hottest and newest properties available right now.</p>
-                </div>
-                <div id="featured-properties-carousel-container">
-                    <div class="text-center" id="featured-loading-spinner">
-                        <div class="spinner-border text-primary" role="status" style="width: 2rem; height: 2rem;">
-                            <span class="visually-hidden">Loading Featured Properties...</span>
-                        </div>
-                        <p class="mt-2 text-muted">Loading featured listings...</p>
-                    </div>
 
-                    <div class="owl-carousel property-carousel wow fadeInUp d-none" id="featured-properties-carousel" data-wow-delay="0.1s">
-                        </div>
-                    
-                    <div class="col-12 text-center d-none" id="featured-no-listings-message">
-                        <p class="lead text-muted mt-5">No featured properties available right now. View all listings on the <a href="property.html">Property List page</a>.</p>
-                    </div>
-                </div>
-            </div>
+<div class="bg-mesh"><div class="blob"></div></div>
+<div class="noise"></div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <nav class="nav-inner glass-strong">
+    <a href="index.html" class="brand">
+      <div class="brand-mark">T</div>
+      <div class="brand-name">Transreal <span>Properties</span></div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="property.html">Property</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="property.html" class="btn-glow">List a Property</a>
+      <button class="nav-toggle" id="navToggle"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="reveal is-visible">
+      <div class="eyebrow hero-eyebrow"><i class="fa-solid fa-location-dot"></i>&nbsp; Iworoko &middot; EKSU &middot; Ekiti State</div>
+      <h1>Your next address is closer to <em>campus</em> than you think.</h1>
+      <p class="lead">Transreal Properties matches EKSU students, families and investors with verified hostels, apartments, homes and land across Iworoko &amp; Ekiti State — no wahala, no duping.</p>
+      <div class="hero-actions">
+        <a href="property.html" class="btn-glow"><i class="fa-solid fa-magnifying-glass"></i> Explore Properties</a>
+        <a href="https://wa.me/2348133979019" target="_blank" class="btn-ghost"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+      </div>
+      <div class="stat-chip glass" id="statChip">
+        <span class="dot"></span>
+        <strong id="statCount">—</strong>
+        <span>verified listings live right now</span>
+      </div>
+    </div>
+    <div class="hero-visual reveal is-visible">
+      <div class="hero-frame">
+        <img src="img/carousel-1.jpg" alt="Student accommodation near EKSU">
+      </div>
+      <div class="float-card top glass-strong">
+        <div class="flabel">Near EKSU Gate</div>
+        <div class="fmain">Self-Contain</div>
+        <div class="fsub">2 mins walk to campus</div>
+      </div>
+      <div class="float-card bottom glass-strong">
+        <div class="flabel">Trusted by</div>
+        <div class="fmain">300+ Students</div>
+        <div class="favatars">
+          <i>FE</i><i>DM</i><i>AF</i>
         </div>
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Get In Touch</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Iworoko road, opposite iworoko community high school, Iworoko Ekiti state Nigeria</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><a href="tel:08133979019">08133979019</a></p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>onefash01@yahoo.com</p>
-                        <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/spirit4440?igsh=ejBiYWp4Nm9qcGQ4"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/share/1Ero7QT5Br/"><i class="fab fa-facebook-f"></i></a>
-                            
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-link text-white-50" href="about.html">About Us</a>
-                        <a class="btn btn-link text-white-50" href="contact">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="Property">Our Services</a>
-                        <a class="btn btn-link text-white-50" href="about">Privacy Policy</a>
-                        <a class="btn btn-link text-white-50" href="about">Terms & Condition</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Photo Gallery</h5>
-                        <div class="row g-2 pt-2">
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/1.jpg" alt="Gallery Photo 1">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/2.jpg" alt="Gallery Photo 2">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/3.jpg" alt="Gallery Photo 3">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/4.jpg" alt="Gallery Photo 4">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/5.jpg" alt="Gallery Photo 5">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/6.jpg" alt="Gallery Photo 6">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Newsletter</h5>
-                        <p>Join our newsletter for the latest property updates.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder=" email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">TP</a> Transreal Properties 2026 All Right Reserved. 
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span><i class="fa-solid fa-house"></i>Self-Contain</span>
+      <span><i class="fa-solid fa-building"></i>Mini Flats</span>
+      <span><i class="fa-solid fa-bed"></i>Student Hostels</span>
+      <span><i class="fa-solid fa-map"></i>Land &amp; Plots</span>
+      <span><i class="fa-solid fa-house-chimney"></i>Family Homes</span>
+      <span><i class="fa-solid fa-house"></i>Self-Contain</span>
+      <span><i class="fa-solid fa-building"></i>Mini Flats</span>
+      <span><i class="fa-solid fa-bed"></i>Student Hostels</span>
+      <span><i class="fa-solid fa-map"></i>Land &amp; Plots</span>
+      <span><i class="fa-solid fa-house-chimney"></i>Family Homes</span>
+    </div>
+  </div>
+</header>
+
+<!-- CATEGORY -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Browse by type</div>
+      <h2 style="font-size:clamp(1.9rem,3vw,2.6rem); font-weight:600; margin-top:12px;">What are you looking for?</h2>
+    </div>
+    <div class="cat-grid reveal">
+      <a id="cat-apartment" class="cat-card" href="property.html?filter=accommodation">
+        <div class="cindex">01</div>
+        <div class="ctitle">Apartments &amp; Hostels</div>
+        <div class="csub">Student accommodation near EKSU</div>
+        <div class="carrow"><i class="fa-solid fa-arrow-up-right"></i></div>
+      </a>
+      <a id="cat-home" class="cat-card" href="property.html?filter=home">
+        <div class="cindex">02</div>
+        <div class="ctitle">Homes</div>
+        <div class="csub">Residential houses &amp; properties</div>
+        <div class="carrow"><i class="fa-solid fa-arrow-up-right"></i></div>
+      </a>
+      <a id="cat-land" class="cat-card" href="property.html?filter=land">
+        <div class="cindex">03</div>
+        <div class="ctitle">Land</div>
+        <div class="csub">Investment plots</div>
+        <div class="carrow"><i class="fa-solid fa-arrow-up-right"></i></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-frame reveal">
+        <img src="img/about.jpg" alt="About Transreal Properties">
+        <div class="about-badge glass-strong">
+          <div class="num">10+</div>
+          <div class="lbl">Years finding homes around Iworoko</div>
         </div>
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+      </div>
+      <div class="about-copy reveal">
+        <div class="eyebrow">Who we are</div>
+        <h2 style="margin-top:14px;">#1 real estate agency in Iworoko, Ekiti.</h2>
+        <p>Looking for a hostel or apartment close to Ekiti State University? Transreal Properties Limited helps students, families, professionals and property seekers find suitable accommodation and real estate opportunities in Iworoko, Ado-Ekiti and across Ekiti State.</p>
+        <div class="check-list">
+          <div class="check-item glass">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <div><strong>Local knowledge</strong><span>We operate around the Iworoko/EKSU area and understand your accommodation needs.</span></div>
+          </div>
+          <div class="check-item glass">
+            <i class="fa-solid fa-layer-group"></i>
+            <div><strong>Multiple options</strong><span>Self-contain, shared apartments, mini-flats and student hostels.</span></div>
+          </div>
+          <div class="check-item glass">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div><strong>Professional service</strong><span>100% transparency and reliability, guaranteed.</span></div>
+          </div>
+        </div>
+        <a href="about.html" class="btn-line" style="margin-top:30px;">Learn more about us <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section class="section">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 reveal" style="margin-bottom:44px;">
+      <div>
+        <div class="eyebrow">Live from the database</div>
+        <h2 style="font-size:clamp(1.9rem,3vw,2.6rem); font-weight:600; margin-top:12px;">Property listings</h2>
+      </div>
+      <div class="pill-tabs glass" id="listingTabs">
+        <button data-tab="featured" class="active">Featured</button>
+        <button data-tab="sale">For Sale</button>
+        <button data-tab="rent">For Rent</button>
+      </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <div class="listing-panel active listing-grid" id="panel-featured">
+      <div class="skeleton" style="height:340px;border-radius:22px;grid-column:span 1;"></div>
+      <div class="skeleton" style="height:340px;border-radius:22px;grid-column:span 1;"></div>
+      <div class="skeleton" style="height:340px;border-radius:22px;grid-column:span 1;"></div>
+    </div>
+    <div class="listing-panel listing-grid" id="panel-sale"></div>
+    <div class="listing-panel listing-grid" id="panel-rent"></div>
+  </div>
+</section>
 
-    <script src="js/main.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        // --- SUPABASE CONFIGURATION (Must be kept up-to-date) ---
-        // Verified keys for read-only access
-        const SUPABASE_URL = 'https://qgwxjnftvnzvbpalzxes.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_A7ILV8KrJcHIrUbk3TsMFg_bjZnWn_C'; 
-        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-            auth: { persistSession: false },
-        });
+<!-- CTA -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="cta-band glass-strong reveal">
+      <div class="cta-grid">
+        <div>
+          <div class="eyebrow">Talk to us</div>
+          <h2 style="font-size:clamp(1.8rem,3vw,2.4rem); margin:14px 0 16px;">Whether you're hunting for a hostel or a plot of land, we're ready to help.</h2>
+          <p>EKSU student looking for accommodation in Iworoko, a family searching for a home, or an investor scouting Ekiti State — reach out today.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="tel:08133979019" class="btn-glow"><i class="fa-solid fa-phone"></i> 0813 397 9019</a>
+          <a href="mailto:onefash01@yahoo.com" class="btn-ghost"><i class="fa-solid fa-envelope"></i> Email us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // --- UTILITY FUNCTION ---
-        function formatNaira(price) {
-            return new Intl.NumberFormat('en-NG', {
-                style: 'currency',
-                currency: 'NGN',
-                minimumFractionDigits: 0,
-            }).format(price);
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Client stories</div>
+      <h2 style="font-size:clamp(1.9rem,3vw,2.6rem); font-weight:600; margin-top:12px;">What our clients say</h2>
+    </div>
+    <div class="owl-carousel testimonial-owl reveal">
+      <div class="t-card glass">
+        <span class="t-quote">&ldquo;</span>
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="txt">Transreal Properties are very truthful and honest when it comes to buying of land or getting property in Ekiti — they are the most reliable.</p>
+        <div class="t-person">
+          <img class="t-avatar" src="img/tes1.jpg" alt="Mr Amini Fabusuyi" style="height:150px;">
+          <div><strong>Mr Amini Fabusuyi</strong><span>Land Purchase</span></div>
+        </div>
+      </div>
+      <div class="t-card glass">
+        <span class="t-quote">&ldquo;</span>
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="txt">Their price is very affordable, and the transactions were very smooth — I was given all my documents instantly, unlike other providers.</p>
+        <div class="t-person">
+          <img class="t-avatar" src="img/tes2.jpg" alt="David Metu">
+          <div><strong>David Metu</strong><span>House Buyer</span></div>
+        </div>
+      </div>
+      <div class="t-card glass">
+        <span class="t-quote">&ldquo;</span>
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="txt">I'm a student of Ekiti State University and had accommodation issues — got duped twice before I met Transreal Properties. Still in the 2-bedroom flat I rented, very peaceful and neat.</p>
+        <div class="t-person">
+          <img class="t-avatar" src="img/tes3.jpg" alt="Feyisara Eniola">
+          <div><strong>Feyisara Eniola</strong><span>EKSU Student (Rent)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5 reveal">
+        <div class="eyebrow">FAQs</div>
+        <h2 style="font-size:clamp(1.9rem,3vw,2.6rem); font-weight:600; margin:12px 0 16px;">Questions, answered.</h2>
+        <p>Got questions about getting a property around EKSU or Iworoko? Here's what people usually ask us.</p>
+      </div>
+      <div class="col-lg-7 reveal">
+        <div class="faq-item glass open">
+          <div class="faq-q">Where can I find accommodation near EKSU? <i class="fa-solid fa-plus"></i></div>
+          <div class="faq-a"><p>Iworoko and surrounding areas offer several student accommodation options. Transreal Properties can help you explore currently available properties fitted for students.</p></div>
+        </div>
+        <div class="faq-item glass">
+          <div class="faq-q">What types of accommodation are available? <i class="fa-solid fa-plus"></i></div>
+          <div class="faq-a"><p>Depending on current availability: self-contain apartments, shared apartments, mini-flats, 1-bedroom apartments and student hostels.</p></div>
+        </div>
+        <div class="faq-item glass">
+          <div class="faq-q">How much does accommodation around EKSU cost? <i class="fa-solid fa-plus"></i></div>
+          <div class="faq-a"><p>Prices vary by property, location, room type, facilities and current market conditions. Contact us for the latest available properties and prices.</p></div>
+        </div>
+        <div class="faq-item glass">
+          <div class="faq-q">Can I inspect a property before paying? <i class="fa-solid fa-plus"></i></div>
+          <div class="faq-a"><p>Absolutely yes. We encourage you to inspect a property in person and confirm its details with our agents before making any payment or commitment.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOT LISTINGS -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end reveal" style="margin-bottom:24px;">
+      <div>
+        <div class="eyebrow">Trending now</div>
+        <h2 style="font-size:clamp(1.9rem,3vw,2.6rem); font-weight:600; margin-top:12px;">Hot featured listings</h2>
+      </div>
+    </div>
+    <div id="featured-loading-spinner" style="text-align:center; padding:30px;">
+      <div class="skeleton" style="height:250px;border-radius:22px;"></div>
+    </div>
+    <div class="owl-carousel property-owl d-none" id="featured-properties-carousel"></div>
+    <div class="text-center d-none glass" style="padding:40px; border-radius:22px;" id="featured-no-listings-message">
+      <p style="color:var(--mist-dim);">No featured properties available right now. View all listings on the <a href="property.html" style="color:var(--amber); text-decoration:underline;">Property List page</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container pb-5">
+    <div class="row g-5">
+      <div class="col-lg-3 col-md-6">
+        <h6>Get in touch</h6>
+        <p class="mb-2"><i class="fa-solid fa-location-dot me-2" style="color:var(--amber);"></i>Iworoko Road, opposite Iworoko Community High School, Iworoko, Ekiti State</p>
+        <p class="mb-2"><i class="fa-solid fa-phone me-2" style="color:var(--amber);"></i><a href="tel:08133979019">0813 397 9019</a></p>
+        <p class="mb-3"><i class="fa-solid fa-envelope me-2" style="color:var(--amber);"></i>onefash01@yahoo.com</p>
+        <div class="d-flex">
+          <a class="social-btn" href="https://www.instagram.com/spirit4440?igsh=ejBiYWp4Nm9qcGQ4"><i class="fa-brands fa-instagram"></i></a>
+          <a class="social-btn" href="https://www.facebook.com/share/1Ero7QT5Br/"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6>Quick links</h6>
+        <div class="footer-links">
+          <a href="about.html">About us</a>
+          <a href="contact.html">Contact us</a>
+          <a href="property.html">Our properties</a>
+          <a href="about.html">Privacy policy</a>
+          <a href="about.html">Terms &amp; condition</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6>Photo gallery</h6>
+        <div class="gallery-mini">
+          <img src="img/1.jpg" alt=""><img src="img/2.jpg" alt=""><img src="img/3.jpg" alt="">
+          <img src="img/4.jpg" alt=""><img src="img/5.jpg" alt=""><img src="img/6.jpg" alt="">
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6>Newsletter</h6>
+        <p>Join our newsletter for the latest property updates in Iworoko and EKSU.</p>
+        <div class="news-input glass">
+          <input type="text" placeholder="Your email">
+          <button>Sign up</button>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">&copy; Transreal Properties 2026. All rights reserved.</div>
+  </div>
+</footer>
+
+<a href="#" class="btn-glow back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = 'https://qgwxjnftvnzvbpalzxes.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_A7ILV8KrJcHIrUbk3TsMFg_bjZnWn_C';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false } });
+
+  const PLACEHOLDER_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='260'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%237C4DFF'/%3E%3Cstop offset='100%25' stop-color='%23FF6B5D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='260' fill='%23170F30'/%3E%3Crect width='400' height='260' fill='url(%23g)' opacity='0.18'/%3E%3Ctext x='200' y='138' font-family='Arial' font-size='15' fill='%23F6F3FF' text-anchor='middle' opacity='0.65'%3EPhoto unavailable%3C/text%3E%3C/svg%3E";
+
+  function formatNaira(price){
+    return new Intl.NumberFormat('en-NG', { style:'currency', currency:'NGN', minimumFractionDigits:0 }).format(price);
+  }
+
+  function propertyCardHTML(property){
+    const isSale = (property.sale_rent_status || '').toLowerCase().includes('sale');
+    return `
+    <div class="p-card glass">
+      <div class="p-media">
+        <a href="property.html?id=${property.id}"><img src="${property.image_url}" alt="${property.name}" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}';"></a>
+        <div class="p-tag ${isSale ? 'sale' : 'rent'}">For ${property.sale_rent_status}</div>
+        <div class="p-type glass-strong">${property.property_type}</div>
+      </div>
+      <div class="p-body">
+        <div class="p-price">${formatNaira(property.price)}</div>
+        <a class="p-name d-block" href="property.html?id=${property.id}">${property.name}</a>
+        <div class="p-loc"><i class="fa-solid fa-location-dot"></i>${property.location}</div>
+      </div>
+    </div>`;
+  }
+
+  function seeMoreCard(href, label){
+    return `<a href="${href}" class="see-more-card glass">
+      <div>
+        <div class="smc-i"><i class="fa-solid fa-arrow-right"></i></div>
+        <div style="color:#fff; font-weight:700; font-size:.92rem;">${label}</div>
+      </div>
+    </a>`;
+  }
+
+  async function loadStatCount(){
+    try{
+      const { count } = await sb.from('properties').select('*', { count: 'exact', head: true });
+      document.getElementById('statCount').textContent = (count ?? 0) + '+';
+    }catch(e){ document.getElementById('statCount').textContent = '50+'; }
+  }
+
+  async function loadListingTabs(){
+    // Featured — only listings explicitly marked featured
+    try{
+      const { data } = await sb.from('properties').select('*').eq('is_featured', true).order('created_at', { ascending:false }).limit(6);
+      const el = document.getElementById('panel-featured');
+      el.innerHTML = (data && data.length) ? data.map(propertyCardHTML).join('') + `<div style="grid-column:1/-1; text-align:center; margin-top:18px;"><a class="btn-view-all" href="property.html"><span>View all properties</span><i class="fa-solid fa-arrow-right"></i></a></div>`
+        : `<p style="grid-column:1/-1; text-align:center;">No featured properties found.</p>`;
+    }catch(e){}
+
+    // For Sale — land only
+    try{
+      const { data } = await sb.from('properties').select('*')
+        .ilike('sale_rent_status', '%sale%')
+        .or(orClauseFor(['land']))
+        .order('created_at', { ascending:false }).limit(5);
+      const el = document.getElementById('panel-sale');
+      el.innerHTML = (data && data.length) ? data.map(propertyCardHTML).join('') + seeMoreCard('property.html?filter=land&status=Sale', 'See more land for sale')
+        : `<p style="grid-column:1/-1; text-align:center;">No land for sale right now. <a href="property.html?status=Sale" style="color:var(--amber);">Browse all sales</a></p>`;
+    }catch(e){}
+
+    // For Rent — hostels & accommodation only, 5 max
+    try{
+      const { data } = await sb.from('properties').select('*')
+        .ilike('sale_rent_status', '%rent%')
+        .or(orClauseFor(['hostel','accommodation','apartment']))
+        .order('created_at', { ascending:false }).limit(5);
+      const el = document.getElementById('panel-rent');
+      el.innerHTML = (data && data.length) ? data.map(propertyCardHTML).join('') + seeMoreCard('property.html?filter=accommodation&status=Rent', 'See all hostels for rent')
+        : `<p style="grid-column:1/-1; text-align:center;">No hostels for rent right now. <a href="property.html?status=Rent" style="color:var(--amber);">Browse all rentals</a></p>`;
+    }catch(e){}
+  }
+
+  document.getElementById('listingTabs').addEventListener('click', (e)=>{
+    const btn = e.target.closest('button'); if(!btn) return;
+    document.querySelectorAll('#listingTabs button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.listing-panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+
+  // Category keyword groups — matched across name, description AND property_type
+  const CATEGORY_KEYWORDS = {
+    'cat-apartment': ['apartment','accommodation','hostel'],
+    'cat-home': ['home','house'],
+    'cat-land': ['land']
+  };
+  function orClauseFor(keywords){
+    const parts = [];
+    keywords.forEach(k => parts.push(`name.ilike.%${k}%`, `description.ilike.%${k}%`, `property_type.ilike.%${k}%`));
+    return parts.join(',');
+  }
+
+  async function loadCategorySlideshows(){
+    for (const id of Object.keys(CATEGORY_KEYWORDS)){
+      const el = document.getElementById(id);
+      if (!el) continue;
+      try{
+        const { data, error } = await sb.from('properties')
+          .select('image_url')
+          .or(orClauseFor(CATEGORY_KEYWORDS[id]))
+          .not('image_url', 'is', null)
+          .limit(4);
+
+        if (error) throw error;
+
+        if (data && data.length){
+          let i = 0;
+          el.style.backgroundImage = `url('${data[0].image_url}')`;
+          if (data.length > 1){
+            setInterval(()=>{ i = (i+1) % data.length; el.style.backgroundImage = `url('${data[i].image_url}')`; }, 4500 + Math.random()*1500);
+          }
+        } else {
+          el.style.backgroundImage = `url('img/carousel-1.jpg')`;
         }
+      }catch(e){
+        el.style.backgroundImage = `url('img/carousel-1.jpg')`;
+      }
+    }
+  }
 
-        // --- FEATURED PROPERTIES LOGIC ---
-        const carouselContainer = document.getElementById('featured-properties-carousel');
-        const loadingSpinner = document.getElementById('featured-loading-spinner');
-        const noListingsMessage = document.getElementById('featured-no-listings-message');
-        
-        async function loadFeaturedProperties() {
-            loadingSpinner.classList.remove('d-none'); // Show loading spinner
+  async function loadBottomCarousel(){
+    const spinner = document.getElementById('featured-loading-spinner');
+    const wrap = document.getElementById('featured-properties-carousel');
+    const empty = document.getElementById('featured-no-listings-message');
 
-            const { data: properties, error } = await sb
-                .from('properties')
-                // Selecting ONLY the columns that exist in your database
-                .select('id, name, price, location, property_type, sale_rent_status, image_url') 
-                .eq('is_featured', true) 
-                .order('created_at', { ascending: false })
-                .limit(8); 
+    let { data: items } = await sb.from('properties').select('id,name,price,location,property_type,sale_rent_status,image_url').eq('is_hot', true).order('created_at', { ascending:false }).limit(8);
+    if (!items || !items.length){
+      const { data: fallback } = await sb.from('properties').select('*').eq('is_featured', true).limit(8);
+      items = fallback;
+    }
+    spinner.classList.add('d-none');
+    if (!items || !items.length){ empty.classList.remove('d-none'); return; }
 
-            loadingSpinner.classList.add('d-none'); // Hide loading spinner
+    items.forEach(property=>{
+      const div = document.createElement('div');
+      div.innerHTML = `
+      <div class="p-card glass" style="margin:6px;">
+        <div class="p-media">
+          <a href="property.html?id=${property.id}"><img src="${property.image_url}" alt="${property.name}" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}';"></a>
+          <div class="p-tag rent" style="background:rgba(255,182,72,.9); color:var(--ink);"><i class="fa-solid fa-fire"></i> Hot</div>
+          <div class="p-type glass-strong">${property.property_type}</div>
+        </div>
+        <div class="p-body">
+          <div class="p-price">${formatNaira(property.price)}</div>
+          <a class="p-name d-block" href="property.html?id=${property.id}">${property.name}</a>
+          <div class="p-loc"><i class="fa-solid fa-location-dot"></i>${property.location}</div>
+        </div>
+      </div>`;
+      wrap.appendChild(div.firstElementChild);
+    });
+    wrap.classList.remove('d-none');
+    $(wrap).owlCarousel({
+      autoplay:true, smartSpeed:900, margin:12, dots:true, loop:true, nav:false,
+      responsive:{ 0:{items:1}, 768:{items:2}, 992:{items:3} }
+    });
+  }
 
-            if (error) {
-                // Proper error logging for debugging
-                const errorMessage = error.message || error.details || 'An unknown database error occurred.';
-                console.error('Database Error:', errorMessage);
-                
-                // Show user-friendly error message on the page
-                noListingsMessage.classList.remove('d-none');
-                noListingsMessage.innerHTML = `<p class="lead text-danger mt-5">Error loading listings. (Error: ${errorMessage})</p>`;
-                return;
-            }
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click', ()=>{
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
 
-            if (properties.length === 0) {
-                noListingsMessage.classList.remove('d-none');
-                return;
-            }
+  // Nav toggle
+  document.getElementById('navToggle').addEventListener('click', ()=>{
+    document.getElementById('navLinks').classList.toggle('open');
+  });
 
-            // Populate the carousel
-            properties.forEach(property => {
-                const carouselItem = document.createElement('div');
-                carouselItem.className = 'owl-carousel-item';
-                
-                // Dynamic Badges using a distinct background color (bg-danger for red)
-                const featuredBadge = `
-                    <div class="bg-danger rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" style="font-weight: 700;">
-                        <i class="fa fa-fire text-white me-1"></i> HOT LISTING
-                    </div>
-                `;
+  // Back to top
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', ()=>{ backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none'; });
+  backToTop.addEventListener('click', (e)=>{ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
 
-                carouselItem.innerHTML = `
-                    <div class="property-item featured-property-item rounded overflow-hidden shadow-sm">
-                        <div class="position-relative overflow-hidden">
-                            <a href="property.html"><img class="img-fluid" src="${property.image_url}" alt="${property.name}"></a>
-                            
-                            ${featuredBadge}
-                            
-                            <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">${property.property_type}</div>
-                        </div>
-                        <div class="p-4 pb-4">
-                            <h5 class="text-primary mb-3">${formatNaira(property.price)}</h5>
-                            <a class="d-block h5 mb-2" href="property.html">${property.name}</a>
-                            <p class="mb-0"><i class="fa fa-map-marker-alt text-primary me-2"></i>${property.location}</p>
-                        </div>
-                        </div>
-                `;
-                carouselContainer.appendChild(carouselItem);
-            });
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('is-visible'); });
+  }, { threshold:0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-            // Initialize Owl Carousel
-            carouselContainer.classList.remove('d-none');
-            $(carouselContainer).owlCarousel({
-                autoplay: true,
-                smartSpeed: 1000,
-                margin: 24,
-                dots: true,
-                loop: true,
-                nav: false,
-                responsive: {
-                    0: { items: 1 },
-                    768: { items: 2 },
-                    992: { items: 3 }
-                }
-            });
-        }
-
-        // Run the main functions on document load
-        document.addEventListener('DOMContentLoaded', () => {
-            new WOW().init();
-            loadFeaturedProperties();
-        });
-    </script>
-
-    
+  document.addEventListener('DOMContentLoaded', ()=>{
+    loadStatCount();
+    loadCategorySlideshows();
+    loadListingTabs();
+    loadBottomCarousel();
+    $('.testimonial-owl').owlCarousel({
+      items:1, loop:true, autoplay:true, smartSpeed:900, dots:true, nav:false, margin:20,
+      responsive:{ 768:{items:2}, 992:{items:3} }
+    });
+  });
+</script>
 </body>
 </html>

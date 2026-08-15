@@ -1,564 +1,602 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Transreal Properties - Property Listings</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Browse available properties for sale and rent from Transreal Properties in Ekiti State." name="keywords">
-    <meta content="Find your perfect home, land, or commercial property with Transreal Properties' current listings." name="description">
+<meta charset="utf-8">
+<title>Property Listings | Transreal Properties</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="Browse available properties for sale and rent from Transreal Properties in Ekiti State.">
+<meta name="description" content="Find your perfect home, hostel, land, or commercial property with Transreal Properties' current listings near EKSU and across Ekiti State.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%237C4DFF'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23FFB648' font-family='Georgia'%3ET%3C/text%3E%3C/svg%3E">
 
-    <link href="img/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<style>
+/* ============ TOKENS (shared with index.html) ============ */
+:root{
+  --ink:#100A24; --ink-2:#170F30; --ink-3:#1F1440;
+  --violet:#7C4DFF; --violet-2:#9B7BFF; --amber:#FFB648; --coral:#FF6B5D;
+  --mist:#F6F3FF; --mist-dim:rgba(246,243,255,.66); --mist-dimmer:rgba(246,243,255,.42);
+  --glass:rgba(255,255,255,.055); --glass-2:rgba(255,255,255,.09); --glass-border:rgba(255,255,255,.14);
+  --radius:20px; --shadow-glow:0 20px 60px rgba(124,77,255,.25);
+}
+*{box-sizing:border-box;}
+body{ margin:0; background:var(--ink); color:var(--mist); font-family:'Manrope',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden;}
+h1,h2,h3,h4,.display{font-family:'Fraunces',serif; color:var(--mist); letter-spacing:-0.01em; margin:0;}
+p{color:var(--mist-dim); margin:0;}
+a{text-decoration:none; color:inherit;}
+img{max-width:100%; display:block;}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;} }
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+.bg-mesh{position:fixed; inset:0; z-index:-2; overflow:hidden;}
+.bg-mesh::before, .bg-mesh::after{content:""; position:absolute; border-radius:50%; filter:blur(90px); opacity:.5;}
+.bg-mesh::before{width:640px; height:640px; top:-220px; left:-160px; background:radial-gradient(circle, var(--violet), transparent 70%);}
+.bg-mesh::after{width:560px; height:560px; bottom:-200px; right:-140px; background:radial-gradient(circle, var(--coral), transparent 70%); opacity:.3;}
+.noise{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
-    <style>
-        :root {
-            var(--bs-primary): #00b98e;
-            var(--bs-success): #198754;
-            var(--bs-warning): #ffc107;
-            var(--bs-danger): #dc3545;
-        }
+.glass{background:var(--glass); border:1px solid var(--glass-border); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border-radius:var(--radius);}
+.glass-strong{background:var(--glass-2); border:1px solid var(--glass-border); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);}
+.eyebrow{font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--amber); font-weight:500;}
 
-        .property-card {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            height: 100%; 
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-        .property-img-container {
-            height: 250px; 
-            overflow: hidden;
-            position: relative;
-        }
-        .property-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .property-body {
-            padding: 15px;
-            flex-grow: 1;
-        }
-        .property-price {
-            font-size: 1.6rem;
-            color: var(--bs-primary);
-            font-weight: 700;
-        }
+.btn-glow, .btn-ghost, .btn-line{display:inline-flex; align-items:center; gap:10px; padding:14px 26px; border-radius:50px; font-weight:700; font-size:.88rem; transition:.35s; border:1px solid transparent; cursor:pointer; white-space:nowrap;}
+.btn-glow{background:linear-gradient(135deg, var(--violet), #9B5CFF); color:#fff; box-shadow:0 10px 30px rgba(124,77,255,.4);}
+.btn-glow:hover{transform:translateY(-3px); color:#fff;}
+.btn-ghost{background:var(--glass); border-color:var(--glass-border); color:var(--mist);}
+.btn-ghost:hover{background:var(--glass-2); color:#fff;}
 
-        /* Responsive tweaks */
-        @media (max-width: 576px) {
-            .property-price { font-size: 1.1rem; }
-            .property-body h5 { font-size: 0.95rem; }
-            .property-img-container { height: 180px; }
-            .property-body { padding: 10px; }
-            .btn-success { font-size: 0.8rem; padding: 6px; }
-            .property-body .badge { font-size: 0.7rem; }
-        }
+/* NAV */
+.nav-wrap{position:sticky; top:0; z-index:999; padding:18px 20px 0;}
+.nav-inner{max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-radius:60px;}
+.brand{display:flex; align-items:center; gap:10px;}
+.brand-mark{width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--violet), var(--coral)); font-family:'Fraunces',serif; font-weight:700; color:#fff; font-size:1.1rem;}
+.brand-name{font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem;}
+.brand-name span{color:var(--amber); font-style:italic;}
+.nav-links{display:flex; align-items:center; gap:34px;}
+.nav-links a{font-size:.88rem; font-weight:600; color:var(--mist-dim); position:relative; padding:4px 0;}
+.nav-links a:hover, .nav-links a.active{color:#fff;}
+.nav-links a.active::after{content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:var(--amber); border-radius:2px;}
+.nav-toggle{display:none; background:none; border:none; color:#fff; font-size:1.4rem;}
+@media (max-width:991px){
+  .nav-links{display:none; position:absolute; top:calc(100% + 10px); left:20px; right:20px; flex-direction:column; align-items:flex-start; gap:6px; padding:18px; border-radius:18px; background:var(--ink-3); border:1px solid var(--glass-border);}
+  .nav-links.open{display:flex;} .nav-links a{padding:10px 4px; width:100%;} .nav-toggle{display:block;}
+}
 
-        /* Detail View Styles */
-        .detail-view-media {
-            width: 100%;
-            max-height: 500px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        img.detail-view-media { object-fit: cover; }
-        video.detail-view-media { object-fit: contain; background-color: #000; }
+/* PAGE HEAD */
+.page-head{padding:56px 20px 20px;}
+.page-head-inner{max-width:1240px; margin:0 auto;}
+.page-head h1{font-size:clamp(2rem,3.6vw,3rem); font-weight:600; margin-bottom:10px;}
+.search-bar{display:flex; align-items:center; gap:12px; padding:8px 8px 8px 22px; border-radius:50px; margin-top:30px;}
+.search-bar i{color:var(--amber);}
+.search-bar input{flex:1; background:transparent; border:none; outline:none; color:#fff; font-family:'Manrope',sans-serif; font-size:.98rem; padding:12px 0;}
+.search-bar input::placeholder{color:var(--mist-dimmer);}
+.search-clear{background:var(--glass-2); border:none; color:var(--mist-dim); width:34px; height:34px; border-radius:50%; cursor:pointer; display:none; align-items:center; justify-content:center;}
 
-        .detail-description {
-            white-space: pre-wrap; 
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #495057;
-        }
-        
-        #search-input {
-            border-radius: 50px; 
-            border: 2px solid var(--bs-primary); 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
-            padding-left: 20px;
-        }
+/* FILTER BAR */
+.filter-bar{max-width:1240px; margin:26px auto 10px; padding:0 20px; display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;}
+.chip-row{display:flex; flex-wrap:wrap; gap:10px;}
+.chip{
+  padding:10px 18px; border-radius:50px; font-size:.84rem; font-weight:700; cursor:pointer; transition:.3s;
+  background:var(--glass); border:1px solid var(--glass-border); color:var(--mist-dim); display:inline-flex; align-items:center; gap:8px;
+}
+.chip:hover{color:#fff;}
+.chip.active{background:linear-gradient(135deg,var(--violet),#9B5CFF); color:#fff; border-color:transparent;}
+.chip i{font-size:.78rem;}
+.status-seg{display:inline-flex; padding:5px; border-radius:50px; gap:4px;}
+.status-seg button{border:none; background:transparent; color:var(--mist-dim); font-weight:700; font-size:.8rem; padding:9px 16px; border-radius:50px; cursor:pointer; transition:.3s;}
+.status-seg button.active{background:var(--amber); color:var(--ink);}
+.sort-select{
+  background:var(--glass); border:1px solid var(--glass-border); color:var(--mist); padding:11px 18px; border-radius:50px;
+  font-size:.84rem; font-weight:600; font-family:'Manrope',sans-serif; outline:none; cursor:pointer;
+}
+.sort-select option{background:var(--ink-3); color:#fff;}
+.result-count{font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--mist-dimmer); padding:0 20px; max-width:1240px; margin:18px auto 0;}
+.result-count strong{color:var(--amber);}
 
-        /* --- SKELETON LOADING STYLES --- */
-        .skeleton {
-            background-color: #e2e5e7;
-            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-            background-size: 40px 100%;
-            background-repeat: no-repeat;
-            background-position: left -40px top 0;
-            animation: shine 1.2s ease infinite;
-        }
-        @keyframes shine {
-            to { background-position: right -40px top 0; }
-        }
-        .skeleton-img { width: 100%; height: 100%; }
-        .skeleton-text { height: 16px; margin-bottom: 10px; border-radius: 4px; }
-        .skeleton-title { height: 24px; margin-bottom: 12px; border-radius: 4px; }
-        .skeleton-btn { height: 40px; border-radius: 4px; margin-top: auto; }
-    </style>
+/* GRID / CARD */
+.listing-wrap{max-width:1240px; margin:0 auto; padding:30px 20px 100px;}
+.p-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+@media (max-width:991px){ .p-grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:640px){ .p-grid{grid-template-columns:1fr;} }
+.p-card{border-radius:22px; overflow:hidden; transition:.4s; display:flex; flex-direction:column; cursor:pointer;}
+.p-card:hover{transform:translateY(-6px); border-color:rgba(255,182,72,.4);}
+.p-media{position:relative; height:210px; overflow:hidden;}
+.p-media img{width:100%; height:100%; object-fit:cover; transition:.6s;}
+.p-card:hover .p-media img{transform:scale(1.08);}
+.p-tag{position:absolute; top:14px; left:14px; padding:6px 13px; border-radius:50px; font-family:'JetBrains Mono',monospace; font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; backdrop-filter:blur(10px);}
+.p-tag.sale{background:rgba(255,107,93,.85); color:#fff;}
+.p-tag.rent{background:rgba(124,77,255,.85); color:#fff;}
+.p-badges{position:absolute; top:14px; right:14px; display:flex; flex-direction:column; gap:6px; align-items:flex-end;}
+.p-badge{padding:5px 11px; border-radius:50px; font-size:.66rem; font-weight:700; display:flex; align-items:center; gap:5px;}
+.p-badge.hot{background:rgba(255,107,93,.9); color:#fff;}
+.p-badge.featured{background:rgba(255,182,72,.9); color:var(--ink);}
+.p-badge.new{background:rgba(124,77,255,.9); color:#fff;}
+.p-type{position:absolute; bottom:14px; left:14px; padding:6px 13px; border-radius:50px; font-size:.72rem; font-weight:700; color:var(--ink); background:var(--mist);}
+.p-body{padding:20px; display:flex; flex-direction:column; flex:1;}
+.p-price{font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:1.15rem; font-weight:600; margin-bottom:8px;}
+.p-name{font-family:'Fraunces',serif; font-size:1.08rem; color:#fff; margin-bottom:8px;}
+.p-loc{font-size:.84rem; display:flex; align-items:center; gap:6px; margin-bottom:16px;}
+.p-loc i{color:var(--amber);}
+.p-wa{
+  margin-top:auto; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:50px;
+  background:rgba(37,211,102,.14); color:#25D366; font-weight:700; font-size:.84rem; border:1px solid rgba(37,211,102,.3); transition:.3s;
+}
+.p-wa:hover{background:#25D366; color:#fff;}
+
+.skeleton{background:linear-gradient(90deg, rgba(255,255,255,.05) 25%, rgba(255,255,255,.12) 37%, rgba(255,255,255,.05) 63%); background-size:400% 100%; animation:sk 1.4s ease infinite; border-radius:22px;}
+@keyframes sk{0%{background-position:100% 50%;} 100%{background-position:0 50%;}}
+.skeleton-card{height:360px;}
+
+.empty-state{grid-column:1/-1; text-align:center; padding:70px 20px;}
+.empty-state i{font-size:2.2rem; color:var(--amber); margin-bottom:16px;}
+
+#load-more-trigger{height:20px;}
+
+/* DETAIL VIEW */
+.detail-wrap{max-width:1200px; margin:0 auto; padding:40px 20px 100px;}
+.detail-back{display:inline-flex; align-items:center; gap:8px; margin-bottom:24px;}
+.detail-media{border-radius:24px; overflow:hidden; box-shadow:var(--shadow-glow); max-height:520px;}
+.detail-media img, .detail-media video{width:100%; max-height:520px; object-fit:cover;}
+.detail-video-box video{background:#000;}
+.detail-tags{display:flex; gap:10px; margin:16px 0;}
+.detail-price{font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:1.4rem; font-weight:700;}
+.detail-desc{font-size:1.02rem; line-height:1.85; white-space:pre-wrap; color:var(--mist-dim);}
+.detail-facts{list-style:none; padding:0; margin:22px 0 0;}
+.detail-facts li{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--glass-border); font-size:.9rem;}
+.detail-facts li span:first-child{color:var(--mist-dim);}
+.detail-facts li span:last-child{color:#fff; font-weight:600;}
+.detail-panel{padding:28px;}
+.wa-cta{display:flex; align-items:center; justify-content:center; gap:10px; padding:16px; border-radius:50px; background:#25D366; color:#fff; font-weight:700; margin-top:22px; transition:.3s;}
+.wa-cta:hover{background:#1eb958; color:#fff;}
+
+.footer{background:var(--ink-2); border-top:1px solid var(--glass-border); padding:70px 0 0; margin-top:60px;}
+.footer h6{font-family:'Fraunces',serif; color:#fff; font-size:1rem; margin-bottom:18px;}
+.footer p, .footer a{color:var(--mist-dim); font-size:.9rem;}
+.footer-links a{display:block; margin-bottom:10px; transition:.25s;}
+.footer-links a:hover{color:var(--amber); padding-left:4px;}
+.social-btn{width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:1px solid var(--glass-border); margin-right:8px; transition:.3s;}
+.social-btn:hover{background:var(--amber); color:var(--ink); border-color:var(--amber);}
+.gallery-mini{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+.gallery-mini img{border-radius:10px; aspect-ratio:1/1; object-fit:cover;}
+.news-input{display:flex; border-radius:50px; padding:5px; margin-top:6px;}
+.news-input input{flex:1; background:transparent; border:none; outline:none; padding:10px 16px; color:#fff; font-size:.88rem;}
+.news-input input::placeholder{color:var(--mist-dimmer);}
+.news-input button{border:none; border-radius:50px; padding:10px 18px; background:linear-gradient(135deg,var(--violet),#9B5CFF); color:#fff; font-weight:700; font-size:.82rem;}
+.copyright{border-top:1px solid var(--glass-border); margin-top:50px; padding:22px 0; font-size:.82rem; text-align:center; color:var(--mist-dimmer);}
+.back-to-top{position:fixed; right:24px; bottom:24px; width:48px; height:48px; border-radius:50%; z-index:60; display:none; align-items:center; justify-content:center; color:#fff; box-shadow:0 10px 26px rgba(124,77,255,.4);}
+.d-none{display:none !important;}
+</style>
 </head>
-
 <body>
-    <div class="container-xxl bg-white p-0">
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        
-        <div class="container-fluid nav-bar bg-transparent">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 140px; height: 64px;">
-                    </div>
-                    <h1 class="m-0 text-primary"><font style="font-size:60%; margin-left:-30px;" >TRANSEAL</font> <font style="font-size:60%;color:#0a0b3ce8;"> PROPERTIES</font></h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Property</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item active">Property List</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                    <a href="admin.html" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
-                </div>
-            </nav>
-        </div>
 
-        <div id="main-listing-view" class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-3 mb-5 justify-content-center">
-                    <div class="col-md-8 col-lg-6">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white border-0 py-3 ps-4 rounded-start-pill"><i class="fas fa-search text-primary"></i></span>
-                            <input type="text" id="search-input" class="form-control py-3 border-start-0 rounded-end-pill" placeholder="Search by property name, location, or type...">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row g-2 g-md-4 justify-content-center" id="property-listings-grid">
-                    </div>
+<div class="bg-mesh"></div>
+<div class="noise"></div>
 
-                <div id="load-more-trigger" style="height: 20px; width: 100%;"></div>
-
-                <div class="row g-4 d-none" id="no-listings-message">
-                    <div class="col-12 text-center">
-                        <p class="lead text-muted mt-5">No properties found matching your search.</p>
-                        <a href="contact.html" class="btn btn-primary py-3 px-5">Contact Us for Consultation</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="property-detail-view" class="container-xxl py-5 d-none animate__animated animate__fadeIn">
-            <div class="container">
-                <div class="row mb-4 align-items-center">
-                    <div class="col-12">
-                        <button onclick="closePropertyDetail()" class="btn btn-outline-primary mb-3">
-                            <i class="fas fa-arrow-left me-2"></i> Back to Listings
-                        </button>
-                        <h2 class="display-5 text-dark mb-2" id="detail-property-name">Property Name</h2>
-                        <h5 class="text-primary mb-3" id="detail-price"></h5>
-                        <h6 id="detail-location" class="text-muted mb-4"><i class="fa fa-map-marker-alt me-2"></i>Location</h6>
-                        <div id="detail-tags" class="mb-4"></div>
-                    </div>
-                </div>
-
-                <div class="row g-5">
-                    <div class="col-lg-7">
-                        <img id="detail-image" class="detail-view-media mb-4" alt="Property Image">
-
-                        <div id="detail-video-container" class="d-none">
-                            <h4 class="mb-3 text-secondary border-bottom pb-2">Property Video Tour</h4>
-                            <video id="detail-video" class="detail-view-media w-100" controls></video>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-5">
-                        <div class="bg-light p-4 rounded shadow-sm">
-                            <h3 class="mb-3 text-secondary border-bottom pb-2">Property Description</h3>
-                            <p id="detail-description" class="detail-description"></p>
-                            
-                            <h5 class="mt-4 mb-3 text-primary">Key Details</h5>
-                            <ul class="list-unstyled mb-4">
-                                <li class="py-2 border-bottom"><i class="fas fa-tag text-primary me-3 w-10"></i> <strong>Status:</strong> <span id="detail-status" class="float-end"></span></li>
-                                <li class="py-2 border-bottom"><i class="fas fa-building text-primary me-3 w-10"></i> <strong>Type:</strong> <span id="detail-type" class="float-end"></span></li>
-                                <li class="py-2 border-bottom"><i class="fas fa-clock text-primary me-3 w-10"></i> <strong>Listed On:</strong> <span id="detail-date" class="float-end"></span></li>
-                            </ul>
-
-                            <a href="#" id="detail-whatsapp-link" target="_blank" class="btn btn-success btn-lg w-100 py-3 mt-2 shadow">
-                                <i class="fab fa-whatsapp me-2 fs-4 align-middle"></i> <span class="align-middle">Enquire Now on WhatsApp</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Get In Touch</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Iworoko road, opposite Iworoko community high school Iworoko Ekiti state Nigeria</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><a href="tel:08133979019">08133979019</a></p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>onefash01@yahoo.com</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/spirit4440?igsh=ejBiYWp4Nm9qcGQ4"><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/share/1Ero7QT5Br/"><i class="fab fa-facebook-f"></i></a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Photo Gallery</h5>
-                        <div class="row g-2 pt-2">
-                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/1.jpg" alt=""></div>
-                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/2.jpg" alt=""></div>
-                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/3.jpg" alt=""></div>
-                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/4.jpg" alt=""></div>
-                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/5.jpg" alt=""></div>
-                            <div class="col-4"><img class="img-fluid rounded bg-light p-1" src="img/6.jpg" alt=""></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Newsletter</h5>
-                        <p>Join our newsletter for the latest property updates.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder=" email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">TP</a> Transreal Properties 2025 All Right Reserved. 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+<!-- NAV -->
+<div class="nav-wrap">
+  <nav class="nav-inner glass-strong">
+    <a href="index.html" class="brand">
+      <div class="brand-mark">T</div>
+      <div class="brand-name">Transreal <span>Properties</span></div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="property.html" class="active">Property</a>
+      <a href="contact.html">Contact</a>
     </div>
+    <div class="nav-cta d-flex align-items-center gap-2">
+      <a href="admin.html" class="btn-glow d-none d-lg-flex">Add Property</a>
+      <button class="nav-toggle" id="navToggle"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </nav>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- PAGE HEAD -->
+<div id="main-listing-view">
+<div class="page-head">
+  <div class="page-head-inner">
+    <div class="eyebrow"><i class="fa-solid fa-building-columns"></i>&nbsp; Full catalogue</div>
+    <h1 style="margin-top:12px;">Every property, one search away.</h1>
+    <div class="search-bar glass-strong">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="search-input" placeholder="Search by name, location, or type…">
+      <button class="search-clear" id="searchClear"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+</div>
 
-    <script>
-        // --- GLOBAL DATA & CONFIGURATION ---
-        const WHATSAPP_NUMBER = '+2348133979019';
-        const SUPABASE_URL = 'https://qgwxjnftvnzvbpalzxes.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_A7ILV8KrJcHIrUbk3TsMFg_bjZnWn_C'; 
-        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-            auth: { persistSession: false },
-        });
+<div class="filter-bar">
+  <div class="chip-row" id="typeChips">
+    <button class="chip active" data-filter="">All types</button>
+    <button class="chip" data-filter="accommodation"><i class="fa-solid fa-bed"></i> Apartments &amp; Hostels</button>
+    <button class="chip" data-filter="home"><i class="fa-solid fa-house"></i> Homes</button>
+    <button class="chip" data-filter="land"><i class="fa-solid fa-map"></i> Land</button>
+  </div>
+  <div class="d-flex flex-wrap gap-3 align-items-center">
+    <div class="status-seg glass" id="statusSeg">
+      <button class="active" data-status="">All</button>
+      <button data-status="Sale">For Sale</button>
+      
+    </div>
+    <select class="sort-select" id="sortSelect">
+      <option value="newest">Newest first</option>
+      <option value="price-asc">Price: low to high</option>
+      <option value="price-desc">Price: high to low</option>
+    </select>
+  </div>
+</div>
 
-        // Global state variables for Lazy Loading / Pagination
-        let allProperties = []; 
-        let currentPage = 0;
-        const itemsPerPage = 10;
-        let isLoading = false;
-        let hasMore = true;
-        let currentSearchTerm = '';
+<div class="result-count" id="resultCount"></div>
 
-        // --- DOM Elements ---
-        const grid = document.getElementById('property-listings-grid');
-        const noListingsMessage = document.getElementById('no-listings-message');
-        const searchInput = document.getElementById('search-input');
-        const loadMoreTrigger = document.getElementById('load-more-trigger');
-        
-        // View Containers
-        const mainListingView = document.getElementById('main-listing-view');
-        const propertyDetailView = document.getElementById('property-detail-view');
+<div class="listing-wrap">
+  <div class="p-grid" id="property-listings-grid"></div>
+  <div id="load-more-trigger"></div>
+</div>
+</div>
 
-        // --- UTILITY FUNCTIONS ---
-        function formatNaira(price) {
-            return new Intl.NumberFormat('en-NG', {
-                style: 'currency',
-                currency: 'NGN',
-                minimumFractionDigits: 0,
-            }).format(price);
+<!-- DETAIL VIEW -->
+<div id="property-detail-view" class="d-none">
+  <div class="detail-wrap">
+    <button onclick="closePropertyDetail()" class="btn-ghost detail-back"><i class="fa-solid fa-arrow-left"></i> Back to listings</button>
+    <div class="row g-5">
+      <div class="col-lg-7">
+        <div class="detail-media"><img id="detail-image" alt="Property image" onerror="this.onerror=null;this.src=PLACEHOLDER_IMG;"></div>
+        <div id="detail-video-container" class="d-none mt-4">
+          <h4 style="font-size:1.1rem; margin-bottom:14px;">Property video tour</h4>
+          <div class="detail-media detail-video-box"><video id="detail-video" controls></video></div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="eyebrow" id="detail-type-eyebrow"></div>
+        <h2 style="font-size:2rem; margin:10px 0 6px;" id="detail-property-name"></h2>
+        <div class="p-loc" style="margin-bottom:6px;" id="detail-location"></div>
+        <div class="detail-price" id="detail-price"></div>
+        <div class="detail-tags" id="detail-tags"></div>
+        <div class="detail-panel glass">
+          <h3 style="font-size:1.15rem; margin-bottom:14px;">Description</h3>
+          <p class="detail-desc" id="detail-description"></p>
+          <ul class="detail-facts">
+            <li><span>Status</span><span id="detail-status"></span></li>
+            <li><span>Type</span><span id="detail-type"></span></li>
+            <li><span>Listed on</span><span id="detail-date"></span></li>
+          </ul>
+          <a href="#" id="detail-whatsapp-link" target="_blank" class="wa-cta"><i class="fa-brands fa-whatsapp fs-5"></i> Enquire now on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container pb-5">
+    <div class="row g-5">
+      <div class="col-lg-3 col-md-6">
+        <h6>Get in touch</h6>
+        <p class="mb-2"><i class="fa-solid fa-location-dot me-2" style="color:var(--amber);"></i>Iworoko Road, opposite Iworoko Community High School, Iworoko, Ekiti State</p>
+        <p class="mb-2"><i class="fa-solid fa-phone me-2" style="color:var(--amber);"></i><a href="tel:08133979019">0813 397 9019</a></p>
+        <p class="mb-3"><i class="fa-solid fa-envelope me-2" style="color:var(--amber);"></i>onefash01@yahoo.com</p>
+        <div class="d-flex">
+          <a class="social-btn" href="https://www.instagram.com/spirit4440?igsh=ejBiYWp4Nm9qcGQ4"><i class="fa-brands fa-instagram"></i></a>
+          <a class="social-btn" href="https://www.facebook.com/share/1Ero7QT5Br/"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6>Quick links</h6>
+        <div class="footer-links">
+          <a href="about.html">About us</a>
+          <a href="contact.html">Contact us</a>
+          <a href="property.html">Our properties</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6>Photo gallery</h6>
+        <div class="gallery-mini">
+          <img src="img/1.jpg" alt=""><img src="img/2.jpg" alt=""><img src="img/3.jpg" alt="">
+          <img src="img/4.jpg" alt=""><img src="img/5.jpg" alt=""><img src="img/6.jpg" alt="">
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6>Newsletter</h6>
+        <p>Join our newsletter for the latest property updates.</p>
+        <div class="news-input glass">
+          <input type="text" placeholder="Your email">
+          <button>Sign up</button>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">&copy; Transreal Properties 2026. All rights reserved.</div>
+  </div>
+</footer>
+
+<a href="#" class="btn-glow back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const WHATSAPP_NUMBER = '+2348133979019';
+  const SUPABASE_URL = 'https://qgwxjnftvnzvbpalzxes.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_A7ILV8KrJcHIrUbk3TsMFg_bjZnWn_C';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false } });
+
+  // ---- state ----
+  let allProperties = [];
+  let currentPage = 0;
+  const itemsPerPage = 9;
+  let isLoading = false;
+  let hasMore = true;
+  let currentSearchTerm = '';
+  let activeStatus = '';
+  let sortMode = 'newest';
+  let quickKeywords = null; // e.g. ['hostel','accommodation']
+
+  // Keyword groups — matched across name, description AND property_type
+  const FILTER_KEYWORDS = {
+    accommodation: ['apartment','accommodation','hostel'],
+    home: ['home','house'],
+    land: ['land']
+  };
+  const PLACEHOLDER_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='260'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%237C4DFF'/%3E%3Cstop offset='100%25' stop-color='%23FF6B5D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='260' fill='%23170F30'/%3E%3Crect width='400' height='260' fill='url(%23g)' opacity='0.18'/%3E%3Ctext x='200' y='138' font-family='Arial' font-size='15' fill='%23F6F3FF' text-anchor='middle' opacity='0.65'%3EPhoto unavailable%3C/text%3E%3C/svg%3E";
+
+  const grid = document.getElementById('property-listings-grid');
+  const resultCount = document.getElementById('resultCount');
+  const searchInput = document.getElementById('search-input');
+  const searchClear = document.getElementById('searchClear');
+  const loadMoreTrigger = document.getElementById('load-more-trigger');
+  const mainListingView = document.getElementById('main-listing-view');
+  const propertyDetailView = document.getElementById('property-detail-view');
+
+  function formatNaira(price){
+    return new Intl.NumberFormat('en-NG', { style:'currency', currency:'NGN', minimumFractionDigits:0 }).format(price);
+  }
+  function getWhatsAppLink(property){
+    const msg = encodeURIComponent(`Hello Transreal Properties, I am interested in property listing: "${property.name}" in ${property.location}. (ID: ${property.id})`);
+    return `https://wa.me/${WHATSAPP_NUMBER.replace(/\s/g,'')}?text=${msg}`;
+  }
+
+  function skeletonCard(){
+    const d = document.createElement('div');
+    d.className = 'skeleton skeleton-card';
+    return d;
+  }
+
+  function createPropertyCard(property){
+    const isNew = (Date.now() - new Date(property.created_at).getTime()) < 86400000;
+    const isSale = (property.sale_rent_status || '').toLowerCase().includes('sale');
+    let badges = '';
+    if (property.is_featured) badges += `<span class="p-badge featured"><i class="fa-solid fa-star"></i> Featured</span>`;
+    if (property.is_hot) badges += `<span class="p-badge hot"><i class="fa-solid fa-fire"></i> Hot</span>`;
+    if (isNew) badges += `<span class="p-badge new"><i class="fa-solid fa-bolt"></i> New</span>`;
+
+    const col = document.createElement('div');
+    col.className = 'p-card glass';
+    col.onclick = () => showPropertyDetail(property.id);
+    col.innerHTML = `
+      <div class="p-media">
+        <img src="${property.image_url || PLACEHOLDER_IMG}" alt="${property.name}" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}';">
+        <div class="p-tag ${isSale ? 'sale' : 'rent'}">For ${property.sale_rent_status}</div>
+        <div class="p-badges">${badges}</div>
+        <div class="p-type">${property.property_type}</div>
+      </div>
+      <div class="p-body">
+        <div class="p-price">${formatNaira(property.price)}</div>
+        <div class="p-name">${property.name}</div>
+        <div class="p-loc"><i class="fa-solid fa-location-dot"></i>${property.location}</div>
+        <a href="${getWhatsAppLink(property)}" target="_blank" class="p-wa" onclick="event.stopPropagation();"><i class="fa-brands fa-whatsapp"></i> Connect on WhatsApp</a>
+      </div>`;
+    return col;
+  }
+
+  function sortColumn(){ return sortMode === 'newest' ? 'created_at' : 'price'; }
+  function sortAsc(){ return sortMode === 'price-asc'; }
+
+  async function fetchProperties(reset=false){
+    if (isLoading || (!hasMore && !reset)) return;
+    isLoading = true;
+
+    if (reset){
+      currentPage = 0; hasMore = true; grid.innerHTML = ''; allProperties = [];
+    }
+
+    const skeletons = [];
+    const n = reset ? 6 : 3;
+    for(let i=0;i<n;i++){ const s = skeletonCard(); grid.appendChild(s); skeletons.push(s); }
+
+    const from = currentPage * itemsPerPage;
+    const to = from + itemsPerPage - 1;
+
+    let query = sb.from('properties')
+      .select('id, name, price, location, property_type, sale_rent_status, image_url, description, video_url, created_at, is_featured, is_hot')
+      .order(sortColumn(), { ascending: sortAsc() })
+      .range(from, to);
+
+    if (activeStatus) query = query.ilike('sale_rent_status', `%${activeStatus}%`);
+
+    if (quickKeywords && quickKeywords.length){
+      const parts = [];
+      quickKeywords.forEach(k=>{
+        parts.push(`name.ilike.%${k}%`, `description.ilike.%${k}%`, `property_type.ilike.%${k}%`);
+      });
+      query = query.or(parts.join(','));
+    } else if (currentSearchTerm){
+      const t = `%${currentSearchTerm}%`;
+      query = query.or(`name.ilike.${t},location.ilike.${t},property_type.ilike.${t},sale_rent_status.ilike.${t},description.ilike.${t}`);
+    }
+
+    const { data, error } = await query;
+    skeletons.forEach(s=>s.remove());
+
+    if (error){
+      grid.innerHTML += `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><p>Error loading listings: ${error.message}</p></div>`;
+      isLoading = false; return;
+    }
+
+    if (data.length < itemsPerPage) hasMore = false;
+
+    if (data.length === 0 && currentPage === 0){
+      grid.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><p style="color:var(--mist-dim);">No properties found matching your filters.</p><a href="contact.html" class="btn-glow mt-3 d-inline-flex">Contact us for consultation</a></div>`;
+    } else {
+      data.forEach(p => grid.appendChild(createPropertyCard(p)));
+      allProperties = [...allProperties, ...data];
+    }
+
+    resultCount.textContent = allProperties.length ? `Showing ${allProperties.length} propert${allProperties.length===1?'y':'ies'}${hasMore ? ' — scroll for more' : ''}` : '';
+
+    currentPage++;
+    isLoading = false;
+  }
+
+  // ---- search ----
+  let searchTimeout;
+  searchInput.addEventListener('input', (e)=>{
+    clearTimeout(searchTimeout);
+    searchClear.style.display = e.target.value ? 'flex' : 'none';
+    searchTimeout = setTimeout(()=>{
+      currentSearchTerm = e.target.value.trim();
+      quickKeywords = null; // typing overrides quick-filter
+      fetchProperties(true);
+    }, 450);
+  });
+  searchClear.addEventListener('click', ()=>{
+    searchInput.value = ''; currentSearchTerm = ''; searchClear.style.display = 'none'; fetchProperties(true);
+  });
+
+  // ---- type chips ----
+  document.getElementById('typeChips').addEventListener('click', (e)=>{
+    const btn = e.target.closest('.chip'); if(!btn) return;
+    document.querySelectorAll('#typeChips .chip').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const key = btn.dataset.filter;
+    quickKeywords = key ? FILTER_KEYWORDS[key] : null;
+    currentSearchTerm = '';
+    searchInput.value = '';
+    searchClear.style.display = 'none';
+    fetchProperties(true);
+  });
+
+  // ---- status segment ----
+  document.getElementById('statusSeg').addEventListener('click', (e)=>{
+    const btn = e.target.closest('button'); if(!btn) return;
+    document.querySelectorAll('#statusSeg button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeStatus = btn.dataset.status;
+    fetchProperties(true);
+  });
+
+  // ---- sort ----
+  document.getElementById('sortSelect').addEventListener('change', (e)=>{
+    sortMode = e.target.value;
+    fetchProperties(true);
+  });
+
+  // ---- detail view ----
+  function showPropertyDetail(id){
+    const property = allProperties.find(p => p.id === id);
+    if (!property) return;
+
+    document.getElementById('detail-type-eyebrow').textContent = property.property_type;
+    document.getElementById('detail-property-name').textContent = property.name;
+    document.getElementById('detail-image').src = property.image_url || PLACEHOLDER_IMG;
+    document.getElementById('detail-price').textContent = formatNaira(property.price);
+    document.getElementById('detail-location').innerHTML = `<i class="fa-solid fa-location-dot"></i> ${property.location}`;
+    document.getElementById('detail-description').textContent = property.description || 'No detailed description provided for this listing.';
+    document.getElementById('detail-status').textContent = property.sale_rent_status;
+    document.getElementById('detail-type').textContent = property.property_type;
+    document.getElementById('detail-date').textContent = new Date(property.created_at).toLocaleDateString();
+    document.getElementById('detail-whatsapp-link').href = getWhatsAppLink(property);
+
+    let tagsHtml = '';
+    if (property.is_featured) tagsHtml += `<span class="p-badge featured" style="position:static;"><i class="fa-solid fa-star"></i> Featured</span> `;
+    if (property.is_hot) tagsHtml += `<span class="p-badge hot" style="position:static;"><i class="fa-solid fa-fire"></i> Hot listing</span>`;
+    document.getElementById('detail-tags').innerHTML = tagsHtml;
+
+    const videoContainer = document.getElementById('detail-video-container');
+    const videoEl = document.getElementById('detail-video');
+    if (property.video_url){
+      videoEl.src = property.video_url; videoContainer.classList.remove('d-none'); videoEl.load();
+    } else {
+      videoEl.src = ''; videoContainer.classList.add('d-none');
+    }
+
+    mainListingView.classList.add('d-none');
+    propertyDetailView.classList.remove('d-none');
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+
+  function closePropertyDetail(){
+    const v = document.getElementById('detail-video');
+    if (v){ v.pause(); v.currentTime = 0; }
+    propertyDetailView.classList.add('d-none');
+    mainListingView.classList.remove('d-none');
+  }
+
+  // ---- init: parse URL params ----
+  function applyUrlParams(){
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get('status');
+    const id = params.get('id');
+    let filter = (params.get('filter') || '').toLowerCase();
+
+    // legacy support for old ?type=Home / ?type=Land / ?type=Apartment links
+    const legacyType = (params.get('type') || '').toLowerCase();
+    if (!filter && legacyType){
+      if (legacyType.includes('apartment')) filter = 'accommodation';
+      else if (legacyType.includes('home')) filter = 'home';
+      else if (legacyType.includes('land')) filter = 'land';
+    }
+    // treat a bare "?filter=hostel" the same as the accommodation group
+    if (filter === 'hostel') filter = 'accommodation';
+
+    if (status){
+      activeStatus = status;
+      document.querySelectorAll('#statusSeg button').forEach(b=>{
+        b.classList.toggle('active', (b.dataset.status || '').toLowerCase() === status.toLowerCase());
+      });
+    }
+    if (filter && FILTER_KEYWORDS[filter]){
+      quickKeywords = FILTER_KEYWORDS[filter];
+      document.querySelectorAll('#typeChips .chip').forEach(b=>{
+        b.classList.toggle('active', b.dataset.filter === filter);
+      });
+    }
+    return id;
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const idFromUrl = applyUrlParams();
+
+    const observer = new IntersectionObserver((entries)=>{
+      if (entries[0].isIntersecting) fetchProperties();
+    }, { root:null, rootMargin:'150px', threshold:0.1 });
+    observer.observe(loadMoreTrigger);
+
+    fetchProperties(true).then(()=>{
+      if (idFromUrl){
+        const asNum = isNaN(idFromUrl) ? idFromUrl : Number(idFromUrl);
+        if (allProperties.find(p=>p.id === asNum)){ showPropertyDetail(asNum); }
+        else {
+          sb.from('properties').select('*').eq('id', asNum).single().then(({data})=>{
+            if (data){ allProperties.push(data); showPropertyDetail(asNum); }
+          });
         }
+      }
+    });
+  });
 
-        function getWhatsAppLink(property) {
-            const whatsappMessage = encodeURIComponent(
-                `Hello Transreal Properties, I am interested in property listing: "${property.name}" in ${property.location}. (ID: ${property.id})`
-            );
-            return `https://wa.me/${WHATSAPP_NUMBER.replace(/\s/g, '')}?text=${whatsappMessage}`;
-        }
+  document.getElementById('navToggle').addEventListener('click', ()=>{
+    document.getElementById('navLinks').classList.toggle('open');
+  });
 
-        // --- HTML GENERATORS ---
-        function getSkeletonHTML() {
-            return `
-            <div class="col-12 property-item skeleton-card">
-                <div class="property-card bg-white shadow-sm border-0">
-                    <div class="property-img-container skeleton skeleton-img"></div>
-                    <div class="property-body d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="skeleton skeleton-text m-0" style="width: 30%;"></div>
-                            <div class="skeleton skeleton-text m-0" style="width: 20%;"></div>
-                        </div>
-                        <div class="skeleton skeleton-title" style="width: 60%;"></div>
-                        <div class="skeleton skeleton-text mb-3" style="width: 80%;"></div>
-                        <div class="skeleton skeleton-text flex-grow-1" style="width: 50%;"></div>
-                        <div class="mt-3 pt-2 border-top border-light">
-                            <div class="skeleton skeleton-btn w-100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function createPropertyCard(property) {
-            const createdAtTime = new Date(property.created_at).getTime();
-            const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
-            const isNew = (new Date().getTime() - createdAtTime) < oneDayInMilliseconds;
-
-            let tagsHtml = '';
-            if (property.is_featured) {
-                tagsHtml += '<span class="badge bg-danger me-1"><i class="fas fa-star fa-fw"></i> Featured</span>';
-            }
-            if (property.is_hot) {
-                tagsHtml += '<span class="badge bg-warning text-dark me-1"><i class="fas fa-fire fa-fw"></i> Hot</span>';
-            }
-            if (isNew) {
-                tagsHtml += '<span class="badge bg-success me-1"><i class="fas fa-bolt fa-fw"></i> New!</span>';
-            }
-            
-            const whatsappLink = getWhatsAppLink(property);
-            const imageSrc = property.image_url || 'https://via.placeholder.com/400x250?text=Image+Missing';
-
-            const column = document.createElement('div');
-            column.className = 'col-12 property-item animate__animated animate__fadeIn'; 
-            column.onclick = () => showPropertyDetail(property.id);
-
-            column.innerHTML = `
-                <div class="property-card bg-white shadow-sm">
-                    <div class="property-img-container">
-                        <img class="property-img" src="${imageSrc}" alt="${property.name}">
-                        <div class="position-absolute top-0 start-0 bg-primary text-white p-2 small" style="border-radius: 0 8px 8px 0;">
-                            ${property.sale_rent_status}
-                        </div>
-                    </div>
-                    <div class="property-body d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="d-flex flex-wrap gap-1">${tagsHtml}</div>
-                            <span class="badge bg-secondary">${property.property_type}</span>
-                        </div>
-                        <h5 class="text-primary property-price mb-2">${formatNaira(property.price)}</h5>
-                        <a class="d-block h5 mb-2 text-dark text-decoration-none" href="#" onclick="event.preventDefault();">${property.name}</a>
-                        <p class="text-body small flex-grow-1"><i class="fa fa-map-marker-alt text-primary me-2"></i>${property.location}</p>
-                        
-                        <div class="mt-3">
-                            <a href="${whatsappLink}" target="_blank" class="btn btn-success py-2 w-100" onclick="event.stopPropagation();">
-                                <i class="fab fa-whatsapp me-2"></i> <span>Connect on WhatsApp</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            return column;
-        }
-
-        // --- FETCH & PAGINATION LOGIC ---
-        async function fetchProperties(reset = false) {
-            if (isLoading || (!hasMore && !reset)) return;
-
-            isLoading = true;
-            
-            if (reset) {
-                currentPage = 0;
-                hasMore = true;
-                grid.innerHTML = '';
-                allProperties = [];
-                noListingsMessage.classList.add('d-none');
-            }
-
-            // Render skeleton cards
-            const numSkeletons = reset ? itemsPerPage : Math.min(3, itemsPerPage);
-            for (let i = 0; i < numSkeletons; i++) {
-                grid.insertAdjacentHTML('beforeend', getSkeletonHTML());
-            }
-
-            // Calculate pagination limits
-            const from = currentPage * itemsPerPage;
-            const to = from + itemsPerPage - 1;
-
-            // Build Supabase Query
-            let query = sb
-                .from('properties')
-                .select('id, name, price, location, property_type, sale_rent_status, image_url, description, video_url, created_at, is_featured, is_hot')
-                .order('created_at', { ascending: false })
-                .range(from, to);
-
-            // Integrate database searching for lazily loaded data
-            if (currentSearchTerm) {
-                const term = `%${currentSearchTerm}%`;
-                // Search across multiple fields using Supabase 'or'
-                query = query.or(`name.ilike.${term},location.ilike.${term},property_type.ilike.${term},sale_rent_status.ilike.${term},description.ilike.${term}`);
-            }
-
-            const { data, error } = await query;
-
-            // Remove Skeletons
-            document.querySelectorAll('.skeleton-card').forEach(el => el.remove());
-
-            if (error) {
-                console.error('Error fetching properties:', error);
-                grid.innerHTML += `<div class="col-12 text-center text-danger py-4"><p><i class="fas fa-exclamation-triangle me-2"></i> Error loading listings: ${error.message}</p></div>`;
-                isLoading = false;
-                return;
-            }
-
-            // Stop fetching if data returned is less than items limit per page
-            if (data.length < itemsPerPage) {
-                hasMore = false;
-            }
-
-            if (data.length === 0 && currentPage === 0) {
-                noListingsMessage.classList.remove('d-none');
-            } else {
-                noListingsMessage.classList.add('d-none');
-                data.forEach(property => {
-                    grid.appendChild(createPropertyCard(property));
-                });
-                // Append data to global array for the detail view logic
-                allProperties = [...allProperties, ...data];
-            }
-
-            currentPage++;
-            isLoading = false;
-        }
-
-        // --- SEARCH HANDLING (DEBOUNCED) ---
-        let searchTimeout;
-        searchInput.addEventListener('input', (e) => {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                currentSearchTerm = e.target.value.trim();
-                fetchProperties(true); // Reset state and fetch new search results
-            }, 500); // 500ms delay to prevent excessive queries while typing
-        });
-
-        // --- VIEW SWITCHING LOGIC ---
-        function showPropertyDetail(id) {
-            const property = allProperties.find(p => p.id === id);
-
-            if (!property) return;
-
-            document.getElementById('detail-property-name').textContent = property.name;
-            document.getElementById('detail-image').src = property.image_url || 'https://via.placeholder.com/800x400?text=Image+Missing';
-            document.getElementById('detail-price').textContent = formatNaira(property.price);
-            document.getElementById('detail-location').innerHTML = `<i class="fa fa-map-marker-alt me-2"></i> ${property.location}`;
-            document.getElementById('detail-description').textContent = property.description || 'No detailed description provided for this listing.';
-            document.getElementById('detail-status').textContent = property.sale_rent_status;
-            document.getElementById('detail-type').textContent = property.property_type;
-            document.getElementById('detail-date').textContent = new Date(property.created_at).toLocaleDateString();
-            document.getElementById('detail-whatsapp-link').href = getWhatsAppLink(property);
-
-            let tagsHtml = '';
-            if (property.is_featured) tagsHtml += '<span class="badge bg-danger me-2 fs-6 py-2 px-3"><i class="fas fa-star"></i> FEATURED</span>';
-            if (property.is_hot) tagsHtml += '<span class="badge bg-warning text-dark me-2 fs-6 py-2 px-3"><i class="fas fa-fire"></i> HOT LISTING</span>';
-            document.getElementById('detail-tags').innerHTML = tagsHtml;
-
-            const videoContainer = document.getElementById('detail-video-container');
-            const videoElement = document.getElementById('detail-video');
-
-            if (property.video_url) {
-                videoElement.src = property.video_url;
-                videoContainer.classList.remove('d-none');
-                videoElement.load(); 
-            } else {
-                videoElement.src = '';
-                videoContainer.classList.add('d-none');
-            }
-
-            mainListingView.classList.add('d-none');
-            propertyDetailView.classList.remove('d-none');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function closePropertyDetail() {
-            const videoElement = document.getElementById('detail-video');
-            if (videoElement) {
-                videoElement.pause();
-                videoElement.currentTime = 0;
-            }
-
-            propertyDetailView.classList.add('d-none');
-            mainListingView.classList.remove('d-none');
-            document.getElementById('search-input').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        // --- INITIALIZATION & OBSERVER ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Setup Intersection Observer for Infinite Scroll
-            const observerOptions = {
-                root: null,
-                rootMargin: '100px', // Trigger fetch 100px before the element is visible
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    fetchProperties(); // Automatically load more
-                }
-            }, observerOptions);
-
-            // Start observing the invisible trigger element
-            observer.observe(loadMoreTrigger);
-
-            // Fetch initial batch
-            fetchProperties(true);
-            new WOW().init();
-        });
-    </script>
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', ()=>{ backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none'; });
+  backToTop.addEventListener('click', (e)=>{ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+</script>
 </body>
 </html>
-
