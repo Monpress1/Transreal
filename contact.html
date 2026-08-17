@@ -4,9 +4,18 @@
 <meta charset="utf-8">
 <title>Contact Us | Transreal Properties</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="Contact Transreal Properties, real estate agent in Iworoko, property in Ekiti State">
+<meta name="keywords" content="Contact Transreal Properties, real estate agent in Iworoko, property in Ekiti State, hostels near EKSU">
 <meta name="description" content="Get in touch with Transreal Properties. We are ready to assist you 24/7 with any property sales, rentals, or consultation needs across Ekiti state.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%237C4DFF'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23FFB648' font-family='Georgia'%3ET%3C/text%3E%3C/svg%3E">
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem('trp-theme');
+    var theme = saved ? saved : ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23D6912E'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23241A0F' font-family='Georgia'%3ET%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,307 +25,156 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-/* ============ TOKENS & BASE ============ */
+/* ============ TOKENS ============ */
 :root{
-  --ink:#100A24;
-  --ink-2:#170F30;
-  --ink-3:#1F1440;
-  --violet:#7C4DFF;
-  --violet-2:#9B7BFF;
-  --amber:#FFB648;
-  --coral:#FF6B5D;
-  --mist:#F6F3FF;
-  --mist-dim:rgba(246,243,255,.66);
-  --mist-dimmer:rgba(246,243,255,.42);
-  --glass:rgba(255,255,255,.055);
-  --glass-2:rgba(255,255,255,.09);
-  --glass-border:rgba(255,255,255,.14);
-  --radius:20px;
-  --shadow-glow:0 20px 60px rgba(124,77,255,.25);
+  --ink:#FAF7F1; --ink-2:#FFFFFF; --ink-3:#F1EBDF;
+  --amber:#D6912E; --amber-deep:#B9701F; --coral:#E85A4B; --azure:#2E6E86;
+  --mist:#221A0F; --mist-dim:rgba(34,26,15,.64); --mist-dimmer:rgba(34,26,15,.42);
+  --glass:rgba(255,255,255,.55); --glass-2:rgba(255,255,255,.8); --glass-border:rgba(34,26,15,.10);
+  --radius:20px; --shadow-glow:0 20px 60px rgba(214,145,46,.18); --blob-op:.16;
+  color-scheme:light;
 }
+html[data-theme="dark"]{
+  --ink:#15110B; --ink-2:#1D170F; --ink-3:#241C12;
+  --amber:#FFB648; --amber-deep:#E39A2E; --coral:#FF6B5D; --azure:#3E93B0;
+  --mist:#F6F3FF; --mist-dim:rgba(246,243,255,.66); --mist-dimmer:rgba(246,243,255,.42);
+  --glass:rgba(255,255,255,.055); --glass-2:rgba(255,255,255,.09); --glass-border:rgba(255,255,255,.14);
+  --shadow-glow:0 20px 60px rgba(255,182,72,.22); --blob-op:.5;
+  color-scheme:dark;
+}
+html, body{ transition:background-color .5s ease, color .5s ease; }
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  margin:0;
-  background:var(--ink);
-  color:var(--mist);
-  font-family:'Manrope',sans-serif;
-  font-size:16px;
-  line-height:1.6;
-  overflow-x:hidden;
-}
-h1,h2,h3,h4,.display{
-  font-family:'Fraunces',serif;
-  color:var(--mist);
-  letter-spacing:-0.01em;
-  margin:0;
-}
+body{ margin:0; background:var(--ink); color:var(--mist); font-family:'Manrope',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden;}
+h1,h2,h3,h4,.display{font-family:'Fraunces',serif; color:var(--mist); letter-spacing:-0.01em; margin:0;}
 p{color:var(--mist-dim); margin:0;}
 a{text-decoration:none; color:inherit;}
 img{max-width:100%; display:block;}
-::selection{background:var(--violet); color:#fff;}
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
-}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;} }
 
-/* ============ AMBIENT BACKDROP ============ */
-.bg-mesh{
-  position:fixed; inset:0; z-index:-2; overflow:hidden;
-}
-.bg-mesh::before, .bg-mesh::after, .bg-mesh .blob{
-  content:""; position:absolute; border-radius:50%; filter:blur(90px); opacity:.5;
-}
-.bg-mesh::before{
-  width:640px; height:640px; top:-220px; left:-160px;
-  background:radial-gradient(circle, var(--violet), transparent 70%);
-}
-.bg-mesh::after{
-  width:560px; height:560px; bottom:-200px; right:-140px;
-  background:radial-gradient(circle, var(--coral), transparent 70%);
-  opacity:.35;
-}
-.bg-mesh .blob{
-  width:420px; height:420px; top:40%; left:60%;
-  background:radial-gradient(circle, var(--amber), transparent 70%);
-  opacity:.22; animation:drift 22s ease-in-out infinite alternate;
-}
-@keyframes drift{ from{transform:translate(0,0);} to{transform:translate(-80px,60px);} }
-.noise{
-  position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+.bg-mesh{position:fixed; inset:0; z-index:-2; overflow:hidden;}
+.bg-mesh::before, .bg-mesh::after{content:""; position:absolute; border-radius:50%; filter:blur(90px); opacity:.5;}
+.bg-mesh::before{width:640px; height:640px; top:-220px; left:-160px; background:radial-gradient(circle, var(--amber), transparent 70%); opacity:var(--blob-op); transition:opacity .5s ease;}
+.bg-mesh::after{width:560px; height:560px; bottom:-200px; right:-140px; background:radial-gradient(circle, var(--coral), transparent 70%); opacity:calc(var(--blob-op) * .7); transition:opacity .5s ease;}
+.noise{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
-/* ============ GLASS ============ */
-.glass{
-  background:var(--glass);
-  border:1px solid var(--glass-border);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border-radius:var(--radius);
-}
-.glass-strong{
-  background:var(--glass-2);
-  border:1px solid var(--glass-border);
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-}
+.glass{background:var(--glass); border:1px solid var(--glass-border); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border-radius:var(--radius); transition:background-color .4s ease, border-color .4s ease;}
+.glass-strong{background:var(--glass-2); border:1px solid var(--glass-border); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); transition:background-color .4s ease, border-color .4s ease;}
+.eyebrow{font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--amber); font-weight:500;}
 
-/* ============ UTIL ============ */
-.eyebrow{
-  font-family:'JetBrains Mono',monospace;
-  font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--amber); font-weight:500;
-}
-.section{padding:110px 0;}
-@media (max-width:768px){ .section{padding:70px 0;} }
-.section-head{max-width:640px; margin:0 auto 56px;}
+.section{padding:90px 0;}
+@media (max-width:768px){ .section{padding:60px 0;} }
 
-/* ============ BUTTONS ============ */
-.btn-glow, .btn-ghost, .btn-line{
-  display:inline-flex; align-items:center; gap:10px;
-  padding:15px 28px; border-radius:50px; font-weight:700; font-size:.92rem;
-  transition:.35s; border:1px solid transparent; cursor:pointer; white-space:nowrap;
-}
-.btn-glow{
-  background:linear-gradient(135deg, var(--violet), #9B5CFF);
-  color:#fff; box-shadow:0 10px 30px rgba(124,77,255,.4);
-}
-.btn-glow:hover{transform:translateY(-3px); box-shadow:0 16px 40px rgba(124,77,255,.55); color:#fff;}
-.btn-ghost{
-  background:var(--glass); border-color:var(--glass-border); color:var(--mist);
-  backdrop-filter:blur(14px);
-}
-.btn-ghost:hover{background:var(--glass-2); color:#fff; transform:translateY(-3px);}
+.btn-glow, .btn-ghost{display:inline-flex; align-items:center; gap:10px; padding:14px 26px; border-radius:50px; font-weight:700; font-size:.88rem; transition:.35s; border:1px solid transparent; cursor:pointer; white-space:nowrap;}
+.btn-glow{background:linear-gradient(135deg, var(--amber), var(--amber-deep)); color:#1A1208; box-shadow:0 10px 30px rgba(214,145,46,.35);}
+.btn-glow:hover{transform:translateY(-3px); color:#1A1208;}
+.btn-ghost{background:var(--glass); border-color:var(--glass-border); color:var(--mist);}
+.btn-ghost:hover{background:var(--glass-2);}
 
-/* ============ NAV ============ */
+/* NAV */
 .nav-wrap{position:sticky; top:0; z-index:999; padding:18px 20px 0;}
-.nav-inner{
-  max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;
-  padding:12px 18px; border-radius:60px;
-}
+.nav-inner{max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-radius:60px;}
 .brand{display:flex; align-items:center; gap:10px;}
-.brand-mark{
-  width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(135deg, var(--violet), var(--coral)); font-family:'Fraunces',serif; font-weight:700; color:#fff; font-size:1.1rem;
-}
-.brand-name{font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; letter-spacing:.01em;}
+.brand-mark{width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--amber), var(--coral)); font-family:'Fraunces',serif; font-weight:700; color:#1A1208; font-size:1.1rem;}
+.brand-name{font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem;}
 .brand-name span{color:var(--amber); font-style:italic;}
 .nav-links{display:flex; align-items:center; gap:34px;}
-.nav-links a{
-  font-size:.88rem; font-weight:600; color:var(--mist-dim); position:relative; padding:4px 0;
-}
-.nav-links a:hover, .nav-links a.active{color:#fff;}
-.nav-links a.active::after{
-  content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px;
-  background:var(--amber); border-radius:2px;
-}
-.nav-cta{display:flex; align-items:center; gap:12px;}
-.nav-toggle{display:none; background:none; border:none; color:#fff; font-size:1.4rem;}
+.nav-links a{font-size:.88rem; font-weight:600; color:var(--mist-dim); position:relative; padding:4px 0;}
+.nav-links a:hover, .nav-links a.active{color:var(--mist);}
+.nav-links a.active::after{content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:var(--amber); border-radius:2px;}
+.nav-toggle{display:none; background:none; border:none; color:var(--mist); font-size:1.4rem;}
 @media (max-width:991px){
-  .nav-links{
-    display:none; position:absolute; top:calc(100% + 10px); left:20px; right:20px; flex-direction:column;
-    align-items:flex-start; gap:6px; padding:18px; border-radius:18px; background:var(--ink-3); border:1px solid var(--glass-border);
-  }
-  .nav-links.open{display:flex;}
-  .nav-links a{padding:10px 4px; width:100%;}
-  .nav-toggle{display:block;}
-  .nav-cta .btn-glow{display:none;}
+  .nav-links{display:none; position:absolute; top:calc(100% + 10px); left:20px; right:20px; flex-direction:column; align-items:flex-start; gap:6px; padding:18px; border-radius:18px; background:var(--ink-3); border:1px solid var(--glass-border);}
+  .nav-links.open{display:flex;} .nav-links a{padding:10px 4px; width:100%;} .nav-toggle{display:block;}
 }
 
-/* ============ PAGE HERO ============ */
-.page-hero {
-  padding: 80px 20px 40px;
-  text-align: center;
+/* THEME TOGGLE */
+.theme-toggle{border:none; background:none; padding:0; cursor:pointer; flex:none; -webkit-tap-highlight-color:transparent;}
+.tt-track{
+  position:relative; display:flex; align-items:center; width:60px; height:32px; border-radius:50px;
+  background:var(--glass-2); border:1px solid var(--glass-border); transition:background-color .4s ease, border-color .4s ease;
 }
-.page-hero h1 {
-  font-size: clamp(2.4rem, 4.6vw, 3.5rem);
-  font-weight: 600;
-  line-height: 1.1;
-  margin: 16px auto 20px;
-  max-width: 800px;
+.tt-thumb{
+  position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%;
+  background:linear-gradient(135deg, var(--amber), var(--amber-deep));
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .45s cubic-bezier(.65,-0.3,.35,1.3), background .4s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
 }
-.page-hero p.lead {
-  font-size: 1.08rem;
-  max-width: 620px;
-  margin: 0 auto;
-}
+html[data-theme="dark"] .tt-thumb{ transform:translateX(28px); }
+.tt-thumb i{ position:absolute; font-size:.72rem; color:#1A1208; transition:opacity .3s ease, transform .3s ease; }
+.tt-sun{ opacity:1; transform:scale(1) rotate(0deg); }
+.tt-moon{ opacity:0; transform:scale(.4) rotate(-90deg); }
+html[data-theme="dark"] .tt-sun{ opacity:0; transform:scale(.4) rotate(90deg); }
+html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
+::view-transition-old(root), ::view-transition-new(root){ animation:none; mix-blend-mode:normal; }
+::view-transition-old(root){ z-index:1; }
+::view-transition-new(root){ z-index:2; }
 
-/* ============ CONTACT INFO CARDS ============ */
+/* PAGE HERO */
+.page-hero { padding: 60px 20px 20px; text-align: center; }
+.page-hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 600; margin: 12px auto 16px; max-width: 800px; }
+.page-hero p.lead { font-size: 1.05rem; max-width: 620px; margin: 0 auto; color: var(--mist-dim); }
+
+/* CONTACT CARDS */
 .contact-icon-box {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 24px;
-  height: 100%;
-  transition: .3s;
+  display: flex; align-items: center; gap: 16px; padding: 24px; height: 100%; transition: .3s;
 }
-.contact-icon-box:hover {
-  border-color: var(--amber);
-  transform: translateY(-4px);
-  background: var(--glass-2);
-}
+.contact-icon-box:hover { border-color: var(--amber); transform: translateY(-4px); background: var(--glass-2); }
 .contact-icon-box .c-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: rgba(255,182,72,.14);
-  color: var(--amber);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  flex: none;
-  transition: .3s;
+  width: 52px; height: 52px; border-radius: 14px; background: rgba(214,145,46,.14); color: var(--amber);
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex: none; transition: .3s;
 }
-.contact-icon-box:hover .c-icon {
-  background: var(--amber);
-  color: var(--ink);
-}
-.contact-icon-box .info {
-  display: flex;
-  flex-direction: column;
-}
-.contact-icon-box h4 {
-  font-family: 'Manrope', sans-serif;
-  font-size: .95rem;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
-.contact-icon-box a, .contact-icon-box span {
-  font-size: .88rem;
-  color: var(--mist-dim);
-  transition: .3s;
-}
-.contact-icon-box a:hover {
-  color: #fff;
-}
+.contact-icon-box:hover .c-icon { background: var(--amber); color: #1A1208; }
+.contact-icon-box .info { display: flex; flex-direction: column; }
+.contact-icon-box h4 { font-family: 'Manrope', sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: 2px; }
+.contact-icon-box a, .contact-icon-box span { font-size: .88rem; color: var(--mist-dim); transition: .3s; }
+.contact-icon-box a:hover { color: var(--amber); }
 
-/* ============ FORM & MAP ============ */
+/* MAP & FORM */
 .map-container {
-  border-radius: 26px;
-  overflow: hidden;
-  height: 100%;
-  min-height: 400px;
-  border: 1px solid var(--glass-border);
+  border-radius: 26px; overflow: hidden; height: 100%; min-height: 400px; border: 1px solid var(--glass-border);
 }
-.map-container iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  /* Optional: gives the map a slightly darker hue to fit the theme */
-  filter: contrast(1.1) opacity(0.9);
-}
+.map-container iframe { width: 100%; height: 100%; border: none; }
 
 .form-glass {
-  width: 100%;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  color: #fff;
-  padding: 18px 20px;
-  border-radius: 16px;
-  font-family: 'Manrope', sans-serif;
-  font-size: .95rem;
-  transition: .3s;
-  outline: none;
+  width: 100%; background: var(--glass); border: 1px solid var(--glass-border); color: var(--mist);
+  padding: 16px 20px; border-radius: 16px; font-family: 'Manrope', sans-serif; font-size: .95rem; transition: .3s; outline: none;
 }
-.form-glass::placeholder {
-  color: var(--mist-dimmer);
-}
-.form-glass:focus {
-  background: var(--glass-2);
-  border-color: var(--amber);
-  box-shadow: 0 0 0 4px rgba(255,182,72,.1);
-}
-textarea.form-glass {
-  resize: vertical;
-  min-height: 150px;
-}
+.form-glass::placeholder { color: var(--mist-dimmer); }
+.form-glass:focus { background: var(--glass-2); border-color: var(--amber); box-shadow: 0 0 0 4px rgba(214,145,46,.15); }
+textarea.form-glass { resize: vertical; min-height: 140px; }
 
-/* ============ FOOTER ============ */
-.footer{background:var(--ink-2); border-top:1px solid var(--glass-border); padding:80px 0 0; margin-top:60px;}
+/* FOOTER */
+.footer{background:#17130B; border-top:1px solid rgba(255,255,255,.1); padding:70px 0 0; margin-top:60px;}
 .footer h6{font-family:'Fraunces',serif; color:#fff; font-size:1rem; margin-bottom:18px;}
-.footer p, .footer a{color:var(--mist-dim); font-size:.9rem;}
+.footer p, .footer a{color:rgba(255,255,255,.64); font-size:.9rem;}
 .footer-links a{display:block; margin-bottom:10px; transition:.25s;}
 .footer-links a:hover{color:var(--amber); padding-left:4px;}
-.social-btn{
-  width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-  border:1px solid var(--glass-border); margin-right:8px; transition:.3s;
-}
-.social-btn:hover{background:var(--amber); color:var(--ink); border-color:var(--amber);}
+.social-btn{width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.16); margin-right:8px; transition:.3s; color:#fff;}
+.social-btn:hover{background:var(--amber); color:#1A1208; border-color:var(--amber);}
+.footer .glass{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.14);}
 .gallery-mini{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
 .gallery-mini img{border-radius:10px; aspect-ratio:1/1; object-fit:cover;}
-.news-input{
-  display:flex; border-radius:50px; padding:5px; margin-top:6px;
-}
-.news-input input{
-  flex:1; background:transparent; border:none; outline:none; padding:10px 16px; color:#fff; font-family:'Manrope',sans-serif; font-size:.88rem;
-}
+.news-input{display:flex; border-radius:50px; padding:5px; margin-top:6px;}
+.news-input input{flex:1; background:transparent; border:none; outline:none; padding:10px 16px; color:#fff; font-size:.88rem;}
 .news-input input::placeholder{color:var(--mist-dimmer);}
-.news-input button{
-  border:none; border-radius:50px; padding:10px 18px; background:linear-gradient(135deg,var(--violet),#9B5CFF); color:#fff; font-weight:700; font-size:.82rem;
-}
-.copyright{border-top:1px solid var(--glass-border); margin-top:50px; padding:22px 0; font-size:.82rem; text-align:center; color:var(--mist-dimmer);}
-
-/* Utilities */
-.back-to-top{
-  position:fixed; right:24px; bottom:24px; width:48px; height:48px; border-radius:50%; z-index:60; display:none;
-  align-items:center; justify-content:center; color:#fff; box-shadow:0 10px 26px rgba(124,77,255,.4);
-}
+.news-input button{border:none; border-radius:50px; padding:10px 18px; background:linear-gradient(135deg,var(--amber),var(--amber-deep)); color:#1A1208; font-weight:700; font-size:.82rem;}
+.copyright{border-top:1px solid rgba(255,255,255,.1); margin-top:50px; padding:22px 0; font-size:.82rem; text-align:center; color:rgba(255,255,255,.42);}
+.back-to-top{position:fixed; right:24px; bottom:24px; width:48px; height:48px; border-radius:50%; z-index:60; display:none; align-items:center; justify-content:center; color:#1A1208; box-shadow:0 10px 26px rgba(214,145,46,.4);}
 .floating-wa {
-  position: fixed; left: 24px; bottom: 24px; width: 56px; height: 56px; border-radius: 50%; z-index: 60;
-  display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+  position: fixed; left: 24px; bottom: 24px; width: 52px; height: 52px; border-radius: 50%; z-index: 60;
+  display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
   background: #25D366; color: #fff; box-shadow: 0 10px 26px rgba(37,211,102,.3); transition: .3s;
 }
-.floating-wa:hover {
-  transform: translateY(-4px) scale(1.05); color: #fff; box-shadow: 0 16px 32px rgba(37,211,102,.4);
-}
+.floating-wa:hover { transform: translateY(-4px) scale(1.05); color: #fff; }
 .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
 .reveal.is-visible{opacity:1; transform:translateY(0);}
 </style>
 </head>
 <body>
 
-<div class="bg-mesh"><div class="blob"></div></div>
+<div class="bg-mesh"></div>
 <div class="noise"></div>
 
 <!-- NAV -->
@@ -332,8 +190,11 @@ textarea.form-glass {
       <a href="property.html">Property</a>
       <a href="contact.html" class="active">Contact</a>
     </div>
-    <div class="nav-cta">
-      <a href="property.html" class="btn-glow">List a Property</a>
+    <div class="nav-cta d-flex align-items-center gap-2">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="tt-track"><span class="tt-thumb"><i class="fa-solid fa-sun tt-sun"></i><i class="fa-solid fa-moon tt-moon"></i></span></span>
+      </button>
+      <a href="admin.html" class="btn-glow d-none d-lg-flex">Add Property</a>
       <button class="nav-toggle" id="navToggle"><i class="fa-solid fa-bars"></i></button>
     </div>
   </nav>
@@ -341,7 +202,7 @@ textarea.form-glass {
 
 <!-- HEADER -->
 <header class="page-hero reveal">
-  <div class="eyebrow">Home &middot; Contact</div>
+  <div class="eyebrow"><i class="fa-solid fa-headset me-1"></i> Home &middot; Contact</div>
   <h1>Get In Touch With Us</h1>
   <p class="lead">We are ready to assist you 24/7 with any property sales, rentals, or consultation needs across Ekiti state.</p>
 </header>
@@ -362,13 +223,13 @@ textarea.form-glass {
         </div>
       </div>
       
-      <!-- Email -->
+      <!-- Gmail -->
       <div class="col-lg-4 col-md-6 reveal">
         <div class="contact-icon-box glass">
           <div class="c-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
           <div class="info">
-            <h4>Email Us</h4>
-            <a href="mailto:onefash01@yahoo.com">onefash01@yahoo.com</a>
+            <h4>Gmail</h4>
+            <a href="mailto:transrealproperties@gmail.com">transrealproperties@gmail.com</a>
           </div>
         </div>
       </div>
@@ -384,19 +245,8 @@ textarea.form-glass {
         </div>
       </div>
       
-      <!-- Instagram -->
-      <div class="col-lg-6 col-md-6 reveal">
-        <div class="contact-icon-box glass">
-          <div class="c-icon"><i class="fa-brands fa-instagram"></i></div>
-          <div class="info">
-            <h4>Instagram</h4>
-            <a href="https://www.instagram.com/spirit4440?igsh=ejBiYWp4Nm9qcGQ4" target="_blank">@spirit4440</a>
-          </div>
-        </div>
-      </div>
-      
       <!-- Facebook -->
-      <div class="col-lg-6 col-md-12 reveal">
+      <div class="col-lg-12 col-md-12 reveal">
         <div class="contact-icon-box glass">
           <div class="c-icon"><i class="fa-brands fa-facebook-f"></i></div>
           <div class="info">
@@ -415,7 +265,7 @@ textarea.form-glass {
   <div class="container">
     <div class="row g-5">
       
-      <!-- Left: Map -->
+      <!-- Map -->
       <div class="col-lg-6 reveal">
         <div class="map-container">
           <iframe 
@@ -427,12 +277,12 @@ textarea.form-glass {
         </div>
       </div>
 
-      <!-- Right: Form -->
+      <!-- Form -->
       <div class="col-lg-6 reveal">
         <h2 style="font-size: clamp(1.8rem, 3vw, 2.2rem); margin-bottom: 12px;">Send us a message</h2>
-        <p style="margin-bottom: 32px;">Use the form below to send us a quick message. If you need immediate assistance or a quick consultation, reach out today.</p>
+        <p style="margin-bottom: 28px;">Use the form below to send us a quick message regarding hostels, land, or 3 bedroom apartments. We reply quickly.</p>
         
-        <form>
+        <form onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent successfully.');">
           <div class="row g-3">
             <div class="col-md-6">
               <input type="text" class="form-glass" id="name" placeholder="Your Name" required>
@@ -447,7 +297,7 @@ textarea.form-glass {
               <textarea class="form-glass" id="message" placeholder="Leave your message here..." required></textarea>
             </div>
             <div class="col-12 mt-3">
-              <button class="btn-glow w-100 justify-content-center" style="padding: 18px; font-size: 1rem;" type="submit">
+              <button class="btn-glow w-100 justify-content-center" style="padding: 16px; font-size: 1rem;" type="submit">
                 Send Message <i class="fa-solid fa-paper-plane ms-2"></i>
               </button>
             </div>
@@ -467,9 +317,8 @@ textarea.form-glass {
         <h6>Get in touch</h6>
         <p class="mb-2"><i class="fa-solid fa-location-dot me-2" style="color:var(--amber);"></i>Iworoko Road, opposite Iworoko Community High School, Iworoko, Ekiti State</p>
         <p class="mb-2"><i class="fa-solid fa-phone me-2" style="color:var(--amber);"></i><a href="tel:08133979019">0813 397 9019</a></p>
-        <p class="mb-3"><i class="fa-solid fa-envelope me-2" style="color:var(--amber);"></i>onefash01@yahoo.com</p>
+        <p class="mb-3"><i class="fa-solid fa-envelope me-2" style="color:var(--amber);"></i>transrealproperties@gmail.com</p>
         <div class="d-flex">
-          <a class="social-btn" href="https://www.instagram.com/spirit4440?igsh=ejBiYWp4Nm9qcGQ4"><i class="fa-brands fa-instagram"></i></a>
           <a class="social-btn" href="https://www.facebook.com/share/1Ero7QT5Br/"><i class="fa-brands fa-facebook-f"></i></a>
         </div>
       </div>
@@ -479,8 +328,6 @@ textarea.form-glass {
           <a href="about.html">About us</a>
           <a href="contact.html">Contact us</a>
           <a href="property.html">Our properties</a>
-          <a href="about.html">Privacy policy</a>
-          <a href="about.html">Terms &amp; condition</a>
         </div>
       </div>
       <div class="col-lg-3 col-md-6">
@@ -509,43 +356,51 @@ textarea.form-glass {
 </a>
 <a href="#" class="btn-glow back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
 
-<!-- SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Nav toggle
   document.getElementById('navToggle').addEventListener('click', ()=>{
     document.getElementById('navLinks').classList.toggle('open');
   });
 
-  // Back to top visibility
-  const backToTop = document.getElementById('backToTop');
-  window.addEventListener('scroll', ()=>{ 
-    backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none'; 
-  });
-  backToTop.addEventListener('click', (e)=>{ 
-    e.preventDefault(); 
-    window.scrollTo({top:0, behavior:'smooth'}); 
-  });
+  // Theme toggle with localStorage & view transitions
+  (function(){
+    const root = document.documentElement;
+    const toggleBtn = document.getElementById('themeToggle');
 
-  // Reveal animation on scroll
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(en=>{ 
-      if(en.isIntersecting) en.target.classList.add('is-visible'); 
-    });
-  }, { threshold: 0.12 });
-  
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-  
-  // Trigger animations for elements already in view on load
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.reveal').forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if(rect.top < window.innerHeight) {
-        el.classList.add('is-visible');
+    function setTheme(theme){
+      root.setAttribute('data-theme', theme);
+      try{ localStorage.setItem('trp-theme', theme); }catch(e){}
+    }
+
+    toggleBtn.addEventListener('click', (e)=>{
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (document.startViewTransition && !prefersReduced){
+        const x = e.clientX, y = e.clientY;
+        const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+        const transition = document.startViewTransition(() => setTheme(next));
+        transition.ready.then(() => {
+          root.animate(
+            { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`] },
+            { duration: 600, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
+          );
+        }).catch(()=>{});
+      } else {
+        setTheme(next);
       }
     });
-  });
+  })();
+
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', ()=>{ backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none'; });
+  backToTop.addEventListener('click', (e)=>{ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('is-visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
