@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,14 +26,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-/* ============ TOKENS (shared with index.html) ============ */
 :root{
-  /* light mode (default) */
   --ink:#FAF7F1; --ink-2:#FFFFFF; --ink-3:#F1EBDF;
   --amber:#D6912E; --amber-deep:#B9701F; --coral:#E85A4B; --azure:#2E6E86;
   --mist:#221A0F; --mist-dim:rgba(34,26,15,.64); --mist-dimmer:rgba(34,26,15,.42);
   --glass:rgba(255,255,255,.55); --glass-2:rgba(255,255,255,.8); --glass-border:rgba(34,26,15,.10);
   --radius:20px; --shadow-glow:0 20px 60px rgba(214,145,46,.18); --blob-op:.16;
+  --sk1:rgba(34,26,15,.05); --sk2:rgba(34,26,15,.12);
   color-scheme:light;
 }
 html[data-theme="dark"]{
@@ -41,6 +41,7 @@ html[data-theme="dark"]{
   --mist:#F6F3FF; --mist-dim:rgba(246,243,255,.66); --mist-dimmer:rgba(246,243,255,.42);
   --glass:rgba(255,255,255,.055); --glass-2:rgba(255,255,255,.09); --glass-border:rgba(255,255,255,.14);
   --shadow-glow:0 20px 60px rgba(255,182,72,.22); --blob-op:.5;
+  --sk1:rgba(255,255,255,.05); --sk2:rgba(255,255,255,.12);
   color-scheme:dark;
 }
 html, body{ transition:background-color .5s ease, color .5s ease; }
@@ -63,11 +64,11 @@ img{max-width:100%; display:block;}
 .glass-strong{background:var(--glass-2); border:1px solid var(--glass-border); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); transition:background-color .4s ease, border-color .4s ease;}
 .eyebrow{font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--amber); font-weight:500;}
 
-.btn-glow, .btn-ghost, .btn-line{display:inline-flex; align-items:center; gap:10px; padding:14px 26px; border-radius:50px; font-weight:700; font-size:.88rem; transition:.35s; border:1px solid transparent; cursor:pointer; white-space:nowrap;}
+.btn-glow, .btn-ghost{display:inline-flex; align-items:center; gap:10px; padding:14px 26px; border-radius:50px; font-weight:700; font-size:.88rem; transition:.35s; border:1px solid transparent; cursor:pointer; white-space:nowrap;}
 .btn-glow{background:linear-gradient(135deg, var(--amber), var(--amber-deep)); color:#1A1208; box-shadow:0 10px 30px rgba(214,145,46,.35);}
 .btn-glow:hover{transform:translateY(-3px); color:#1A1208;}
 .btn-ghost{background:var(--glass); border-color:var(--glass-border); color:var(--mist);}
-.btn-ghost:hover{background:var(--glass-2); color:#fff;}
+.btn-ghost:hover{background:var(--glass-2); color:var(--mist);}
 
 /* NAV */
 .nav-wrap{position:sticky; top:0; z-index:999; padding:18px 20px 0;}
@@ -86,19 +87,10 @@ img{max-width:100%; display:block;}
   .nav-links.open{display:flex;} .nav-links a{padding:10px 4px; width:100%;} .nav-toggle{display:block;}
 }
 
-/* ============ THEME TOGGLE ============ */
+/* THEME TOGGLE */
 .theme-toggle{border:none; background:none; padding:0; cursor:pointer; flex:none; -webkit-tap-highlight-color:transparent;}
-.tt-track{
-  position:relative; display:flex; align-items:center; width:60px; height:32px; border-radius:50px;
-  background:var(--glass-2); border:1px solid var(--glass-border); transition:background-color .4s ease, border-color .4s ease;
-}
-.tt-thumb{
-  position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%;
-  background:linear-gradient(135deg, var(--amber), var(--amber-deep));
-  display:flex; align-items:center; justify-content:center;
-  transition:transform .45s cubic-bezier(.65,-0.3,.35,1.3), background .4s ease;
-  box-shadow:0 4px 12px rgba(0,0,0,.25);
-}
+.tt-track{position:relative; display:flex; align-items:center; width:60px; height:32px; border-radius:50px; background:var(--glass-2); border:1px solid var(--glass-border); transition:background-color .4s ease, border-color .4s ease;}
+.tt-thumb{position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg, var(--amber), var(--amber-deep)); display:flex; align-items:center; justify-content:center; transition:transform .45s cubic-bezier(.65,-0.3,.35,1.3), background .4s ease; box-shadow:0 4px 12px rgba(0,0,0,.25);}
 html[data-theme="dark"] .tt-thumb{ transform:translateX(28px); }
 .tt-thumb i{ position:absolute; font-size:.72rem; color:#1A1208; transition:opacity .3s ease, transform .3s ease; }
 .tt-sun{ opacity:1; transform:scale(1) rotate(0deg); }
@@ -115,30 +107,23 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
 .page-head h1{font-size:clamp(2rem,3.6vw,3rem); font-weight:600; margin-bottom:10px;}
 .search-bar{display:flex; align-items:center; gap:12px; padding:8px 8px 8px 22px; border-radius:50px; margin-top:30px;}
 .search-bar i{color:var(--amber);}
-.search-bar input{flex:1; background:transparent; border:none; outline:none; color:grey; font-family:'Manrope',sans-serif; font-size:.98rem; padding:12px 0;}
+.search-bar input{flex:1; min-width:0; background:transparent; border:none; outline:none; color:var(--mist); font-family:'Manrope',sans-serif; font-size:.98rem; padding:12px 0;}
 .search-bar input::placeholder{color:var(--mist-dimmer);}
 .search-clear{background:var(--glass-2); border:none; color:var(--mist-dim); width:34px; height:34px; border-radius:50%; cursor:pointer; display:none; align-items:center; justify-content:center;}
 
 /* FILTER BAR */
 .filter-bar{max-width:1240px; margin:26px auto 10px; padding:0 20px; display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;}
 .chip-row{display:flex; flex-wrap:wrap; gap:10px;}
-.chip{
-  padding:10px 18px; border-radius:50px; font-size:.84rem; font-weight:700; cursor:pointer; transition:.3s;
-  background:var(--glass); border:1px solid var(--glass-border); color:var(--mist-dim); display:inline-flex; align-items:center; gap:8px;
-}
-.chip:hover{color:#fff;}
+.chip{padding:10px 18px; border-radius:50px; font-size:.84rem; font-weight:700; cursor:pointer; transition:.3s; background:var(--glass); border:1px solid var(--glass-border); color:var(--mist-dim); display:inline-flex; align-items:center; gap:8px;}
+.chip:hover{color:var(--mist);}
 .chip.active{background:linear-gradient(135deg,var(--amber),var(--amber-deep)); color:#1A1208; border-color:transparent;}
 .chip i{font-size:.78rem;}
 .status-seg{display:inline-flex; padding:5px; border-radius:50px; gap:4px;}
 .status-seg button{border:none; background:transparent; color:var(--mist-dim); font-weight:700; font-size:.8rem; padding:9px 16px; border-radius:50px; cursor:pointer; transition:.3s;}
 .status-seg button.active{background:var(--amber); color:#1A1208;}
-.sort-select{
-  background:var(--glass); border:1px solid var(--glass-border); color:var(--mist); padding:11px 18px; border-radius:50px;
-  font-size:.84rem; font-weight:600; font-family:'Manrope',sans-serif; outline:none; cursor:pointer;
-}
-.sort-select option{background:var(--ink-3); color:#fff;}
+.sort-select{background:var(--glass); border:1px solid var(--glass-border); color:var(--mist); padding:11px 18px; border-radius:50px; font-size:.84rem; font-weight:600; font-family:'Manrope',sans-serif; outline:none; cursor:pointer;}
+.sort-select option{background:var(--ink-3); color:var(--mist);}
 .result-count{font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--mist-dimmer); padding:0 20px; max-width:1240px; margin:18px auto 0;}
-.result-count strong{color:var(--amber);}
 
 /* GRID / CARD */
 .listing-wrap{max-width:1240px; margin:0 auto; padding:30px 20px 100px;}
@@ -146,37 +131,34 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
 @media (max-width:991px){ .p-grid{grid-template-columns:1fr 1fr;} }
 @media (max-width:640px){ .p-grid{grid-template-columns:1fr;} }
 .p-card{border-radius:22px; overflow:hidden; transition:.4s; display:flex; flex-direction:column; cursor:pointer;}
-.p-card:hover{transform:translateY(-6px); border-color:rgba(255,182,72,.4);}
+.p-card:hover{transform:translateY(-6px); border-color:rgba(214,145,46,.45);}
 .p-media{position:relative; height:210px; overflow:hidden;}
 .p-media img{width:100%; height:100%; object-fit:cover; transition:.6s;}
 .p-card:hover .p-media img{transform:scale(1.08);}
 .p-tag{position:absolute; top:14px; left:14px; padding:6px 13px; border-radius:50px; font-family:'JetBrains Mono',monospace; font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; backdrop-filter:blur(10px);}
-.p-tag.sale{background:rgba(255,107,93,.85); color:#fff;}
-.p-tag.rent{background:rgba(46,110,134,.88); color:#fff;}
+.p-tag.sale{background:rgba(232,90,75,.9); color:#fff;}
+.p-tag.rent{background:rgba(46,110,134,.9); color:#fff;}
 .p-badges{position:absolute; top:14px; right:14px; display:flex; flex-direction:column; gap:6px; align-items:flex-end;}
 .p-badge{padding:5px 11px; border-radius:50px; font-size:.66rem; font-weight:700; display:flex; align-items:center; gap:5px;}
-.p-badge.hot{background:rgba(255,107,93,.9); color:#fff;}
-.p-badge.featured{background:rgba(255,182,72,.9); color:#1A1208;}
-.p-badge.new{background:rgba(46,110,134,.9); color:#fff;}
+.p-badge.hot{background:rgba(232,90,75,.92); color:#fff;}
+.p-badge.featured{background:rgba(255,182,72,.95); color:#1A1208;}
+.p-badge.new{background:rgba(46,110,134,.92); color:#fff;}
 .p-type{position:absolute; bottom:14px; left:14px; padding:6px 13px; border-radius:50px; font-size:.72rem; font-weight:700; color:var(--ink); background:var(--mist);}
 .p-body{padding:20px; display:flex; flex-direction:column; flex:1;}
 .p-price{font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:1.15rem; font-weight:600; margin-bottom:8px;}
-.p-name{font-family:'Fraunces',serif; font-size:1.08rem; color:#fff; margin-bottom:8px;}
-.p-loc{font-size:.84rem; display:flex; align-items:center; gap:6px; margin-bottom:16px;}
+.p-name{font-family:'Fraunces',serif; font-size:1.08rem; color:var(--mist); margin-bottom:8px;}
+.p-loc{font-size:.84rem; display:flex; align-items:center; gap:6px; margin-bottom:16px; color:var(--mist-dim);}
 .p-loc i{color:var(--amber);}
-.p-wa{
-  margin-top:auto; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:50px;
-  background:rgba(37,211,102,.14); color:#25D366; font-weight:700; font-size:.84rem; border:1px solid rgba(37,211,102,.3); transition:.3s;
-}
+.p-wa{margin-top:auto; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:50px; background:rgba(37,211,102,.14); color:#1a9c4d; font-weight:700; font-size:.84rem; border:1px solid rgba(37,211,102,.3); transition:.3s;}
+html[data-theme="dark"] .p-wa{color:#25D366;}
 .p-wa:hover{background:#25D366; color:#fff;}
 
-.skeleton{background:linear-gradient(90deg, rgba(255,255,255,.05) 25%, rgba(255,255,255,.12) 37%, rgba(255,255,255,.05) 63%); background-size:400% 100%; animation:sk 1.4s ease infinite; border-radius:22px;}
+.skeleton{background:linear-gradient(90deg, var(--sk1) 25%, var(--sk2) 37%, var(--sk1) 63%); background-size:400% 100%; animation:sk 1.4s ease infinite; border-radius:22px;}
 @keyframes sk{0%{background-position:100% 50%;} 100%{background-position:0 50%;}}
 .skeleton-card{height:360px;}
 
 .empty-state{grid-column:1/-1; text-align:center; padding:70px 20px;}
 .empty-state i{font-size:2.2rem; color:var(--amber); margin-bottom:16px;}
-
 #load-more-trigger{height:20px;}
 
 /* DETAIL VIEW */
@@ -185,13 +167,13 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
 .detail-media{border-radius:24px; overflow:hidden; box-shadow:var(--shadow-glow); max-height:520px;}
 .detail-media img, .detail-media video{width:100%; max-height:520px; object-fit:cover;}
 .detail-video-box video{background:#000;}
-.detail-tags{display:flex; gap:10px; margin:16px 0;}
+.detail-tags{display:flex; gap:10px; margin:16px 0; flex-wrap:wrap;}
 .detail-price{font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:1.4rem; font-weight:700;}
 .detail-desc{font-size:1.02rem; line-height:1.85; white-space:pre-wrap; color:var(--mist-dim);}
 .detail-facts{list-style:none; padding:0; margin:22px 0 0;}
 .detail-facts li{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--glass-border); font-size:.9rem;}
 .detail-facts li span:first-child{color:var(--mist-dim);}
-.detail-facts li span:last-child{color:#fff; font-weight:600;}
+.detail-facts li span:last-child{color:var(--mist); font-weight:600;}
 .detail-panel{padding:28px;}
 .wa-cta{display:flex; align-items:center; justify-content:center; gap:10px; padding:16px; border-radius:50px; background:#25D366; color:#fff; font-weight:700; margin-top:22px; transition:.3s;}
 .wa-cta:hover{background:#1eb958; color:#fff;}
@@ -207,11 +189,11 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
 .gallery-mini{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
 .gallery-mini img{border-radius:10px; aspect-ratio:1/1; object-fit:cover;}
 .news-input{display:flex; border-radius:50px; padding:5px; margin-top:6px;}
-.news-input input{flex:1; background:transparent; border:none; outline:none; padding:10px 16px; color:#fff; font-size:.88rem;}
-.news-input input::placeholder{color:var(--mist-dimmer);}
+.news-input input{flex:1; min-width:0; background:transparent; border:none; outline:none; padding:10px 16px; color:#fff; font-size:.88rem;}
+.news-input input::placeholder{color:rgba(255,255,255,.42);}
 .news-input button{border:none; border-radius:50px; padding:10px 18px; background:linear-gradient(135deg,var(--amber),var(--amber-deep)); color:#1A1208; font-weight:700; font-size:.82rem;}
 .copyright{border-top:1px solid rgba(255,255,255,.1); margin-top:50px; padding:22px 0; font-size:.82rem; text-align:center; color:rgba(255,255,255,.42);}
-.back-to-top{position:fixed; right:24px; bottom:24px; width:48px; height:48px; border-radius:50%; z-index:60; display:none; align-items:center; justify-content:center; color:#1A1208; box-shadow:0 10px 26px rgba(214,145,46,.4);}
+.back-to-top{position:fixed; right:24px; bottom:24px; width:48px; height:48px; border-radius:50%; z-index:60; display:none; align-items:center; justify-content:center; padding:0; color:#1A1208; box-shadow:0 10px 26px rgba(214,145,46,.4);}
 .d-none{display:none !important;}
 </style>
 </head>
@@ -238,12 +220,12 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
         <span class="tt-track"><span class="tt-thumb"><i class="fa-solid fa-sun tt-sun"></i><i class="fa-solid fa-moon tt-moon"></i></span></span>
       </button>
       <a href="admin.html" class="btn-glow d-none d-lg-flex">Add Property</a>
-      <button class="nav-toggle" id="navToggle"><i class="fa-solid fa-bars"></i></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
     </div>
   </nav>
 </div>
 
-<!-- PAGE HEAD -->
+<!-- LISTING VIEW -->
 <div id="main-listing-view">
 <div class="page-head">
   <div class="page-head-inner">
@@ -252,7 +234,7 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
     <div class="search-bar glass-strong">
       <i class="fa-solid fa-magnifying-glass"></i>
       <input type="text" id="search-input" placeholder="Search by name, location, or type…">
-      <button class="search-clear" id="searchClear"><i class="fa-solid fa-xmark"></i></button>
+      <button class="search-clear" id="searchClear" aria-label="Clear search"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
 </div>
@@ -295,7 +277,7 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
         <div class="detail-media"><img id="detail-image" alt="Property image" onerror="this.onerror=null;this.src=PLACEHOLDER_IMG;"></div>
         <div id="detail-video-container" class="d-none mt-4">
           <h4 style="font-size:1.1rem; margin-bottom:14px;">Property video tour</h4>
-          <div class="detail-media detail-video-box"><video id="detail-video" controls></video></div>
+          <div class="detail-media detail-video-box"><video id="detail-video" controls playsinline></video></div>
         </div>
       </div>
       <div class="col-lg-5">
@@ -312,7 +294,7 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
             <li><span>Type</span><span id="detail-type"></span></li>
             <li><span>Listed on</span><span id="detail-date"></span></li>
           </ul>
-          <a href="#" id="detail-whatsapp-link" target="_blank" class="wa-cta"><i class="fa-brands fa-whatsapp fs-5"></i> Enquire now on WhatsApp</a>
+          <a href="#" id="detail-whatsapp-link" target="_blank" rel="noopener" class="wa-cta"><i class="fa-brands fa-whatsapp fs-5"></i> Enquire now on WhatsApp</a>
         </div>
       </div>
     </div>
@@ -329,7 +311,7 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
         <p class="mb-2"><i class="fa-solid fa-phone me-2" style="color:var(--amber);"></i><a href="tel:08133979019">0813 397 9019</a></p>
         <p class="mb-3"><i class="fa-solid fa-envelope me-2" style="color:var(--amber);"></i>transrealproperties@gmail.com</p>
         <div class="d-flex">
-          <a class="social-btn" href="https://www.facebook.com/share/1Ero7QT5Br/"><i class="fa-brands fa-facebook-f"></i></a>
+          <a class="social-btn" href="https://www.facebook.com/share/1Ero7QT5Br/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
         </div>
       </div>
       <div class="col-lg-3 col-md-6">
@@ -360,16 +342,15 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
   </div>
 </footer>
 
-<a href="#" class="btn-glow back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+<a href="#" class="btn-glow back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
   const WHATSAPP_NUMBER = '+2348133979019';
-  const SUPABASE_URL = 'https://qgwxjnftvnzvbpalzxes.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_A7ILV8KrJcHIrUbk3TsMFg_bjZnWn_C';
+  const SUPABASE_URL = 'https://ytnuvyewwbuqfxhgnhth.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_fzrFRCIXb1q2LPDef6jmFg_7BBRxPRm';
   const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false } });
 
   // ---- state ----
@@ -381,9 +362,8 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
   let currentSearchTerm = '';
   let activeStatus = '';
   let sortMode = 'newest';
-  let quickKeywords = null; // e.g. ['hostel','accommodation']
+  let quickKeywords = null;
 
-  // Keyword groups — matched across name, description AND property_type
   const FILTER_KEYWORDS = {
     accommodation: ['apartment','accommodation','hostel'],
     home: ['home','house'],
@@ -399,13 +379,16 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
   const mainListingView = document.getElementById('main-listing-view');
   const propertyDetailView = document.getElementById('property-detail-view');
 
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function formatNaira(price){
     return new Intl.NumberFormat('en-NG', { style:'currency', currency:'NGN', minimumFractionDigits:0 }).format(price);
   }
   function getWhatsAppLink(property){
     const msg = encodeURIComponent(`Hello Transreal Properties, I am interested in property listing: "${property.name}" in ${property.location}. (ID: ${property.id})`);
-    return `https://wa.me/${WHATSAPP_NUMBER.replace(/\s/g,'')}?text=${msg}`;
+    return `https://wa.me/${WHATSAPP_NUMBER.replace(/[^\d]/g,'')}?text=${msg}`;
   }
+  // escape characters that would break PostgREST .or() filter syntax
+  function cleanTerm(t){ return t.replace(/[,()%*\\]/g,' ').trim(); }
 
   function skeletonCard(){
     const d = document.createElement('div');
@@ -426,16 +409,16 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
     col.onclick = () => showPropertyDetail(property.id);
     col.innerHTML = `
       <div class="p-media">
-        <img src="${property.image_url || PLACEHOLDER_IMG}" alt="${property.name}" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}';">
-        <div class="p-tag ${isSale ? 'sale' : 'rent'}">For ${property.sale_rent_status}</div>
+        <img src="${esc(property.image_url) || PLACEHOLDER_IMG}" alt="${esc(property.name)}" loading="lazy" onerror="this.onerror=null;this.src=PLACEHOLDER_IMG;">
+        <div class="p-tag ${isSale ? 'sale' : 'rent'}">For ${esc(property.sale_rent_status)}</div>
         <div class="p-badges">${badges}</div>
-        <div class="p-type">${property.property_type}</div>
+        <div class="p-type">${esc(property.property_type)}</div>
       </div>
       <div class="p-body">
         <div class="p-price">${formatNaira(property.price)}</div>
-        <div class="p-name">${property.name}</div>
-        <div class="p-loc"><i class="fa-solid fa-location-dot"></i>${property.location}</div>
-        <a href="${getWhatsAppLink(property)}" target="_blank" class="p-wa" onclick="event.stopPropagation();"><i class="fa-brands fa-whatsapp"></i> Connect on WhatsApp</a>
+        <div class="p-name">${esc(property.name)}</div>
+        <div class="p-loc"><i class="fa-solid fa-location-dot"></i>${esc(property.location)}</div>
+        <a href="${getWhatsAppLink(property)}" target="_blank" rel="noopener" class="p-wa" onclick="event.stopPropagation();"><i class="fa-brands fa-whatsapp"></i> Connect on WhatsApp</a>
       </div>`;
     return col;
   }
@@ -444,7 +427,8 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
   function sortAsc(){ return sortMode === 'price-asc'; }
 
   async function fetchProperties(reset=false){
-    if (isLoading || (!hasMore && !reset)) return;
+    if (isLoading && !reset) return;
+    if (!hasMore && !reset) return;
     isLoading = true;
 
     if (reset){
@@ -461,6 +445,7 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
     let query = sb.from('properties')
       .select('id, name, price, location, property_type, sale_rent_status, image_url, description, video_url, created_at, is_featured, is_hot')
       .order(sortColumn(), { ascending: sortAsc() })
+      .order('id', { ascending: false })
       .range(from, to);
 
     if (activeStatus) query = query.ilike('sale_rent_status', `%${activeStatus}%`);
@@ -472,22 +457,25 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
       });
       query = query.or(parts.join(','));
     } else if (currentSearchTerm){
-      const t = `%${currentSearchTerm}%`;
-      query = query.or(`name.ilike.${t},location.ilike.${t},property_type.ilike.${t},sale_rent_status.ilike.${t},description.ilike.${t}`);
+      const term = cleanTerm(currentSearchTerm);
+      if (term){
+        const t = `%${term}%`;
+        query = query.or(`name.ilike.${t},location.ilike.${t},property_type.ilike.${t},sale_rent_status.ilike.${t},description.ilike.${t}`);
+      }
     }
 
     const { data, error } = await query;
     skeletons.forEach(s=>s.remove());
 
     if (error){
-      grid.innerHTML += `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><p>Error loading listings: ${error.message}</p></div>`;
+      grid.insertAdjacentHTML('beforeend', `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><p>Error loading listings: ${esc(error.message)}</p></div>`);
       isLoading = false; return;
     }
 
     if (data.length < itemsPerPage) hasMore = false;
 
     if (data.length === 0 && currentPage === 0){
-      grid.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><p style="color:var(--mist-dim);">No properties found matching your filters.</p><a href="contact.html" class="btn-glow mt-3 d-inline-flex">Contact us for consultation</a></div>`;
+      grid.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><p>No properties found matching your filters.</p><a href="contact.html" class="btn-glow mt-3 d-inline-flex">Contact us for consultation</a></div>`;
     } else {
       data.forEach(p => grid.appendChild(createPropertyCard(p)));
       allProperties = [...allProperties, ...data];
@@ -506,7 +494,8 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
     searchClear.style.display = e.target.value ? 'flex' : 'none';
     searchTimeout = setTimeout(()=>{
       currentSearchTerm = e.target.value.trim();
-      quickKeywords = null; // typing overrides quick-filter
+      quickKeywords = null;
+      document.querySelectorAll('#typeChips .chip').forEach(b=>b.classList.toggle('active', b.dataset.filter === ''));
       fetchProperties(true);
     }, 450);
   });
@@ -551,7 +540,7 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
     document.getElementById('detail-property-name').textContent = property.name;
     document.getElementById('detail-image').src = property.image_url || PLACEHOLDER_IMG;
     document.getElementById('detail-price').textContent = formatNaira(property.price);
-    document.getElementById('detail-location').innerHTML = `<i class="fa-solid fa-location-dot"></i> ${property.location}`;
+    document.getElementById('detail-location').innerHTML = `<i class="fa-solid fa-location-dot"></i> ${esc(property.location)}`;
     document.getElementById('detail-description').textContent = property.description || 'No detailed description provided for this listing.';
     document.getElementById('detail-status').textContent = property.sale_rent_status;
     document.getElementById('detail-type').textContent = property.property_type;
@@ -568,7 +557,7 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
     if (property.video_url){
       videoEl.src = property.video_url; videoContainer.classList.remove('d-none'); videoEl.load();
     } else {
-      videoEl.src = ''; videoContainer.classList.add('d-none');
+      videoEl.removeAttribute('src'); videoContainer.classList.add('d-none');
     }
 
     mainListingView.classList.add('d-none');
@@ -578,7 +567,7 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
 
   function closePropertyDetail(){
     const v = document.getElementById('detail-video');
-    if (v){ v.pause(); v.currentTime = 0; }
+    if (v){ v.pause(); }
     propertyDetailView.classList.add('d-none');
     mainListingView.classList.remove('d-none');
   }
@@ -590,14 +579,12 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
     const id = params.get('id');
     let filter = (params.get('filter') || '').toLowerCase();
 
-    // legacy support for old ?type=Home / ?type=Land / ?type=Apartment links
     const legacyType = (params.get('type') || '').toLowerCase();
     if (!filter && legacyType){
       if (legacyType.includes('apartment')) filter = 'accommodation';
       else if (legacyType.includes('home')) filter = 'home';
       else if (legacyType.includes('land')) filter = 'land';
     }
-    // treat a bare "?filter=hostel" the same as the accommodation group
     if (filter === 'hostel') filter = 'accommodation';
 
     if (status){
@@ -640,7 +627,7 @@ html[data-theme="dark"] .tt-moon{ opacity:1; transform:scale(1) rotate(0deg); }
     document.getElementById('navLinks').classList.toggle('open');
   });
 
-  // Theme toggle — remembers choice in localStorage, animates with a circular reveal
+  // Theme toggle
   (function(){
     const root = document.documentElement;
     const toggleBtn = document.getElementById('themeToggle');
