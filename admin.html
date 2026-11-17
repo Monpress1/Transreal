@@ -1,932 +1,529 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Transreal Properties - Admin Dashboard</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Admin panel for managing property listings" name="keywords">
-    <meta content="Property management dashboard" name="description">
+<meta charset="utf-8">
+<title>Transreal Properties - Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="img/favicon.ico" rel="icon">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<style>
+:root{--pri:#007bff;--navy:#003366;--ok:#28a745;--warn:#ffc107;--bad:#dc3545;--bg:#f2f5f9;--card:#fff;--line:#e6ebf1;--mut:#6b7785}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:#1c2733;padding-bottom:84px}
+button,input,select,textarea{font-family:inherit;font-size:1rem}
+.hide{display:none!important}
 
-    <link href="img/favicon.ico" rel="icon">
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:10000;background:radial-gradient(circle at 50% 42%,#0a5bc4 0%,#003366 58%,#001a33 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;text-align:center;transition:opacity .4s ease,visibility .4s ease}
+#splash.out{opacity:0;visibility:hidden}
+.arc{position:absolute;border-radius:50%;border:2px solid transparent;top:50%;left:50%}
+.a1{width:300px;height:300px;margin:-150px 0 0 -150px;border-top-color:rgba(255,255,255,.6);border-right-color:rgba(255,255,255,.12);animation:spin 2.4s linear infinite}
+.a2{width:230px;height:230px;margin:-115px 0 0 -115px;border-bottom-color:#6db3ff;border-left-color:rgba(109,179,255,.2);animation:spin 1.6s linear infinite reverse}
+.a3{width:370px;height:370px;margin:-185px 0 0 -185px;border:1px dashed rgba(255,255,255,.18);animation:spin 9s linear infinite}
+.cn{position:absolute;width:420px;height:420px;border-radius:50%;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 0 28px rgba(255,255,255,.035),0 0 0 56px rgba(255,255,255,.025)}
+.cn1{top:-210px;left:-210px}.cn2{bottom:-210px;right:-210px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sp-in{position:relative;z-index:2;padding:0 16px}
+.sp-ico{width:62px;height:62px;margin-bottom:6px}
+.sp-ico path{fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:140;stroke-dashoffset:140;animation:draw .8s ease forwards}
+.sp-ico .acc{stroke:#6db3ff;animation-delay:.25s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.sp-t{display:block;font-family:'Great Vibes','Brush Script MT',cursive;color:#fff;line-height:1.15;clip-path:inset(0 100% 0 0);animation:write .75s ease forwards}
+.sp-t1{font-size:clamp(2.2rem,10vw,3.4rem);animation-delay:.1s}
+.sp-t2{font-size:clamp(1.6rem,7vw,2.3rem);color:#8cc4ff;animation-delay:.45s}
+@keyframes write{to{clip-path:inset(0 -10% 0 0)}}
+.sp-sw{width:200px;height:20px;margin-top:4px}
+.sp-sw path{fill:none;stroke:#6db3ff;stroke-width:2;stroke-linecap:round;stroke-dasharray:220;stroke-dashoffset:220;animation:draw .6s ease .5s forwards}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+/* UPLOAD PROGRESS */
+#upBox{margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#f7faff}
+#upBox .r{display:flex;justify-content:space-between;font-size:.82rem;font-weight:600;color:var(--navy)}
+#upBox .tr{height:12px;border-radius:20px;background:#dde7f3;margin:10px 0 6px;overflow:hidden}
+#upBox .fl{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,#007bff,#4dabff);transition:width .2s}
+#upBox .fl.ind{width:35%!important;animation:ind 1s ease-in-out infinite alternate}
+@keyframes ind{from{margin-left:0}to{margin-left:65%}}
+#upBox small{color:var(--mut);font-size:.74rem}
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+/* LOCK */
+#lock{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#003366,#007bff);display:flex;align-items:center;justify-content:center;transition:opacity .5s}
+.glass{background:rgba(255,255,255,.12);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:40px 28px;width:90%;max-width:380px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3);transition:transform .1s}
+.glass h2{color:#fff;margin:0 0 4px}.glass p{color:rgba(255,255,255,.8);margin:0 0 24px;font-size:.9rem}
+.lk-in{position:relative;margin-bottom:16px}
+.lk-in i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.7)}
+.lk-in input{width:100%;padding:15px 15px 15px 44px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:12px;color:#fff;outline:none}
+.lk-in input::placeholder{color:rgba(255,255,255,.55)}
+.lk-btn{width:100%;padding:15px;border-radius:12px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.22);color:#fff;font-weight:600;cursor:pointer}
+#lk-err{color:#ffb3b3;font-size:.85rem;margin-top:14px;display:none;font-weight:600}
 
-    <style>
-        /* NEW Color Palette & Typography */
-        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
-        :root { 
-            --bs-primary: #007bff; 
-            --bs-secondary: #003366;  
-            --bs-success: #28a745;
-            --bs-danger: #dc3545;
-        }
+/* TOP BAR */
+.top{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+.top b{font-size:1rem;letter-spacing:.5px}.top b span{color:#6db3ff}
+.top a{color:#fff;text-decoration:none;font-size:.85rem;opacity:.85}
+.top a i{margin-right:6px}
+.wrap{max-width:1000px;margin:0 auto;padding:16px}
+.view{display:none}.view.on{display:block;animation:f .25s}
+@keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+h3.sec{font-size:1rem;color:var(--navy);margin:22px 0 10px;font-weight:700}
+.card{background:var(--card);border-radius:16px;padding:16px;box-shadow:0 2px 10px rgba(0,51,102,.06);border:1px solid var(--line)}
+#msg{margin-bottom:12px;padding:12px 14px;border-radius:12px;font-size:.88rem;font-weight:600}
+.m-info{background:#e7f1ff;color:#0a58ca}.m-success{background:#e6f6ea;color:#17692b}.m-danger{background:#fde8ea;color:#a1212d}.m-warning{background:#fff4d6;color:#8a6500}
 
-        /* --- GLASSMORPHISM LOCK SCREEN STYLES --- */
-        #glass-lock-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(135deg, #003366 0%, #007bff 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999999; /* Always on top */
-            transition: opacity 0.5s ease;
-        }
+/* STORAGE */
+.stor{background:linear-gradient(135deg,#003366,#0a5bc4);color:#fff;border:none}
+.stor .row1{display:flex;justify-content:space-between;align-items:flex-end}
+.stor small{opacity:.8;font-size:.78rem}
+.stor .pct{font-size:2.4rem;font-weight:700;line-height:1}
+.bar{height:14px;border-radius:20px;background:rgba(255,255,255,.2);margin:14px 0 10px;overflow:hidden;display:flex}
+.bar i{display:block;height:100%;transition:width .8s}
+.b-img{background:#4dd0e1}.b-vid{background:#ffca28}
+.leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem}
+.leg span:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--c)}
+.stor-note{margin-top:10px;font-size:.8rem;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.15)}
+.stor.warn{background:linear-gradient(135deg,#8a5a00,#d99100)}
+.stor.crit{background:linear-gradient(135deg,#7d1520,#d6293a)}
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 50px 40px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-        }
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.stat{padding:12px 8px;text-align:center}
+.stat i{width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.85rem;margin-bottom:6px}
+.stat b{display:block;font-size:1.5rem;color:var(--navy);line-height:1.1}
+.stat small{color:var(--mut);font-size:.7rem}
+.charts{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:700px){.charts{grid-template-columns:1fr 1fr}.stats{gap:16px}}
+.cbox{position:relative;height:230px}
 
-        .glass-card h2 {
-            color: #ffffff;
-            font-weight: 700;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
+/* LIST */
+.search{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:12px;outline:none}
+.item{display:flex;gap:12px;padding:12px;margin-bottom:10px;align-items:center}
+.item img{width:68px;height:68px;border-radius:10px;object-fit:cover;background:#e9ecef;flex:none}
+.item .inf{flex:1;min-width:0}
+.item h6{margin:0 0 3px;font-size:.92rem;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .pr{font-weight:700;font-size:.85rem}
+.item .lc{font-size:.76rem;color:var(--mut)}
+.tg{display:inline-block;font-size:.65rem;padding:2px 8px;border-radius:20px;margin:4px 4px 0 0;font-weight:600;color:#fff}
+.t-sale{background:var(--ok)}.t-rent{background:#e0a800;color:#222}.t-ft{background:var(--pri)}.t-hot{background:var(--bad)}.t-ty{background:#6c757d}
+.acts{display:flex;flex-direction:column;gap:6px}
+.acts button{border:1px solid;background:#fff;border-radius:10px;padding:7px 12px;font-size:.78rem;font-weight:600;cursor:pointer}
+.ed{color:var(--pri);border-color:var(--pri)!important}.dl{color:var(--bad);border-color:var(--bad)!important}
 
-        .glass-card p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
+/* FORM */
+label{display:block;font-size:.82rem;font-weight:600;margin:14px 0 6px;color:var(--navy)}
+.f{width:100%;padding:13px 14px;border:1px solid #ced4da;border-radius:12px;background:#fff;outline:none}
+.f:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(0,123,255,.12)}
+.g2{display:grid;grid-template-columns:1fr;gap:0 14px}
+@media(min-width:700px){.g2{grid-template-columns:1fr 1fr}}
+.sw{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1px solid var(--line);border-radius:12px;margin-top:12px;font-size:.9rem}
+.sw input{width:44px;height:24px;accent-color:var(--pri)}
+.st{font-size:.78rem;margin-top:6px;display:block}
+.btn{width:100%;padding:15px;border:none;border-radius:12px;background:var(--pri);color:#fff;font-weight:700;margin-top:20px;cursor:pointer}
+.btn:disabled{opacity:.7}.btn.o{background:#fff;color:var(--mut);border:1px solid #ced4da;margin-top:10px}
 
-        .glass-input-group {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .glass-input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .glass-input {
-            width: 100%;
-            padding: 15px 15px 15px 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .glass-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .glass-input:focus {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-
-        .glass-btn {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        #lock-error-msg {
-            color: #ff6b6b;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            display: none;
-            font-weight: 600;
-        }
-
-        /* Hidden class to completely remove the dashboard from view */
-        .admin-content-hidden {
-            display: none !important;
-        }
-        /* --- END GLASSMORPHISM STYLES --- */
-
-        .admin-container { 
-            max-width: 1200px; 
-            margin: 20px auto; 
-            padding: 30px; 
-            background-color: #fff; 
-        }
-
-        .admin-welcome {
-            color: var(--bs-secondary); 
-            font-size: 1.8rem; 
-            font-weight: 700;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 10px;
-        }
-
-        .dashboard-card { 
-            border: 1px solid #e9ecef;
-            border-radius: .5rem; 
-            transition: all 0.3s ease; 
-            box-shadow: 0 0.5rem 1rem rgba(0, 51, 102, 0.05) !important;
-        }
-        .dashboard-card .card-body { padding: 1rem; } 
-        .dashboard-card:hover { transform: translateY(-3px); box-shadow: 0 0.8rem 1.5rem rgba(0, 51, 102, 0.1); }
-        .dashboard-card-icon {
-            padding: 0.7rem;
-            border-radius: 50%;
-            color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .dashboard-card-icon.bg-primary { background-color: var(--bs-primary); }
-        .dashboard-card-icon.bg-warning { background-color: #ffc107 !important; }
-        .dashboard-card-icon.bg-danger { background-color: #dc3545 !important; }
-
-        .dashboard-card .display-4 { 
-            font-size: 2.5rem; 
-            font-weight: 700;
-            color: var(--bs-secondary);
-        }
-        
-        .property-list-section { 
-            max-height: 60vh; 
-            overflow-y: auto; 
-            border: 1px solid #dee2e6; 
-            border-radius: .5rem; 
-            padding: 10px;
-        }
-
-        .property-card { 
-            display: flex; 
-            gap: 15px;
-            align-items: center; 
-            padding: 15px; 
-            margin-bottom: 10px; 
-            border: 1px solid #f0f0f0;
-            border-radius: .5rem;
-            background-color: #fff;
-            transition: box-shadow 0.2s;
-        }
-        .property-card:hover { box-shadow: 0 4px 10px rgba(0, 51, 102, 0.05); }
-
-        .property-card-img {
-            width: 80px; 
-            height: 80px; 
-            min-width: 80px;
-            min-height: 80px;
-            overflow: hidden;
-            border-radius: 5px;
-            flex-shrink: 0;
-            background-color: #e9ecef; 
-        }
-        .property-card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .property-info { 
-            flex-grow: 1; 
-            margin-right: 20px; 
-        }
-        .property-info h6 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--bs-secondary);
-            margin-bottom: 5px;
-        }
-        .action-buttons button { 
-            margin-left: 8px; 
-            min-width: 80px; 
-            font-size: 0.8rem;
-        }
-
-        .nav-pills-admin .nav-link {
-            border-radius: 50px;
-            margin-right: 10px;
-            font-weight: 600;
-            color: var(--bs-secondary);
-            transition: all 0.3s;
-            border: 1px solid #ced4da;
-            padding: 8px 20px;
-        }
-        .nav-pills-admin .nav-link.active {
-            background-color: var(--bs-primary);
-            color: #fff; 
-            border-color: var(--bs-primary);
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
-        }
-
-        .form-section-header {
-            border-bottom: 1px solid #e9ecef;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            color: var(--bs-secondary);
-            font-weight: 600;
-        }
-    </style>
+/* BOTTOM NAV */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);display:flex;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -4px 20px rgba(0,0,0,.06)}
+.nav button{flex:1;border:none;background:none;padding:8px 4px;color:var(--mut);font-size:.7rem;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.nav button i{font-size:1.2rem}.nav button.on{color:var(--pri)}
+.nav button.add i{background:var(--pri);color:#fff;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:-22px;box-shadow:0 6px 16px rgba(0,123,255,.4);font-size:1.1rem}
+@media(min-width:900px){.nav{max-width:520px;left:50%;transform:translateX(-50%);border-radius:20px 20px 0 0}}
+</style>
 </head>
 <body>
 
-    <!-- GLASSMORPHISM LOCK SCREEN OVERLAY -->
-    <div id="glass-lock-screen">
-        <div class="glass-card">
-            <h2>Admin Locked</h2>
-            <p>Transreal Properties Dashboard</p>
-            
-            <div class="glass-input-group">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="admin-password" class="glass-input" placeholder="Enter secure password">
-            </div>
-            
-            <button class="glass-btn" onclick="verifyAdminPassword()">
-                <i class="fa-solid fa-unlock-keyhole me-2"></i> Unlock Dashboard
-            </button>
-            
-            <div id="lock-error-msg"><i class="fa-solid fa-circle-exclamation me-1"></i> Incorrect password. Try again.</div>
+<div id="splash">
+  <div class="cn cn1"></div><div class="cn cn2"></div>
+  <div class="arc a3"></div><div class="arc a1"></div><div class="arc a2"></div>
+  <div class="sp-in">
+    <svg class="sp-ico" viewBox="0 0 64 64"><path d="M8 32 L32 10 L56 32"/><path class="acc" d="M14 28 V54 H50 V28"/><path class="acc" d="M26 54 V38 H38 V54"/></svg>
+    <span class="sp-t sp-t1">Transreal Properties</span>
+    <span class="sp-t sp-t2">Administrator</span>
+    <svg class="sp-sw" viewBox="0 0 200 20"><path d="M6 12 C50 2, 90 20, 130 9 S185 6, 194 10"/></svg>
+  </div>
+</div>
+<script>setTimeout(function(){document.getElementById('splash').classList.add('out')},1000);</script>
+
+<div id="lock">
+  <div class="glass" id="lk-card">
+    <h2>Admin Locked</h2><p>Transreal Properties Dashboard</p>
+    <div class="lk-in"><i class="fa-solid fa-lock"></i><input type="password" id="pw" placeholder="Enter secure password"></div>
+    <button class="lk-btn" onclick="unlock()"><i class="fa-solid fa-unlock-keyhole"></i>&nbsp; Unlock Dashboard</button>
+    <div id="lk-err"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<div id="app" class="hide">
+  <div class="top">
+    <b>TRANSREAL <span>ADMIN</span></b>
+    <a href="property.html"><i class="fa-solid fa-arrow-up-right-from-square"></i>View site</a>
+  </div>
+
+  <div class="wrap">
+    <div id="msg" class="hide"></div>
+
+    <!-- DASHBOARD -->
+    <section class="view on" id="v-dash">
+      <div class="card stor" id="storCard">
+        <div class="row1">
+          <div><small>STORAGE USED</small><div class="pct" id="pct">--%</div></div>
+          <div style="text-align:right"><small>Used</small><div style="font-weight:600" id="usedTxt">--</div></div>
         </div>
-    </div>
-    
-    <!-- ADMIN DASHBOARD CONTENT (Hidden by default until unlocked) -->
-    <div id="main-admin-content" class="container-xxl bg-white p-0 admin-content-hidden">
-        
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
+        <div class="bar"><i class="b-img" id="barImg" style="width:0"></i><i class="b-vid" id="barVid" style="width:0"></i></div>
+        <div class="leg">
+          <span style="--c:#4dd0e1">Images: <b id="imgTxt">--</b></span>
+          <span style="--c:#ffca28">Videos: <b id="vidTxt">--</b></span>
+          <span style="--c:rgba(255,255,255,.3)">Free: <b id="freeTxt">--</b></span>
         </div>
-        
-        <div class="container-fluid nav-bar bg-white sticky-top shadow-sm">
-            <nav class="navbar navbar-expand-lg navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 140px; height: 64px;">
-                    </div>
-                    <h1 class="m-0 text-secondary" style="font-size: 1.5rem;">
-                         TRANSREAL <span class="text-primary">PROPERTIES</span>
-                    </h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="property.html" class="nav-item nav-link">Property List</a>
-                        <a href="admin.html" class="nav-item nav-link active">Admin</a>
-                    </div>
-                    <button type="button" class="btn btn-primary px-3 d-none d-lg-flex ms-3 shadow-sm" data-bs-toggle="tab" data-bs-target="#add" onclick="document.getElementById('add-tab').click(); resetFormState(false);">
-                        <i class="fa-solid fa-house-chimney-medical me-2"></i> Add Property
-                    </button>
-                </div>
-            </nav>
+        <div class="stor-note" id="storNote">Calculating…</div>
+      </div>
+
+      <div class="stats">
+        <div class="card stat"><i class="fa-solid fa-house" style="background:var(--pri)"></i><b id="sTotal">0</b><small>Listings</small></div>
+        <div class="card stat"><i class="fa-solid fa-star" style="background:var(--warn)"></i><b id="sFeat">0</b><small>Featured</small></div>
+        <div class="card stat"><i class="fa-solid fa-fire" style="background:var(--bad)"></i><b id="sHot">0</b><small>Hot</small></div>
+      </div>
+
+      <h3 class="sec">Analytics</h3>
+      <div class="charts">
+        <div class="card"><small style="color:var(--mut)">Storage breakdown</small><div class="cbox"><canvas id="chStor"></canvas></div></div>
+        <div class="card"><small style="color:var(--mut)">Listings by type</small><div class="cbox"><canvas id="chType"></canvas></div></div>
+        <div class="card"><small style="color:var(--mut)">Sale vs Rent</small><div class="cbox"><canvas id="chSale"></canvas></div></div>
+        <div class="card"><small style="color:var(--mut)">New listings (last 6 months)</small><div class="cbox"><canvas id="chMonth"></canvas></div></div>
+      </div>
+    </section>
+
+    <!-- LISTINGS -->
+    <section class="view" id="v-list">
+      <h3 class="sec" style="margin-top:6px">Manage Listings (<span id="cnt">0</span>)</h3>
+      <input class="search" id="q" placeholder="Search listings…">
+      <div id="list"></div>
+    </section>
+
+    <!-- ADD / EDIT -->
+    <section class="view" id="v-add">
+      <h3 class="sec" style="margin-top:6px" id="formTitle">New Listing Details</h3>
+      <form id="form" class="card">
+        <input type="hidden" id="editId">
+        <div class="g2">
+          <div><label>Property Name <b style="color:red">*</b></label><input class="f" id="name" placeholder="e.g., 2 bedroom flat" required></div>
+          <div><label>Price (₦) <b style="color:red">*</b></label><input class="f" id="price" type="number" inputmode="numeric" placeholder="200000" required></div>
+          <div><label>Location <b style="color:red">*</b></label><input class="f" id="location" placeholder="e.g., Ado Ekiti" required></div>
+          <div><label>Type <b style="color:red">*</b></label>
+            <select class="f" id="property_type" required><option value="" disabled selected>Select Type</option><option>Apartment</option><option>House</option><option>Land</option><option>Commercial</option></select></div>
+          <div><label>Status <b style="color:red">*</b></label>
+            <select class="f" id="sale_rent_status" required><option value="" disabled selected>Select Status</option><option value="Sale">For Sale</option><option value="Rent">For Rent</option></select></div>
         </div>
-        
-        <div class="admin-container shadow-lg rounded">
-            <h2 class="admin-welcome">WELCOME, ADMINISTRATOR</h2>
-            <div id="message" class="alert d-none"></div>
-
-            <div class="row mb-5 g-4 justify-content-center">
-                <div class="col-sm-6 col-md-4">
-                    <div class="card dashboard-card">
-                        <div class="card-body">
-                            <h6 class="card-title text-muted d-flex justify-content-between align-items-center mb-2">
-                                Total Listings 
-                                <i class="fa-solid fa-house fa-xl dashboard-card-icon bg-primary"></i>
-                            </h6>
-                            <div id="total-properties" class="display-4 text-primary">0</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="card dashboard-card">
-                        <div class="card-body">
-                            <h6 class="card-title text-muted d-flex justify-content-between align-items-center mb-2">
-                                Featured Count 
-                                <i class="fa-solid fa-star fa-xl dashboard-card-icon bg-warning"></i>
-                            </h6>
-                            <div id="featured-properties" class="display-4 text-warning">0</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="card dashboard-card">
-                        <div class="card-body">
-                            <h6 class="card-title text-muted d-flex justify-content-between align-items-center mb-2">
-                                Hot Listings Count
-                                <i class="fa-solid fa-fire fa-xl dashboard-card-icon bg-danger"></i>
-                            </h6>
-                            <div id="hot-properties" class="display-4 text-danger">0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <ul class="nav nav-pills nav-pills-admin mb-4 justify-content-center" id="adminTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="manage-tab" data-bs-toggle="tab" data-bs-target="#manage" type="button" role="tab" aria-controls="manage" aria-selected="true">
-                        <i class="fa-solid fa-list-check me-2"></i> Manage/Edit Listings
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="add-tab" data-bs-toggle="tab" data-bs-target="#add" type="button" role="tab" aria-controls="add" aria-selected="false">
-                        <i class="fa-solid fa-house-chimney-medical me-2"></i> Add New Property
-                    </button>
-                </li>
-            </ul>
-            
-            <div class="tab-content border border-top-0 p-4 bg-light rounded-bottom">
-                
-                <div class="tab-pane fade show active" id="manage" role="tabpanel" aria-labelledby="manage-tab">
-                    <h4 class="mb-4 text-secondary">Existing Properties (Total: <span id="property-count-display">...</span>)</h4>
-                    <div class="property-list-section shadow-sm p-3 bg-white" id="manage-list">
-                        <div class="property-card text-center text-muted">Loading properties...</div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
-                    <h4 class="mb-4 text-secondary" id="form-title">New Listing Details</h4>
-                    <form id="add-property-form" class="p-4 border rounded bg-white shadow-sm">
-                        <input type="hidden" id="property-id-to-edit" value="">
-                        
-                        <div class="form-section-header"><i class="fa-solid fa-circle-info me-2"></i> Basic Information</div>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="name" class="form-label">Property Name/Title <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="name" placeholder="e.g., 2 bedroom flat" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="price" class="form-label">Price <span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₦</span>
-                                    <input type="number" class="form-control" id="price" placeholder="200,000" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="location" class="form-label">Location/Address <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="location" placeholder="e.g., Ado Ekiti" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="property_type" class="form-label">Property Type <span class="text-danger">*</span></label>
-                                <select class="form-select" id="property_type" required>
-                                    <option value="" selected disabled>Select Type</option>
-                                    <option value="Apartment">Apartment</option>
-                                    <option value="House">House</option>
-                                    <option value="Land">Land</option>
-                                    <option value="Commercial">Commercial</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="sale_rent_status" class="form-label">Sale/Rent Status <span class="text-danger">*</span></label>
-                                <select class="form-select" id="sale_rent_status" required>
-                                    <option value="" selected disabled>Select Status</option>
-                                    <option value="Sale">For Sale</option>
-                                    <option value="Rent">For Rent</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="mb-4 mt-3">
-                            <label for="description" class="form-label">Detailed Description (Optional)</label>
-                            <textarea class="form-control" id="description" rows="4" placeholder="Enter a comprehensive description of the property, features, and amenities..."></textarea>
-                        </div>
-                        
-                        <div class="form-section-header mt-4"><i class="fa-solid fa-camera-retro me-2"></i> Media & Tags</div>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-6">
-                                <label for="image_file" class="form-label">Upload Primary Image <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control" id="image_file" accept="image/*" required>
-                                <small class="mt-1 d-block" id="current-image-status"></small>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="video_file" class="form-label">Upload Video (Max 50MB)</label>
-                                <input type="file" class="form-control" id="video_file" accept="video/*">
-                                <small class="mt-1 d-block" id="current-video-status"></small>
-                            </div>
-                            
-                            <div class="col-md-6 pt-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="is_featured">
-                                    <label class="form-check-label" for="is_featured">Mark as <strong class="text-primary">Featured</strong></label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 pt-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="is_hot">
-                                    <label class="form-check-label" for="is_hot">Mark as <strong class="text-danger">Hot Listing</strong></label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row pt-3 g-2">
-                            <div class="col-md-8">
-                                <button type="submit" class="btn btn-primary w-100 py-2" id="submit-btn">
-                                    <i class="fa-solid fa-floppy-disk me-2"></i> Add Property Listing
-                                </button>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-outline-secondary w-100 py-2 d-none" id="cancel-edit-btn">
-                                    <i class="fa-solid fa-xmark me-2"></i> Cancel Edit
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <label>Description (optional)</label>
+        <textarea class="f" id="description" rows="4" placeholder="Features, amenities…"></textarea>
+        <div class="g2">
+          <div><label>Primary Image <b style="color:red">*</b></label><input class="f" type="file" id="image_file" accept="image/*" required><small class="st" id="imgSt"></small></div>
+          <div><label>Video (max 50MB)</label><input class="f" type="file" id="video_file" accept="video/*"><small class="st" id="vidSt"></small></div>
         </div>
-    </div> <!-- End Main Content -->
+        <div class="sw"><span>Mark as <b style="color:var(--pri)">Featured</b></span><input type="checkbox" id="is_featured"></div>
+        <div class="sw"><span>Mark as <b style="color:var(--bad)">Hot Listing</b></span><input type="checkbox" id="is_hot"></div>
+        <div id="upBox" class="hide">
+          <div class="r"><span id="upLabel">Uploading…</span><span id="upPct">0%</span></div>
+          <div class="tr"><div class="fl" id="upFill"></div></div>
+          <small id="upSub"></small>
+        </div>
+        <button class="btn" id="submitBtn" type="submit"><i class="fa-solid fa-floppy-disk"></i>&nbsp; Add Property Listing</button>
+        <button class="btn o hide" id="cancelBtn" type="button"><i class="fa-solid fa-xmark"></i>&nbsp; Cancel Edit</button>
+      </form>
+    </section>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <div class="nav">
+    <button class="on" data-v="dash"><i class="fa-solid fa-chart-pie"></i>Dashboard</button>
+    <button class="add" data-v="add"><i class="fa-solid fa-plus"></i>Add</button>
+    <button data-v="list"><i class="fa-solid fa-list-check"></i>Listings</button>
+  </div>
+</div>
 
-    <!-- GLASSMORPHISM LOCK LOGIC -->
-    <script>
-        const lockScreen = document.getElementById('glass-lock-screen');
-        const mainContent = document.getElementById('main-admin-content');
-        const passwordInput = document.getElementById('admin-password');
-        const errorMsg = document.getElementById('lock-error-msg');
-        
-        // Define your password here
-        const SECRET_PASSWORD = "Trans123";
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+/* ---------- LOCK ---------- */
+const SECRET_PASSWORD = "Trans123";
+const $ = id => document.getElementById(id);
+function showApp(){ $('lock').style.display='none'; $('app').classList.remove('hide'); init(); }
+function unlock(){
+  if ($('pw').value === SECRET_PASSWORD){
+    localStorage.setItem('glassAdminUnlocked','true');
+    $('lock').style.opacity='0'; setTimeout(showApp,500);
+  } else {
+    $('lk-err').style.display='block'; $('pw').value=''; $('pw').focus();
+    const c=$('lk-card'); [-6,6,-6,0].forEach((x,i)=>setTimeout(()=>c.style.transform=`translateX(${x}px)`,i*100));
+  }
+}
+$('pw').addEventListener('keypress',e=>{ if(e.key==='Enter'){e.preventDefault();unlock();} });
+/* ---------- CONFIG ---------- */
+const SUPABASE_URL = 'https://ytnuvyewwbuqfxhgnhth.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_fzrFRCIXb1q2LPDef6jmFg_7BBRxPRm';
+const BUCKET = 'property-media';
+const TOTAL_BYTES = 1 * 1024 * 1024 * 1024; // 1 GB plan limit
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth:{ persistSession:false } });
 
-        function checkAdminLock() {
-            if (localStorage.getItem('glassAdminUnlocked') === 'true') {
-                // Already unlocked: Hide overlay, show main content
-                lockScreen.style.display = 'none';
-                mainContent.classList.remove('admin-content-hidden');
-            }
-        }
+let props = [], charts = {};
+const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const naira = n => new Intl.NumberFormat('en-NG',{style:'currency',currency:'NGN',minimumFractionDigits:0}).format(n);
+function fmt(b){ if(b<1024)return b+' B'; if(b<1048576)return (b/1024).toFixed(1)+' KB'; if(b<1073741824)return (b/1048576).toFixed(1)+' MB'; return (b/1073741824).toFixed(2)+' GB'; }
 
-        function verifyAdminPassword() {
-            if (passwordInput.value === SECRET_PASSWORD) {
-                // Correct Password
-                localStorage.setItem('glassAdminUnlocked', 'true');
-                errorMsg.style.display = 'none';
-                
-                // Fade out overlay and show content
-                lockScreen.style.opacity = '0';
-                setTimeout(() => {
-                    lockScreen.style.display = 'none';
-                    mainContent.classList.remove('admin-content-hidden');
-                }, 500);
-            } else {
-                // Incorrect Password
-                errorMsg.style.display = 'block';
-                passwordInput.value = '';
-                passwordInput.focus();
-                
-                // Shake effect on card
-                const card = document.querySelector('.glass-card');
-                card.style.transform = 'translate(-5px, 0)';
-                setTimeout(() => card.style.transform = 'translate(5px, 0)', 100);
-                setTimeout(() => card.style.transform = 'translate(-5px, 0)', 200);
-                setTimeout(() => card.style.transform = 'translate(0, 0)', 300);
-            }
-        }
+function msg(text,type){
+  const m=$('msg'); m.textContent=text; m.className='m-'+type; m.classList.remove('hide');
+  clearTimeout(msg.t); msg.t=setTimeout(()=>m.classList.add('hide'),5000);
+}
 
-        // Allow pressing Enter to submit
-        passwordInput.addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                verifyAdminPassword();
-            }
-        });
+/* ---------- NAV ---------- */
+function go(v){
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if (v==='add' && !$('editId').value) resetForm();
+}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.v)));
 
-        // Run check immediately
-        checkAdminLock();
-    </script>
+/* ---------- STORAGE MONITOR ---------- */
+async function folderSize(folder){
+  let total=0,count=0,offset=0;
+  while(true){
+    const {data,error}=await sb.storage.from(BUCKET).list(folder,{limit:1000,offset});
+    if(error) throw error;
+    data.forEach(f=>{ if(f.id){ total+=(f.metadata&&f.metadata.size)||0; count++; } });
+    if(data.length<1000) break; offset+=1000;
+  }
+  return {total,count};
+}
+async function loadStorage(){
+  try{
+    const [img,vid]=await Promise.all([folderSize('images'),folderSize('videos')]);
+    const used=img.total+vid.total, free=Math.max(TOTAL_BYTES-used,0);
+    const pct=used/TOTAL_BYTES*100;
+    $('pct').textContent=pct.toFixed(pct<10?2:1)+'%';
+    $('usedTxt').textContent=fmt(used);
+    $('imgTxt').textContent=fmt(img.total)+` (${img.count})`;
+    $('vidTxt').textContent=fmt(vid.total)+` (${vid.count})`;
+    $('freeTxt').textContent=fmt(free);
+    $('barImg').style.width=(img.total/TOTAL_BYTES*100)+'%';
+    $('barVid').style.width=(vid.total/TOTAL_BYTES*100)+'%';
+    const card=$('storCard'); card.classList.remove('warn','crit');
+    let note=`${Math.max(100-pct,0).toFixed(1)}% of storage remaining.`;
+    if(pct>=90){card.classList.add('crit'); note='⚠ Almost full! '+note+' Delete unused media or upgrade.';}
+    else if(pct>=70){card.classList.add('warn'); note='Getting full. '+note;}
+    $('storNote').textContent=note;
+    draw('chStor','doughnut',['Images','Videos','Free'],[img.total/1048576,vid.total/1048576,free/1048576],['#4dd0e1','#ffca28','#dfe6ee'],{cutout:'62%'});
+  }catch(e){
+    $('storNote').textContent='Could not read storage: '+e.message;
+    $('pct').textContent='--%';
+  }
+}
 
-    <!-- SUPABASE & DASHBOARD LOGIC -->
-    <script>
-        // --- CONFIGURATION ---
-        const SUPABASE_URL = 'https://qgwxjnftvnzvbpalzxes.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_A7ILV8KrJcHIrUbk3TsMFg_bjZnWn_C'; 
-        const STORAGE_BUCKET = 'property-media'; 
+/* ---------- CHARTS ---------- */
+function draw(id,type,labels,data,colors,extra={}){
+  if(charts[id]) charts[id].destroy();
+  const bar=type==='bar'||type==='line';
+  charts[id]=new Chart($(id),{
+    type,
+    data:{labels,datasets:[{data,backgroundColor:colors,borderColor:type==='line'?'#007bff':'#fff',borderWidth:type==='line'?3:2,fill:type==='line',tension:.35,borderRadius:8,pointRadius:type==='line'?4:0}]},
+    options:Object.assign({responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:!bar,position:'bottom',labels:{boxWidth:10,font:{family:'Poppins',size:11}}}},
+      scales:bar?{y:{beginAtZero:true,ticks:{precision:0}},x:{grid:{display:false}}}:{}},extra)
+  });
+  if(type==='line') charts[id].data.datasets[0].backgroundColor='rgba(0,123,255,.12)';
+}
+function drawCharts(){
+  const types={}; props.forEach(p=>types[p.property_type]=(types[p.property_type]||0)+1);
+  draw('chType','bar',Object.keys(types),Object.values(types),['#007bff','#28a745','#ffc107','#dc3545','#6f42c1']);
+  const sale=props.filter(p=>p.sale_rent_status==='Sale').length;
+  draw('chSale','doughnut',['For Sale','For Rent'],[sale,props.length-sale],['#28a745','#ffc107'],{cutout:'62%'});
+  const months=[],now=new Date();
+  for(let i=5;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);months.push({k:d.getFullYear()+'-'+d.getMonth(),l:d.toLocaleString('en',{month:'short'}),n:0});}
+  props.forEach(p=>{const d=new Date(p.created_at),k=d.getFullYear()+'-'+d.getMonth();const m=months.find(x=>x.k===k);if(m)m.n++;});
+  draw('chMonth','line',months.map(m=>m.l),months.map(m=>m.n),'#007bff');
+}
 
-        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-            auth: { persistSession: false },
-        });
+/* ---------- DATA ---------- */
+async function loadProps(){
+  const {data,error}=await sb.from('properties')
+    .select('id,name,location,price,sale_rent_status,property_type,is_featured,is_hot,image_url,video_url,created_at')
+    .order('created_at',{ascending:false});
+  if(error){ $('list').innerHTML=`<div class="card" style="color:var(--bad)">Error loading: ${esc(error.message)}</div>`; return; }
+  props=data;
+  $('sTotal').textContent=props.length; $('cnt').textContent=props.length;
+  $('sFeat').textContent=props.filter(p=>p.is_featured).length;
+  $('sHot').textContent=props.filter(p=>p.is_hot).length;
+  renderList(); drawCharts();
+}
+function renderList(){
+  const q=$('q').value.trim().toLowerCase();
+  const rows=props.filter(p=>!q||[p.name,p.location,p.property_type,p.sale_rent_status].join(' ').toLowerCase().includes(q));
+  if(!rows.length){ $('list').innerHTML='<div class="card" style="text-align:center;color:var(--mut)">No listings found.</div>'; return; }
+  $('list').innerHTML=rows.map(p=>`
+    <div class="card item">
+      <img src="${esc(p.image_url)}" alt="" loading="lazy">
+      <div class="inf">
+        <h6>${esc(p.name)}</h6>
+        <div class="pr">${naira(p.price)}</div>
+        <div class="lc"><i class="fa-solid fa-location-dot"></i> ${esc(p.location)}</div>
+        <span class="tg ${p.sale_rent_status==='Sale'?'t-sale':'t-rent'}">${p.sale_rent_status==='Sale'?'SALE':'RENT'}</span><span class="tg t-ty">${esc(p.property_type)}</span>${p.is_featured?'<span class="tg t-ft">★</span>':''}${p.is_hot?'<span class="tg t-hot">🔥</span>':''}
+      </div>
+      <div class="acts"><button class="ed" data-e="${p.id}"><i class="fa-solid fa-pen"></i> Edit</button><button class="dl" data-d="${p.id}"><i class="fa-solid fa-trash"></i> Del</button></div>
+    </div>`).join('');
+}
+$('q').addEventListener('input',renderList);
+$('list').addEventListener('click',e=>{
+  const ed=e.target.closest('[data-e]'), dl=e.target.closest('[data-d]');
+  if(ed) editProp(+ed.dataset.e);
+  if(dl) delProp(+dl.dataset.d);
+});
 
-        // --- DOM Elements ---
-        const form = document.getElementById('add-property-form');
-        const manageList = document.getElementById('manage-list');
-        const messageElement = document.getElementById('message');
-        const submitBtn = document.getElementById('submit-btn');
-        const cancelEditBtn = document.getElementById('cancel-edit-btn');
-        const propertyIdToEdit = document.getElementById('property-id-to-edit');
-        const imageFileInput = document.getElementById('image_file');
-        const videoFileInput = document.getElementById('video_file');
-        const currentImageStatus = document.getElementById('current-image-status');
-        const currentVideoStatus = document.getElementById('current-video-status');
-        const formTitle = document.getElementById('form-title');
-        const propertyCountDisplay = document.getElementById('property-count-display');
-        const featuredPropertiesCount = document.getElementById('featured-properties'); 
-        const hotPropertiesCount = document.getElementById('hot-properties'); 
+/* ---------- FILES ---------- */
+function compressImage(file,quality=.5){
+  return new Promise((res,rej)=>{
+    const r=new FileReader(); r.onerror=rej;
+    r.onload=ev=>{
+      const img=new Image(); img.onerror=rej;
+      img.onload=()=>{
+        const MAX=1200; let w=img.width,h=img.height;
+        if(w>MAX){h=h*(MAX/w);w=MAX;}
+        const c=document.createElement('canvas'); c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0,w,h);
+        c.toBlob(b=>b?res(new File([b],file.name.replace(/\.[^/.]+$/,'')+'.jpeg',{type:'image/jpeg'})):rej(new Error('Compression failed')),'image/jpeg',quality);
+      };
+      img.src=ev.target.result;
+    };
+    r.readAsDataURL(file);
+  });
+}
+function pathFromUrl(u){ if(!u) return null; const i=u.indexOf(`/${BUCKET}/`); return i<0?null:decodeURIComponent(u.substring(i+BUCKET.length+2).split('?')[0]); }
 
-        // --- UTILITY FUNCTIONS ---
-        var spinner = function () {
-            setTimeout(function () {
-                if ($('#spinner').length > 0) {
-                    $('#spinner').removeClass('show');
-                }
-            }, 100); 
-        };
-        spinner();
-        
-        function displayMessage(text, type) {
-            messageElement.textContent = text;
-            messageElement.className = `alert alert-${type} animated fadeIn`;
-            messageElement.classList.remove('d-none');
-            setTimeout(() => {
-                messageElement.classList.add('d-none');
-            }, 5000);
-        }
+/* progress bar */
+let upStart=0;
+function showProg(label,loaded,total){
+  $('upBox').classList.remove('hide');
+  $('upLabel').textContent=label;
+  const fl=$('upFill');
+  if(total==null){ fl.classList.add('ind'); $('upPct').textContent=''; $('upSub').textContent='Please wait…'; return; }
+  fl.classList.remove('ind');
+  const p=total?Math.min(100,loaded/total*100):0;
+  fl.style.width=p+'%'; $('upPct').textContent=Math.floor(p)+'%';
+  const sec=(Date.now()-upStart)/1000, spd=sec>0.5?loaded/sec:0;
+  $('upSub').textContent=`${fmt(loaded)} of ${fmt(total)}`+(spd?` · ${fmt(spd)}/s`:'');
+}
+function hideProg(){ $('upBox').classList.add('hide'); $('upFill').style.width='0'; $('upFill').classList.remove('ind'); }
 
-        function disableForm(disabled) {
-            submitBtn.disabled = disabled;
-            const actionText = propertyIdToEdit.value ? 'Saving Changes' : 'Adding Listing';
-            const actionIcon = propertyIdToEdit.value ? '<i class="fa-solid fa-floppy-disk me-2"></i>' : '<i class="fa-solid fa-house-chimney-medical me-2"></i>';
+function xhrUpload(path,file,onProg){
+  return new Promise((res,rej)=>{
+    const x=new XMLHttpRequest();
+    x.open('POST',`${SUPABASE_URL}/storage/v1/object/${BUCKET}/${path.split('/').map(encodeURIComponent).join('/')}`);
+    x.setRequestHeader('apikey',SUPABASE_ANON_KEY);
+    x.setRequestHeader('Authorization','Bearer '+SUPABASE_ANON_KEY);
+    x.setRequestHeader('x-upsert','true');
+    x.setRequestHeader('cache-control','max-age=3600');
+    x.setRequestHeader('Content-Type',file.type||'application/octet-stream');
+    x.upload.onprogress=e=>{ if(e.lengthComputable) onProg(e.loaded,e.total); };
+    x.onload=()=>{
+      if(x.status>=200&&x.status<300) return res();
+      let m='HTTP '+x.status; try{ m=JSON.parse(x.responseText).message||m; }catch(_){}
+      rej(new Error(m));
+    };
+    x.onerror=()=>rej(new Error('Network error during upload'));
+    x.ontimeout=()=>rej(new Error('Upload timed out'));
+    x.send(file);
+  });
+}
 
-            submitBtn.innerHTML = disabled 
-                ? `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> ${actionText}...` 
-                : `${actionIcon} ${actionText}`;
-        }
-        
-        function resetFormState(switchTab = true) {
-            form.reset();
-            propertyIdToEdit.value = '';
-            imageFileInput.required = true;
-            
-            formTitle.textContent = 'New Listing Details';
-            submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk me-2"></i> Add Property Listing';
-            cancelEditBtn.classList.add('d-none');
-            
-            currentImageStatus.textContent = '';
-            currentImageStatus.dataset.url = '';
-            currentImageStatus.className = 'mt-1 d-block'; 
-            currentVideoStatus.textContent = '';
-            currentVideoStatus.dataset.url = '';
-            currentVideoStatus.className = 'mt-1 d-block'; 
+async function uploadFile(file,folder,oldUrl=null){
+  if(!file) return oldUrl;
+  if(folder==='videos' && file.size>50*1024*1024) throw new Error('Video file is too large. Max limit is 50MB.');
+  let f=file;
+  if(folder==='images'){ showProg('Compressing image…',null,null); f=await compressImage(file); }
+  const ext=f.name.split('.').pop();
+  let path=pathFromUrl(oldUrl);
+  if(!path||!path.startsWith(folder+'/')) path=`${folder}/${Date.now()}-${Math.random().toString(36).substring(2,9)}.${ext}`;
+  upStart=Date.now();
+  const label=folder==='videos'?'Uploading video':'Uploading image';
+  showProg(label,0,f.size);
+  try{ await xhrUpload(path,f,(l,t)=>showProg(label,l,t)); }
+  catch(err){ throw new Error(`Upload failed for ${f.name}: ${err.message}`); }
+  showProg(label,f.size,f.size);
+  return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl+'?v='+Date.now();
+}
 
-            if (switchTab) {
-                document.getElementById('manage-tab').click(); 
-            }
-        }
+/* ---------- FORM ---------- */
+function setBtn(busy){
+  const b=$('submitBtn'), edit=!!$('editId').value, t=edit?'Saving Changes':'Adding Listing';
+  b.disabled=busy;
+  b.innerHTML=busy?`<i class="fa-solid fa-spinner fa-spin"></i>&nbsp; ${t}...`:`<i class="fa-solid fa-floppy-disk"></i>&nbsp; ${edit?'Save Changes':'Add Property Listing'}`;
+}
+function resetForm(){
+  $('form').reset(); $('editId').value=''; $('image_file').required=true;
+  $('formTitle').textContent='New Listing Details';
+  $('submitBtn').innerHTML='<i class="fa-solid fa-floppy-disk"></i>&nbsp; Add Property Listing';
+  $('cancelBtn').classList.add('hide');
+  [$('imgSt'),$('vidSt')].forEach(s=>{s.textContent='';s.dataset.url='';s.style.color='';});
+}
+$('cancelBtn').addEventListener('click',()=>{resetForm();go('list');});
 
-        function compressImage(file, quality = 0.5) {
-             return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = event => {
-                    const img = new Image();
-                    img.src = event.target.result;
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        const MAX_WIDTH = 1200;
-                        let width = img.width;
-                        let height = img.height;
+$('form').addEventListener('submit',async e=>{
+  e.preventDefault(); setBtn(true);
+  const editing=!!$('editId').value;
+  const imgF=$('image_file').files[0], vidF=$('video_file').files[0];
+  let imageUrl=$('imgSt').dataset.url||null, videoUrl=$('vidSt').dataset.url||null;
+  try{
+    if(!editing&&!imgF) throw new Error('Primary image is required for a new listing.');
+    if(imgF){ msg('Compressing & uploading image…','info'); imageUrl=await uploadFile(imgF,'images',imageUrl); }
+    if(!imageUrl) throw new Error('Primary image is missing. Please upload one.');
+    if(vidF){ msg('Uploading video…','info'); videoUrl=await uploadFile(vidF,'videos',videoUrl); }
+    msg('Saving to database…','info');
+    const row={
+      name:$('name').value, price:parseInt($('price').value), location:$('location').value,
+      property_type:$('property_type').value, sale_rent_status:$('sale_rent_status').value,
+      is_featured:$('is_featured').checked, is_hot:$('is_hot').checked,
+      image_url:imageUrl, video_url:videoUrl, description:$('description').value||null
+    };
+    const {error}=editing ? await sb.from('properties').update(row).eq('id',$('editId').value) : await sb.from('properties').insert([row]);
+    if(error) throw new Error('Database operation failed: '+error.message);
+    msg(`Listing ${editing?'updated':'created'} successfully!`,'success');
+    resetForm(); go('list'); await loadProps(); loadStorage();
+  }catch(err){ msg('Operation failed: '+err.message,'danger'); console.error(err); }
+  finally{ setBtn(false); hideProg(); }
+});
 
-                        if (width > MAX_WIDTH) {
-                            height = height * (MAX_WIDTH / width);
-                            width = MAX_WIDTH;
-                        }
-                        
-                        canvas.width = width;
-                        canvas.height = height; 
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-                        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
-                        fetch(compressedDataUrl)
-                            .then(res => res.blob())
-                            .then(blob => {
-                                const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpeg", { type: 'image/jpeg' });
-                                resolve(compressedFile);
-                            })
-                            .catch(reject);
-                    };
-                    img.onerror = reject;
-                };
-                reader.onerror = reject;
-            });
-        }
-        
-        async function uploadFile(file, folder, oldUrl = null) {
-            if (!file) return oldUrl; 
-            if (folder === 'videos' && file.size > 50 * 1024 * 1024) { 
-                throw new Error('Video file is too large. Max limit is 50MB.');
-            }
-            
-            const fileToUpload = folder === 'images' ? await compressImage(file) : file;
-            const fileExt = fileToUpload.name.split('.').pop();
-            
-            let filePath;
-            if (oldUrl) {
-                try {
-                    const urlPath = new URL(oldUrl).pathname;
-                    const bucketIndex = urlPath.indexOf(STORAGE_BUCKET);
-                    if (bucketIndex !== -1) {
-                        filePath = urlPath.substring(bucketIndex + STORAGE_BUCKET.length + 1);
-                    }
-                } catch (e) {
-                    console.warn("Could not parse old URL for upsert path. Using new path generation:", e);
-                }
-            }
-            if (!filePath || !filePath.includes(folder)) {
-                filePath = `${folder}/${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
-            }
+async function editProp(id){
+  const {data:p,error}=await sb.from('properties').select('*').eq('id',id).single();
+  if(error){ msg('Error loading property: '+error.message,'danger'); return; }
+  go('add');
+  $('name').value=p.name; $('price').value=p.price; $('location').value=p.location;
+  $('property_type').value=p.property_type; $('sale_rent_status').value=p.sale_rent_status;
+  $('description').value=p.description||''; $('is_featured').checked=p.is_featured; $('is_hot').checked=p.is_hot;
+  $('editId').value=p.id; $('image_file').required=false;
+  $('imgSt').dataset.url=p.image_url||''; $('vidSt').dataset.url=p.video_url||'';
+  $('imgSt').innerHTML=p.image_url?`✅ Image set · <a href="${esc(p.image_url)}" target="_blank">View</a> · new file overwrites`:'No image set.';
+  $('imgSt').style.color=p.image_url?'var(--ok)':'var(--bad)';
+  $('vidSt').innerHTML=p.video_url?`🎥 Video set · <a href="${esc(p.video_url)}" target="_blank">View</a> · new file overwrites`:'No video (optional).';
+  $('vidSt').style.color=p.video_url?'var(--ok)':'var(--mut)';
+  $('formTitle').textContent='Edit Listing #'+p.id;
+  $('submitBtn').innerHTML='<i class="fa-solid fa-floppy-disk"></i>&nbsp; Save Changes';
+  $('cancelBtn').classList.remove('hide');
+}
 
-            const { data, error } = await sb.storage
-                .from(STORAGE_BUCKET)
-                .upload(filePath, fileToUpload, { upsert: true, cacheControl: '3600' });
+async function delProp(id){
+  const p=props.find(x=>x.id===id); if(!p) return;
+  if(!confirm(`Delete "${p.name}"? This is permanent and removes its image/video.`)) return;
+  msg('Deleting…','warning');
+  const {error}=await sb.from('properties').delete().eq('id',id);
+  if(error){ msg('Error deleting: '+error.message,'danger'); return; }
+  const paths=[pathFromUrl(p.image_url),pathFromUrl(p.video_url)].filter(Boolean);
+  if(paths.length) await sb.storage.from(BUCKET).remove(paths);
+  msg(`"${p.name}" deleted.`,'warning');
+  await loadProps(); loadStorage();
+}
 
-            if (error) {
-                throw new Error(`Upload failed for ${fileToUpload.name}: ${error.message}`);
-            }
+let started=false;
+function init(){ if(started) return; started=true; loadProps(); loadStorage(); }
 
-            const { data: publicUrlData } = sb.storage
-                .from(STORAGE_BUCKET)
-                .getPublicUrl(filePath);
-
-            return publicUrlData.publicUrl;
-        }
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            disableForm(true);
-
-            const isEditing = !!propertyIdToEdit.value;
-            const imageFile = imageFileInput.files[0];
-            const videoFile = videoFileInput.files[0];
-
-            let imageUrl = currentImageStatus.dataset.url || null; 
-            let videoUrl = currentVideoStatus.dataset.url || null; 
-
-            try {
-                if (!isEditing && !imageFile) {
-                    throw new Error('Primary image is required for a new listing.');
-                }
-                
-                if (imageFile) {
-                    displayMessage('Uploading and compressing image (This may take a moment)...', 'info');
-                    imageUrl = await uploadFile(imageFile, 'images', imageUrl);
-                } 
-                if (!imageUrl) {
-                    throw new Error('Primary image URL is missing. Please upload an image.');
-                }
-
-                if (videoFile) {
-                    displayMessage('Uploading video (Max 50MB)...', 'info');
-                    videoUrl = await uploadFile(videoFile, 'videos', videoUrl);
-                }
-
-                displayMessage(isEditing ? 'Saving changes to database...' : 'Inserting new data into database...', 'info');
-                
-                const propertyData = {
-                    name: document.getElementById('name').value,
-                    price: parseInt(document.getElementById('price').value),
-                    location: document.getElementById('location').value,
-                    property_type: document.getElementById('property_type').value,
-                    sale_rent_status: document.getElementById('sale_rent_status').value,
-                    is_featured: document.getElementById('is_featured').checked,
-                    is_hot: document.getElementById('is_hot').checked,
-                    image_url: imageUrl,
-                    video_url: videoUrl,
-                    description: document.getElementById('description').value || null,
-                };
-
-                let dbOperation;
-                if (isEditing) {
-                    dbOperation = sb
-                        .from('properties')
-                        .update(propertyData)
-                        .eq('id', propertyIdToEdit.value);
-                } else {
-                    dbOperation = sb
-                        .from('properties')
-                        .insert([propertyData]);
-                }
-
-                const { error: dbError } = await dbOperation;
-
-                if (dbError) {
-                    throw new Error(`Database operation failed: ${dbError.message}`);
-                }
-
-                displayMessage(`Property listing ${isEditing ? 'updated' : 'created'} successfully!`, 'success');
-                resetFormState(); 
-                loadPropertiesForManagement(); 
-                loadPropertyCount(); 
-            } catch (error) {
-                displayMessage(`Operation Failed: ${error.message}`, 'danger');
-                console.error('Admin Error:', error);
-            } finally {
-                disableForm(false);
-            }
-        });
-
-        async function editProperty(id) {
-            displayMessage('Loading property details for editing...', 'info');
-            
-            const { data: property, error } = await sb
-                .from('properties')
-                .select('*')
-                .eq('id', id)
-                .single();
-
-            if (error) {
-                displayMessage(`Error loading property: ${error.message}`, 'danger');
-                return;
-            }
-
-            document.getElementById('name').value = property.name;
-            document.getElementById('price').value = property.price;
-            document.getElementById('location').value = property.location;
-            document.getElementById('property_type').value = property.property_type;
-            document.getElementById('sale_rent_status').value = property.sale_rent_status;
-            document.getElementById('description').value = property.description || '';
-            
-            document.getElementById('is_featured').checked = property.is_featured;
-            document.getElementById('is_hot').checked = property.is_hot;
-            
-            propertyIdToEdit.value = property.id;
-            imageFileInput.required = false;
-
-            currentImageStatus.dataset.url = property.image_url || '';
-            if (property.image_url) {
-                currentImageStatus.innerHTML = `✅ **Image Set** | <a href="${property.image_url}" target="_blank">View Current</a> | New file will overwrite.`;
-                currentImageStatus.className = 'mt-1 d-block text-success fw-bold';
-            } else {
-                currentImageStatus.textContent = 'No current image set. Please upload one.';
-                currentImageStatus.className = 'mt-1 d-block text-danger';
-            }
-            
-            currentVideoStatus.dataset.url = property.video_url || '';
-            if (property.video_url) {
-                currentVideoStatus.innerHTML = `🎥 **Video Set** | <a href="${property.video_url}" target="_blank">View Current</a> | New file will overwrite.`;
-                currentVideoStatus.className = 'mt-1 d-block text-success fw-bold';
-            } else {
-                currentVideoStatus.textContent = 'No current video set. Uploading is optional.';
-                currentVideoStatus.className = 'mt-1 d-block text-muted';
-            }
-
-            formTitle.textContent = 'Edit Existing Listing (ID: ' + property.id + ')';
-            submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk me-2"></i> Save Changes';
-            cancelEditBtn.classList.remove('d-none');
-            
-            document.getElementById('add-tab').click();
-            displayMessage('Ready to edit listing. Overwrite media by selecting new files.', 'success');
-        }
-
-        cancelEditBtn.addEventListener('click', () => resetFormState(true)); 
-        
-        async function deleteProperty(id, name) {
-            if (!confirm(`Are you sure you want to delete "${name}"? This action is permanent and will remove media.`)) { return; }
-            displayMessage('Deleting property from database...', 'warning');
-            
-            const { error } = await sb.from('properties').delete().eq('id', id);
-            if (error) {
-                displayMessage(`Error deleting property: ${error.message}`, 'danger');
-            } else {
-                displayMessage(`Property "${name}" deleted successfully!`, 'warning');
-                loadPropertiesForManagement(); 
-                loadPropertyCount(); 
-            }
-        }
-
-        async function loadPropertyCount() {
-            const [
-                { count: totalCount, error: totalError },
-                { count: featuredCount, error: featuredError },
-                { count: hotCount, error: hotError }
-            ] = await Promise.all([
-                sb.from('properties').select('id', { count: 'exact', head: true }),
-                sb.from('properties').select('id', { count: 'exact', head: true }).eq('is_featured', true),
-                sb.from('properties').select('id', { count: 'exact', head: true }).eq('is_hot', true)
-            ]);
-
-            if (!totalError && !featuredError && !hotError) {
-                document.getElementById('total-properties').textContent = totalCount || 0;
-                propertyCountDisplay.textContent = totalCount || 0;
-                featuredPropertiesCount.textContent = featuredCount || 0; 
-                hotPropertiesCount.textContent = hotCount || 0; 
-            } else {
-                console.error("Failed to load counts:", totalError || featuredError || hotError);
-                document.getElementById('total-properties').textContent = 'Error';
-                propertyCountDisplay.textContent = 'Error';
-                featuredPropertiesCount.textContent = 'Error';
-                hotPropertiesCount.textContent = 'Error';
-            }
-        }
-        
-        async function loadPropertiesForManagement() {
-            manageList.innerHTML = '<div class="property-card text-center text-muted">Loading...</div>';
-
-            const { data: properties, error } = await sb
-                .from('properties')
-                .select('id, name, location, price, sale_rent_status, property_type, is_featured, is_hot, image_url')
-                .order('created_at', { ascending: false });
-
-            if (error) {
-                manageList.innerHTML = `<div class="property-card text-danger"><i class="fa-solid fa-exclamation-triangle me-2"></i> Error loading: ${error.message}</div>`;
-                return;
-            }
-
-            if (properties.length === 0) {
-                manageList.innerHTML = '<div class="property-card text-success text-center">No properties currently listed. Use the "Add New Property" tab to start.</div>';
-                return;
-            }
-
-            manageList.innerHTML = ''; 
-
-            properties.forEach(property => {
-                const isFeaturedBadge = property.is_featured ? '<span class="badge bg-primary me-1"><i class="fa-solid fa-star"></i> Featured</span>' : '';
-                const isHotBadge = property.is_hot ? '<span class="badge bg-danger me-1"><i class="fa-solid fa-fire"></i> Hot</span>' : '';
-                
-                const saleStatusBadge = property.sale_rent_status === 'Sale' 
-                    ? `<span class="badge rounded-pill bg-success ms-2"><i class="fa-solid fa-tag me-1"></i> SALE</span>` 
-                    : `<span class="badge rounded-pill bg-warning text-dark ms-2"><i class="fa-solid fa-key me-1"></i> RENT</span>`;
-
-                const typeBadge = `<span class="badge bg-secondary text-light ms-2">${property.property_type}</span>`;
-                
-                const imageSrc = property.image_url || 'https://via.placeholder.com/80?text=No+Image';
-                
-                const priceFormatted = property.price ? new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', minimumFractionDigits: 0 }).format(property.price) : 'Price N/A';
-
-                const item = document.createElement('div');
-                item.className = 'property-card';
-                item.innerHTML = `
-                    <div class="property-card-img">
-                        <img src="${imageSrc}" alt="${property.name} thumbnail">
-                    </div>
-                    <div class="property-info">
-                        <h6>${property.name} ${isFeaturedBadge}${isHotBadge}</h6> 
-                        <div class="d-flex align-items-center flex-wrap">
-                            <small class="text-secondary fw-bold me-3">${priceFormatted}</small>
-                            <small class="text-muted d-block me-3">
-                                <i class="fa-solid fa-location-dot me-1"></i> ${property.location}
-                            </small>
-                            ${saleStatusBadge}
-                            ${typeBadge}
-                        </div>
-                    </div>
-                    <div class="action-buttons">
-                        <button class="btn btn-sm btn-outline-primary edit-btn" data-id="${property.id}">
-                            <i class="fa-solid fa-pen-to-square"></i> Edit
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${property.id}" data-name="${property.name}">
-                            <i class="fa-solid fa-trash-can"></i> Delete
-                        </button>
-                    </div>
-                `;
-                
-                item.querySelector('.edit-btn').addEventListener('click', () => {
-                    editProperty(property.id);
-                });
-                
-                item.querySelector('.delete-btn').addEventListener('click', () => {
-                    deleteProperty(property.id, property.name);
-                });
-
-                manageList.appendChild(item);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadPropertyCount();
-            loadPropertiesForManagement();
-        });
-    </script>
+// must stay last: everything above has to be initialised first
+if (localStorage.getItem('glassAdminUnlocked')==='true') showApp();
+</script>
 </body>
 </html>
 
